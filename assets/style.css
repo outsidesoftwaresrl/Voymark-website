@@ -35,6 +35,33 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ---------- Language switcher ---------- */
+
+.langnav {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  display: flex;
+  gap: 12px;
+}
+
+.langnav a {
+  color: var(--ink2);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.langnav a:hover { color: var(--burgundy); }
+
+.langnav a.current {
+  color: var(--burgundy);
+  font-weight: 600;
+  border-bottom: 1.5px solid var(--burgundy);
+}
+
 body {
   background: var(--paper);
   color: var(--ink);
