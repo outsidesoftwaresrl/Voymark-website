@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://outsidesoftwaresrl.github.io/Voymark-website/sitemap.xml

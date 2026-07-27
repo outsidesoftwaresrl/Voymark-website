@@ -214,6 +214,44 @@ body {
 }
 .privacy-list strong { color: var(--ink); }
 
+/* ---------- Subpages (legal + explore) ---------- */
+
+.hero-sub {
+  padding: 72px 24px 24px;
+}
+
+.hero-sub h1 {
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+}
+
+.homelink { text-decoration: none; display: inline-block; }
+
+.stamp-small {
+  width: 92px;
+  height: 80px;
+  font-size: 10px;
+  border-width: 2px;
+  margin-bottom: 24px;
+}
+
+.prose {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 26px 28px;
+  margin-bottom: 18px;
+}
+
+.prose h2 {
+  text-align: left;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.prose p { color: var(--ink2); }
+.prose p + p { margin-top: 12px; }
+.prose strong { color: var(--ink); }
+
 /* ---------- Footer ---------- */
 
 footer {
@@ -230,3 +268,15 @@ footer .tagline {
   color: var(--burgundy);
   margin-bottom: 10px;
 }
+
+.footnav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  margin-top: 16px;
+  font-size: 0.8rem;
+}
+
+.footnav a { color: var(--ink2); text-decoration: none; }
+.footnav a:hover { color: var(--burgundy); text-decoration: underline; }
