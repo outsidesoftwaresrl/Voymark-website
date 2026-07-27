@@ -29,6 +29,16 @@ Primary: **visited countries map**
 - interactive visited countries map free
 - countries been to map
 
+## Cluster 2b — travel map (travel-map.html)
+
+Primary: **travel map**
+- travel map app
+- personal travel map
+- my travel map
+- world travel map with routes
+- map of my travels
+- travel map with photos
+
 ## Cluster 3 — travel tracker app (travel-tracker-app.html)
 
 Primary: **travel tracker app**

@@ -21,12 +21,12 @@ T = {
  "ro": "Voymark — Fiecare călătorie lasă o urmă.",
 },
 "meta": {
- "en": "Voymark is your world passport: a living map of countries, trips, places and memories — built from the photos already on your iPhone. Offline-first, no account, no tracking.",
- "fr": "Voymark est votre passeport du monde : une carte vivante de pays, voyages, lieux et souvenirs — construite à partir des photos déjà sur votre iPhone. Hors ligne d'abord, sans compte, sans suivi.",
- "es": "Voymark es tu pasaporte del mundo: un mapa vivo de países, viajes, lugares y recuerdos — construido con las fotos que ya están en tu iPhone. Offline primero, sin cuenta, sin rastreo.",
- "it": "Voymark è il tuo passaporto del mondo: una mappa viva di paesi, viaggi, luoghi e ricordi — costruita dalle foto già sul tuo iPhone. Offline-first, senza account, senza tracciamento.",
- "de": "Voymark ist dein Weltpass: eine lebendige Karte aus Ländern, Reisen, Orten und Erinnerungen — gebaut aus den Fotos, die schon auf deinem iPhone sind. Offline-first, ohne Konto, ohne Tracking.",
- "ro": "Voymark este pașaportul tău al lumii: o hartă vie de țări, călătorii, locuri și amintiri — construită din pozele aflate deja pe iPhone-ul tău. Offline mai întâi, fără cont, fără urmărire.",
+ "en": "Voymark is your world passport: a living map of countries, trips, places and memories — built from the photos already on your phone. Offline-first, no account, no tracking.",
+ "fr": "Voymark est votre passeport du monde : une carte vivante de pays, voyages, lieux et souvenirs — construite à partir des photos déjà sur votre téléphone. Hors ligne d'abord, sans compte, sans suivi.",
+ "es": "Voymark es tu pasaporte del mundo: un mapa vivo de países, viajes, lugares y recuerdos — construido con las fotos que ya están en tu teléfono. Offline primero, sin cuenta, sin rastreo.",
+ "it": "Voymark è il tuo passaporto del mondo: una mappa viva di paesi, viaggi, luoghi e ricordi — costruita dalle foto già sul tuo telefono. Offline-first, senza account, senza tracciamento.",
+ "de": "Voymark ist dein Weltpass: eine lebendige Karte aus Ländern, Reisen, Orten und Erinnerungen — gebaut aus den Fotos, die schon auf deinem Handy sind. Offline-first, ohne Konto, ohne Tracking.",
+ "ro": "Voymark este pașaportul tău al lumii: o hartă vie de țări, călătorii, locuri și amintiri — construită din pozele aflate deja pe telefonul tău. Offline mai întâi, fără cont, fără urmărire.",
 },
 "h1": {
  "en": "Every journey leaves a&nbsp;mark.",
@@ -37,12 +37,12 @@ T = {
  "ro": "Fiecare călătorie lasă o&nbsp;urmă.",
 },
 "lede": {
- "en": "Voymark is your world passport — a living map of countries, trips, places and memories, built by hand or from the photos already on your iPhone.",
- "fr": "Voymark est votre passeport du monde — une carte vivante de pays, voyages, lieux et souvenirs, construite à la main ou à partir des photos déjà sur votre iPhone.",
- "es": "Voymark es tu pasaporte del mundo — un mapa vivo de países, viajes, lugares y recuerdos, construido a mano o con las fotos que ya están en tu iPhone.",
- "it": "Voymark è il tuo passaporto del mondo — una mappa viva di paesi, viaggi, luoghi e ricordi, costruita a mano o dalle foto già sul tuo iPhone.",
- "de": "Voymark ist dein Weltpass — eine lebendige Karte aus Ländern, Reisen, Orten und Erinnerungen, von Hand gebaut oder aus den Fotos, die schon auf deinem iPhone sind.",
- "ro": "Voymark este pașaportul tău al lumii — o hartă vie de țări, călătorii, locuri și amintiri, construită manual sau din pozele aflate deja pe iPhone-ul tău.",
+ "en": "Voymark is your world passport — a living map of countries, trips, places and memories, built by hand or from the photos already on your phone.",
+ "fr": "Voymark est votre passeport du monde — une carte vivante de pays, voyages, lieux et souvenirs, construite à la main ou à partir des photos déjà sur votre téléphone.",
+ "es": "Voymark es tu pasaporte del mundo — un mapa vivo de países, viajes, lugares y recuerdos, construido a mano o con las fotos que ya están en tu teléfono.",
+ "it": "Voymark è il tuo passaporto del mondo — una mappa viva di paesi, viaggi, luoghi e ricordi, costruita a mano o dalle foto già sul tuo telefono.",
+ "de": "Voymark ist dein Weltpass — eine lebendige Karte aus Ländern, Reisen, Orten und Erinnerungen, von Hand gebaut oder aus den Fotos, die schon auf deinem Handy sind.",
+ "ro": "Voymark este pașaportul tău al lumii — o hartă vie de țări, călătorii, locuri și amintiri, construită manual sau din pozele aflate deja pe telefonul tău.",
 },
 "badge_small": {
  "en": "Coming soon to the", "fr": "Bientôt sur l'", "es": "Muy pronto en el",
@@ -51,6 +51,34 @@ T = {
 "badge_small_android": {
  "en": "Coming soon to", "fr": "Bientôt sur", "es": "Muy pronto en",
  "it": "Presto su", "de": "Bald bei", "ro": "În curând pe",
+},
+"shots_title": {
+ "en": "Straight from the app", "fr": "Directement depuis l'app", "es": "Directo desde la app",
+ "it": "Direttamente dall'app", "de": "Direkt aus der App", "ro": "Direct din aplicație",
+},
+"shots_alt_map": {
+ "en": "The Voymark map with visited countries stamped in burgundy",
+ "fr": "La carte Voymark avec les pays visités tamponnés en bordeaux",
+ "es": "El mapa de Voymark con los países visitados sellados en burdeos",
+ "it": "La mappa Voymark con i paesi visitati timbrati in bordeaux",
+ "de": "Die Voymark-Karte mit burgunderrot gestempelten besuchten Ländern",
+ "ro": "Harta Voymark cu țările vizitate ștampilate în burgundy",
+},
+"shots_alt_passport": {
+ "en": "The Voymark passport screen with country stamps",
+ "fr": "L'écran passeport de Voymark avec des tampons de pays",
+ "es": "La pantalla de pasaporte de Voymark con sellos de países",
+ "it": "La schermata passaporto di Voymark con timbri dei paesi",
+ "de": "Der Voymark-Pass-Bildschirm mit Länderstempeln",
+ "ro": "Ecranul de pașaport Voymark cu ștampile de țări",
+},
+"shots_alt_timeline": {
+ "en": "The Voymark timeline of trips by year",
+ "fr": "La chronologie Voymark des voyages par année",
+ "es": "La línea de tiempo de Voymark con viajes por año",
+ "it": "La cronologia Voymark dei viaggi per anno",
+ "de": "Die Voymark-Zeitleiste der Reisen nach Jahr",
+ "ro": "Cronologia Voymark a călătoriilor pe ani",
 },
 "nav_privacy": {
  "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad",
@@ -188,12 +216,12 @@ T = {
 },
 "p2s": {"en": "On-device only.", "fr": "Sur l'appareil uniquement.", "es": "Solo en el dispositivo.", "it": "Solo sul dispositivo.", "de": "Nur auf dem Gerät.", "ro": "Doar pe dispozitiv."},
 "p2": {
- "en": "Photo scanning happens on your iPhone; images are never copied or uploaded.",
- "fr": "L'analyse des photos se fait sur votre iPhone ; les images ne sont jamais copiées ni envoyées.",
- "es": "El escaneo de fotos ocurre en tu iPhone; las imágenes nunca se copian ni se suben.",
- "it": "La scansione delle foto avviene sul tuo iPhone; le immagini non vengono mai copiate né caricate.",
- "de": "Der Foto-Scan läuft auf deinem iPhone; Bilder werden nie kopiert oder hochgeladen.",
- "ro": "Scanarea pozelor are loc pe iPhone-ul tău; imaginile nu sunt niciodată copiate sau încărcate.",
+ "en": "Photo scanning happens on your phone; images are never copied or uploaded.",
+ "fr": "L'analyse des photos se fait sur votre téléphone ; les images ne sont jamais copiées ni envoyées.",
+ "es": "El escaneo de fotos ocurre en tu teléfono; las imágenes nunca se copian ni se suben.",
+ "it": "La scansione delle foto avviene sul tuo telefono; le immagini non vengono mai copiate né caricate.",
+ "de": "Der Foto-Scan läuft auf deinem Handy; Bilder werden nie kopiert oder hochgeladen.",
+ "ro": "Scanarea pozelor are loc pe telefonul tău; imaginile nu sunt niciodată copiate sau încărcate.",
 },
 "p3s": {
  "en": "No account. No tracking. No ads.", "fr": "Pas de compte. Pas de suivi. Pas de pub.",
@@ -288,6 +316,13 @@ TEMPLATE = """<!DOCTYPE html>
         <article><h3>{paper_h}</h3><p>{paper_p}</p></article>
         <article><h3>{modern_h}</h3><p>{modern_p}</p></article>
         <article><h3>{cities_h}</h3><p>{cities_p}</p></article>
+      </div>
+    </section>
+
+    <section class="band band-shots">
+      <h2>{shots_title}</h2>
+      <div class="shots">
+{shots_html}
       </div>
     </section>
 
@@ -710,9 +745,61 @@ PAGES = {
  ],
 },
 
+"travel-map": {
+ "nav": {"en":"Travel map","fr":"Carte de voyage","es":"Mapa de viajes","it":"Mappa di viaggio","de":"Reisekarte","ro":"Hartă de călătorii"},
+ "title": {
+  "en":"Travel Map — your trips, routes and photos on one world map | Voymark",
+  "fr":"Carte de voyage — vos voyages, itinéraires et photos sur une carte du monde | Voymark",
+  "es":"Mapa de viajes — tus viajes, rutas y fotos en un mapa del mundo | Voymark",
+  "it":"Mappa di viaggio — i tuoi viaggi, itinerari e foto su una mappa del mondo | Voymark",
+  "de":"Reisekarte — deine Reisen, Routen und Fotos auf einer Weltkarte | Voymark",
+  "ro":"Hartă de călătorii — călătoriile, rutele și pozele tale pe o hartă a lumii | Voymark"},
+ "meta": {
+  "en":"A personal travel map that shows everywhere you've been: stamped countries, trip routes, marked cities and photo spots — on a beautiful offline world map. No account, free.",
+  "fr":"Une carte de voyage personnelle qui montre partout où vous êtes allé : pays tamponnés, itinéraires, villes marquées et lieux de photos — sur une belle carte du monde hors ligne. Sans compte, gratuit.",
+  "es":"Un mapa de viajes personal que muestra todos los lugares donde has estado: países sellados, rutas, ciudades marcadas y puntos de fotos — en un precioso mapa del mundo offline. Sin cuenta, gratis.",
+  "it":"Una mappa di viaggio personale che mostra ovunque tu sia stato: paesi timbrati, itinerari, città segnate e luoghi delle foto — su una bellissima mappa del mondo offline. Senza account, gratis.",
+  "de":"Eine persönliche Reisekarte, die zeigt, wo du überall warst: gestempelte Länder, Reiserouten, markierte Städte und Foto-Orte — auf einer schönen Offline-Weltkarte. Ohne Konto, kostenlos.",
+  "ro":"O hartă de călătorii personală care arată peste tot pe unde ai fost: țări ștampilate, rute, orașe marcate și locuri cu poze — pe o hartă a lumii frumoasă și offline. Fără cont, gratuit."},
+ "h1": {
+  "en":"Your whole travel story, on one map","fr":"Toute votre histoire de voyage, sur une carte",
+  "es":"Toda tu historia viajera, en un mapa","it":"Tutta la tua storia di viaggio, su una mappa",
+  "de":"Deine ganze Reisegeschichte auf einer Karte","ro":"Toată povestea ta de călătorie, pe o hartă"},
+ "lede": {
+  "en":"Countries fill in burgundy, routes trace each trip, gold dots mark where photos were taken. Pinch from the whole world down to a single city — all offline.",
+  "fr":"Les pays se remplissent de bordeaux, les itinéraires tracent chaque voyage, des points dorés marquent vos photos. Pincez du monde entier jusqu'à une seule ville — tout hors ligne.",
+  "es":"Los países se llenan de burdeos, las rutas trazan cada viaje, puntos dorados marcan tus fotos. Haz zoom del mundo entero a una sola ciudad — todo offline.",
+  "it":"I paesi si riempiono di bordeaux, le rotte tracciano ogni viaggio, punti dorati segnano le tue foto. Dal mondo intero a una singola città con un gesto — tutto offline.",
+  "de":"Länder füllen sich burgunderrot, Routen zeichnen jede Reise nach, goldene Punkte markieren deine Fotos. Zoome von der ganzen Welt bis zu einer einzelnen Stadt — alles offline.",
+  "ro":"Țările se umplu de burgundy, rutele trasează fiecare călătorie, puncte aurii marchează pozele tale. Din întreaga lume până la un singur oraș — totul offline."},
+ "sections": [
+  {"h":{"en":"More than pins on a map","fr":"Plus que des épingles sur une carte","es":"Más que alfileres en un mapa","it":"Più che puntine su una mappa","de":"Mehr als Nadeln auf einer Karte","ro":"Mai mult decât piuneze pe o hartă"},
+   "p":{"en":"A travel map should remember journeys, not just places. Voymark layers your stamped countries, every trip's route, the cities you've marked and the spots where your photos were taken — and lets you toggle each layer on and off.",
+        "fr":"Une carte de voyage doit retenir des voyages, pas seulement des lieux. Voymark superpose vos pays tamponnés, l'itinéraire de chaque voyage, les villes marquées et les lieux de vos photos — chaque calque s'active ou se désactive.",
+        "es":"Un mapa de viajes debe recordar viajes, no solo lugares. Voymark superpone tus países sellados, la ruta de cada viaje, las ciudades marcadas y los puntos de tus fotos — y cada capa se activa o desactiva.",
+        "it":"Una mappa di viaggio deve ricordare viaggi, non solo luoghi. Voymark sovrappone i paesi timbrati, la rotta di ogni viaggio, le città segnate e i luoghi delle tue foto — e ogni livello si attiva o disattiva.",
+        "de":"Eine Reisekarte sollte sich Reisen merken, nicht nur Orte. Voymark legt deine gestempelten Länder, die Route jeder Reise, markierte Städte und die Orte deiner Fotos übereinander — jede Ebene einzeln schaltbar.",
+        "ro":"O hartă de călătorii ar trebui să țină minte călătorii, nu doar locuri. Voymark suprapune țările ștampilate, ruta fiecărei călătorii, orașele marcate și locurile pozelor tale — fiecare strat se aprinde și se stinge separat."}},
+  {"h":{"en":"Two styles, one atlas","fr":"Deux styles, un atlas","es":"Dos estilos, un atlas","it":"Due stili, un atlante","de":"Zwei Stile, ein Atlas","ro":"Două stiluri, un atlas"},
+   "p":{"en":"Choose a clean, modern Atlas or an aged Paper map that looks pulled from an old expedition journal. Both ship inside the app, work in airplane mode and animate your routes country by country.",
+        "fr":"Choisissez un Atlas épuré et moderne ou une carte Papier vieillie qui semble sortie d'un journal d'expédition. Les deux sont livrés dans l'app, fonctionnent en mode avion et animent vos itinéraires pays par pays.",
+        "es":"Elige un Atlas limpio y moderno o un mapa de Papel envejecido que parece sacado de un diario de expedición. Ambos vienen dentro de la app, funcionan en modo avión y animan tus rutas país por país.",
+        "it":"Scegli un Atlante pulito e moderno o una mappa di Carta invecchiata che sembra uscita da un diario di spedizione. Entrambi sono inclusi nell'app, funzionano in modalità aereo e animano le tue rotte paese per paese.",
+        "de":"Wähle einen klaren, modernen Atlas oder eine gealterte Papierkarte wie aus einem alten Expeditionstagebuch. Beide stecken in der App, funktionieren im Flugmodus und animieren deine Routen Land für Land.",
+        "ro":"Alege un Atlas curat și modern sau o hartă de Hârtie veche, parcă ruptă dintr-un jurnal de expediție. Ambele vin în aplicație, funcționează în modul avion și îți animă rutele țară cu țară."}},
+  {"h":{"en":"Yours alone","fr":"À vous seul","es":"Solo tuyo","it":"Solo tuo","de":"Nur deins","ro":"Doar a ta"},
+   "p":{"en":"This is your map, not a feed. It lives on your phone, needs no account, and leaves your device only when you export or share it yourself — as a share card, a PDF travel book or an open-format file.",
+        "fr":"C'est votre carte, pas un fil d'actualité. Elle vit sur votre téléphone, n'exige aucun compte et ne quitte votre appareil que si vous l'exportez ou la partagez vous-même — carte à partager, livre de voyage PDF ou fichier au format ouvert.",
+        "es":"Es tu mapa, no un feed. Vive en tu teléfono, no necesita cuenta y solo sale de tu dispositivo cuando tú lo exportas o compartes — como tarjeta para compartir, libro de viajes en PDF o archivo en formato abierto.",
+        "it":"È la tua mappa, non un feed. Vive sul tuo telefono, non richiede account e lascia il tuo dispositivo solo quando la esporti o condividi tu — come card da condividere, libro di viaggio PDF o file in formato aperto.",
+        "de":"Das ist deine Karte, kein Feed. Sie lebt auf deinem Handy, braucht kein Konto und verlässt dein Gerät nur, wenn du sie selbst exportierst oder teilst — als Share-Karte, PDF-Reisebuch oder offenes Dateiformat.",
+        "ro":"E harta ta, nu un feed. Trăiește pe telefonul tău, nu cere cont și îți părăsește dispozitivul doar când o exporți sau o distribui chiar tu — drept card de share, carte de călătorie PDF sau fișier în format deschis."}},
+ ],
+},
+
 }
 
-EXPLORE_SLUGS = ["visited-countries-map", "travel-tracker-app", "country-counter", "travel-photos-to-trips"]
+EXPLORE_SLUGS = ["visited-countries-map", "travel-map", "travel-tracker-app", "country-counter", "travel-photos-to-trips"]
 LEGAL_SLUGS = ["privacy", "terms"]
 ALL_SLUGS = EXPLORE_SLUGS + LEGAL_SLUGS
 
@@ -745,7 +832,7 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
   </header>
 
   <main>
-    <section class="band">
+{shots_band}    <section class="band">
 {sections_html}
     </section>
     <section class="band band-alt">
@@ -798,6 +885,45 @@ def langlinks_block(lang, lang_url):
     return "\n".join(link(l) for l in LANGS)
 
 
+# App screenshots (assets/img/screen-*.png, captured from the real app on
+# Appetize). Key → alt-text T key. Order matters.
+SHOT_FILES = {
+    "map": ("screen-map.png", "shots_alt_map"),
+    "passport": ("screen-passport.png", "shots_alt_passport"),
+    "timeline": ("screen-timeline.png", "shots_alt_timeline"),
+}
+INDEX_SHOTS = ["map", "passport", "timeline"]
+PAGE_SHOTS = {
+    "visited-countries-map": ["map", "passport"],
+    "travel-map": ["map", "timeline"],
+    "travel-tracker-app": ["timeline", "passport"],
+    "country-counter": ["passport", "map"],
+    "travel-photos-to-trips": ["timeline", "map"],
+}
+
+def shots_html_block(lang, root, keys):
+    lines = []
+    for key in keys:
+        fname, alt_key = SHOT_FILES[key]
+        lines.append(
+            f'        <figure class="shot"><img src="{root}assets/img/{fname}" '
+            f'alt="{T[alt_key][lang]}" loading="lazy" width="360" height="800"></figure>'
+        )
+    return "\n".join(lines)
+
+def shots_band_block(lang, root, slug):
+    keys = PAGE_SHOTS.get(slug)
+    if not keys:
+        return ""
+    return (
+        '    <section class="band band-shots">\n'
+        f'      <h2>{T["shots_title"][lang]}</h2>\n'
+        '      <div class="shots">\n'
+        f"{shots_html_block(lang, root, keys)}\n"
+        "      </div>\n"
+        "    </section>\n"
+    )
+
 def footnav_block(lang):
     links = [f'      <a href="{page_url(s, lang)}">{PAGES[s]["nav"][lang]}</a>' for s in EXPLORE_SLUGS]
     links.append(f'      <a href="{page_url("privacy", lang)}">{T["nav_privacy"][lang]}</a>')
@@ -813,6 +939,7 @@ def build_index(lang):
         hreflangs=hreflang_block(url_for),
         langlinks=langlinks_block(lang, url_for),
         footnav=footnav_block(lang),
+        shots_html=shots_html_block(lang, root, INDEX_SHOTS),
         **values,
     )
     out = "index.html" if lang == "en" else f"{lang}/index.html"
@@ -835,6 +962,7 @@ def build_page(slug, lang):
         title=page["title"][lang], meta=page["meta"][lang],
         h1=page["h1"][lang], lede=page["lede"][lang],
         sections_html=sections,
+        shots_band=shots_band_block(lang, root, slug),
         hreflangs=hreflang_block(lambda l: page_url(slug, l)),
         langlinks=langlinks_block(lang, lambda l: page_url(slug, l)),
         footnav=footnav_block(lang),
