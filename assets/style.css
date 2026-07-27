@@ -182,6 +182,13 @@ body {
   margin-bottom: 8px;
 }
 
+.grid h3 small {
+  font-family: var(--mono);
+  font-size: 0.66em;
+  color: var(--ink2);
+  letter-spacing: 0.06em;
+}
+
 .grid p { color: var(--ink2); font-size: 0.95rem; }
 
 .wide {

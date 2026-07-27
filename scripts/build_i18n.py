@@ -93,9 +93,9 @@ T = {
  "it": "Esplora", "de": "Entdecken", "ro": "Explorează",
 },
 "s1_h": {
- "en": "Two maps. One passport.", "fr": "Deux cartes. Un passeport.",
- "es": "Dos mapas. Un pasaporte.", "it": "Due mappe. Un passaporto.",
- "de": "Zwei Karten. Ein Pass.", "ro": "Două hărți. Un pașaport.",
+ "en": "Your maps. Your passport.", "fr": "Vos cartes. Votre passeport.",
+ "es": "Tus mapas. Tu pasaporte.", "it": "Le tue mappe. Il tuo passaporto.",
+ "de": "Deine Karten. Dein Pass.", "ro": "Hărțile tale. Pașaportul tău.",
 },
 "atlas_h": {"en": "🗺️ Atlas", "fr": "🗺️ Atlas", "es": "🗺️ Atlas", "it": "🗺️ Atlante", "de": "🗺️ Atlas", "ro": "🗺️ Atlas"},
 "atlas_p": {
@@ -116,10 +116,23 @@ T = {
  "ro": "Același pașaport, desenat ca un atlas vechi — ștampile burgundy presate în pergament. Istoria ta de călătorie așa cum merită să arate.",
 },
 "modern_h": {
- "en": "🧭 Layers &amp; routes", "fr": "🧭 Calques &amp; itinéraires", "es": "🧭 Capas &amp; rutas",
- "it": "🧭 Livelli &amp; rotte", "de": "🧭 Ebenen &amp; Routen", "ro": "🧭 Straturi &amp; rute",
+ "en": "🧭 Modern &amp; Satellite <small>· iPhone</small>", "fr": "🧭 Moderne &amp; Satellite <small>· iPhone</small>",
+ "es": "🧭 Moderno &amp; Satélite <small>· iPhone</small>", "it": "🧭 Moderna &amp; Satellite <small>· iPhone</small>",
+ "de": "🧭 Modern &amp; Satellit <small>· iPhone</small>", "ro": "🧭 Modern &amp; Satelit <small>· iPhone</small>",
 },
 "modern_p": {
+ "en": "On iPhone, two extra Apple Maps styles with your visited countries inked over them — pins, routes and photo markers stay in sync with the Atlas.",
+ "fr": "Sur iPhone, deux styles Apple Plans supplémentaires avec vos pays visités encrés par-dessus — épingles, itinéraires et marqueurs photo restent en synchro avec l'Atlas.",
+ "es": "En iPhone, dos estilos extra de Apple Maps con tus países visitados entintados encima — pines, rutas y marcadores de fotos siguen en sincronía con el Atlas.",
+ "it": "Su iPhone, due stili extra di Mappe Apple con i tuoi paesi visitati inchiostrati sopra — segnaposto, rotte e marcatori foto restano in sincronia con l'Atlante.",
+ "de": "Auf dem iPhone zwei zusätzliche Apple-Karten-Stile mit deinen besuchten Ländern darüber — Pins, Routen und Foto-Marker bleiben synchron mit dem Atlas.",
+ "ro": "Pe iPhone, două stiluri Apple Maps în plus, cu țările tale vizitate colorate deasupra — pinurile, rutele și marcajele foto rămân în sincron cu Atlasul.",
+},
+"layers_h": {
+ "en": "🧷 Layers &amp; routes", "fr": "🧷 Calques &amp; itinéraires", "es": "🧷 Capas &amp; rutas",
+ "it": "🧷 Livelli &amp; rotte", "de": "🧷 Ebenen &amp; Routen", "ro": "🧷 Straturi &amp; rute",
+},
+"layers_p": {
  "en": "Place pins, trip routes, photo markers, cities and wishlist shading — flip each layer on or off, on both the Atlas and the Paper map.",
  "fr": "Épingles de lieux, itinéraires de voyage, marqueurs photo, villes et liste d'envies — activez ou coupez chaque calque, sur l'Atlas comme sur la carte Papier.",
  "es": "Pines de lugares, rutas de viaje, marcadores de fotos, ciudades y lista de deseos — activa o desactiva cada capa, tanto en el Atlas como en el mapa de Papel.",
@@ -207,12 +220,12 @@ T = {
 },
 "p1s": {"en": "Offline-first.", "fr": "Hors ligne d'abord.", "es": "Offline primero.", "it": "Offline-first.", "de": "Offline-first.", "ro": "Offline mai întâi."},
 "p1": {
- "en": "Maps, cities, collections — everything ships inside the app. No tile servers, no API calls.",
- "fr": "Cartes, villes, collections — tout est livré dans l'app. Pas de serveurs de tuiles, pas d'appels d'API.",
- "es": "Mapas, ciudades, colecciones — todo viene dentro de la app. Sin servidores de mosaicos, sin llamadas a API.",
- "it": "Mappe, città, collezioni — tutto è incluso nell'app. Niente server di tile, niente chiamate API.",
- "de": "Karten, Städte, Sammlungen — alles steckt in der App. Keine Tile-Server, keine API-Aufrufe.",
- "ro": "Hărți, orașe, colecții — totul vine în aplicație. Fără servere de hărți, fără apeluri API.",
+ "en": "Atlas, Paper map, cities, collections — everything ships inside the app and works in airplane mode. Only the optional Apple Maps styles on iPhone fetch map tiles.",
+ "fr": "Atlas, carte Papier, villes, collections — tout est livré dans l'app et fonctionne en mode avion. Seuls les styles Apple Plans optionnels sur iPhone chargent des tuiles.",
+ "es": "Atlas, mapa de Papel, ciudades, colecciones — todo viene dentro de la app y funciona en modo avión. Solo los estilos opcionales de Apple Maps en iPhone cargan mosaicos.",
+ "it": "Atlante, mappa di Carta, città, collezioni — tutto è incluso nell'app e funziona in modalità aereo. Solo gli stili opzionali di Mappe Apple su iPhone scaricano tile.",
+ "de": "Atlas, Papierkarte, Städte, Sammlungen — alles steckt in der App und läuft im Flugmodus. Nur die optionalen Apple-Karten-Stile auf dem iPhone laden Kartenkacheln.",
+ "ro": "Atlas, hartă de Hârtie, orașe, colecții — totul vine în aplicație și merge în modul avion. Doar stilurile opționale Apple Maps de pe iPhone încarcă dale de hartă.",
 },
 "p2s": {"en": "On-device only.", "fr": "Sur l'appareil uniquement.", "es": "Solo en el dispositivo.", "it": "Solo sul dispositivo.", "de": "Nur auf dem Gerät.", "ro": "Doar pe dispozitiv."},
 "p2": {
@@ -315,6 +328,7 @@ TEMPLATE = """<!DOCTYPE html>
         <article><h3>{atlas_h}</h3><p>{atlas_p}</p></article>
         <article><h3>{paper_h}</h3><p>{paper_p}</p></article>
         <article><h3>{modern_h}</h3><p>{modern_p}</p></article>
+        <article><h3>{layers_h}</h3><p>{layers_p}</p></article>
         <article><h3>{cities_h}</h3><p>{cities_p}</p></article>
       </div>
     </section>
@@ -439,12 +453,12 @@ PAGES = {
         "de":"Vergleichscodes, Share-Karten, Reisebücher und Exporte verlassen dein Gerät nur, wenn du sie über das System-Share-Sheet an ein Ziel deiner Wahl teilst. Vergleichsdaten enthalten nur Länderstempel und einen Anzeigenamen — nie Reisen, Orte, Fotos oder Daten.",
         "ro":"Codurile de comparare, cardurile, cărțile de călătorie și exporturile îți părăsesc dispozitivul doar când alegi tu să le partajezi, prin foaia de partajare a sistemului, către destinația aleasă de tine. Datele de comparare conțin doar ștampile de țări și un nume — niciodată călătorii, locuri, poze sau date."}},
   {"h":{"en":"App stores and this website","fr":"Boutiques d'applications et ce site","es":"Tiendas de aplicaciones y este sitio","it":"Store delle app e questo sito","de":"App-Stores und diese Website","ro":"Magazinele de aplicații și acest site"},
-   "p":{"en":"Downloading Voymark through the App Store or Google Play is governed by Apple's and Google's own privacy policies. This website is a static site hosted on GitHub Pages; GitHub may log standard technical requests. The site sets no cookies and runs no analytics; fonts are loaded from Google Fonts, which involves a standard font request to Google.",
-        "fr":"Le téléchargement de Voymark via l'App Store ou Google Play est régi par les politiques de confidentialité d'Apple et de Google. Ce site est un site statique hébergé sur GitHub Pages ; GitHub peut journaliser des requêtes techniques standard. Le site ne pose aucun cookie et n'utilise aucune analytique ; les polices sont chargées depuis Google Fonts, ce qui implique une requête standard vers Google.",
-        "es":"La descarga de Voymark desde el App Store o Google Play se rige por las políticas de privacidad de Apple y Google. Este sitio es estático y está alojado en GitHub Pages; GitHub puede registrar solicitudes técnicas estándar. El sitio no usa cookies ni analítica; las fuentes se cargan desde Google Fonts, lo que implica una solicitud estándar a Google.",
-        "it":"Il download di Voymark tramite App Store o Google Play è regolato dalle politiche sulla privacy di Apple e Google. Questo sito è statico e ospitato su GitHub Pages; GitHub può registrare richieste tecniche standard. Il sito non imposta cookie e non usa analisi; i caratteri sono caricati da Google Fonts, con una richiesta standard a Google.",
-        "de":"Der Download von Voymark über den App Store oder Google Play unterliegt den Datenschutzrichtlinien von Apple bzw. Google. Diese Website ist statisch und wird auf GitHub Pages gehostet; GitHub kann technische Standard-Anfragen protokollieren. Die Seite setzt keine Cookies und nutzt keine Analyse; Schriften werden von Google Fonts geladen, was eine Standard-Anfrage an Google bedeutet.",
-        "ro":"Descărcarea Voymark prin App Store sau Google Play este guvernată de politicile de confidențialitate ale Apple și Google. Acest site este static și găzduit pe GitHub Pages; GitHub poate înregistra cereri tehnice standard. Site-ul nu setează cookie-uri și nu folosește analitice; fonturile sunt încărcate de la Google Fonts, ceea ce presupune o cerere standard către Google."}},
+   "p":{"en":"Downloading Voymark through the App Store or Google Play is governed by Apple's and Google's own privacy policies. This website is a static site hosted on GitHub Pages; GitHub may log standard technical requests. The site sets no cookies and runs no analytics; fonts are loaded from Google Fonts, which involves a standard font request to Google. On iPhone, the optional Modern and Satellite map styles load map tiles through Apple Maps; those requests go to Apple under Apple's privacy policy. The Atlas and Paper maps are fully offline on both platforms.",
+        "fr":"Le téléchargement de Voymark via l'App Store ou Google Play est régi par les politiques de confidentialité d'Apple et de Google. Ce site est un site statique hébergé sur GitHub Pages ; GitHub peut journaliser des requêtes techniques standard. Le site ne pose aucun cookie et n'utilise aucune analytique ; les polices sont chargées depuis Google Fonts, ce qui implique une requête standard vers Google. Sur iPhone, les styles de carte optionnels Moderne et Satellite chargent des tuiles via Apple Plans ; ces requêtes vont à Apple selon la politique de confidentialité d'Apple. Les cartes Atlas et Papier sont entièrement hors ligne sur les deux plateformes.",
+        "es":"La descarga de Voymark desde el App Store o Google Play se rige por las políticas de privacidad de Apple y Google. Este sitio es estático y está alojado en GitHub Pages; GitHub puede registrar solicitudes técnicas estándar. El sitio no usa cookies ni analítica; las fuentes se cargan desde Google Fonts, lo que implica una solicitud estándar a Google. En iPhone, los estilos de mapa opcionales Moderno y Satélite cargan mosaicos a través de Apple Maps; esas solicitudes van a Apple según la política de privacidad de Apple. Los mapas Atlas y de Papel son totalmente offline en ambas plataformas.",
+        "it":"Il download di Voymark tramite App Store o Google Play è regolato dalle politiche sulla privacy di Apple e Google. Questo sito è statico e ospitato su GitHub Pages; GitHub può registrare richieste tecniche standard. Il sito non imposta cookie e non usa analisi; i caratteri sono caricati da Google Fonts, con una richiesta standard a Google. Su iPhone, gli stili di mappa opzionali Moderna e Satellite caricano tile tramite Mappe Apple; quelle richieste vanno ad Apple secondo la politica sulla privacy di Apple. Le mappe Atlante e di Carta sono completamente offline su entrambe le piattaforme.",
+        "de":"Der Download von Voymark über den App Store oder Google Play unterliegt den Datenschutzrichtlinien von Apple bzw. Google. Diese Website ist statisch und wird auf GitHub Pages gehostet; GitHub kann technische Standard-Anfragen protokollieren. Die Seite setzt keine Cookies und nutzt keine Analyse; Schriften werden von Google Fonts geladen, was eine Standard-Anfrage an Google bedeutet. Auf dem iPhone laden die optionalen Kartenstile Modern und Satellit Kartenkacheln über Apple Karten; diese Anfragen gehen gemäß Apples Datenschutzrichtlinie an Apple. Atlas- und Papierkarte sind auf beiden Plattformen vollständig offline.",
+        "ro":"Descărcarea Voymark prin App Store sau Google Play este guvernată de politicile de confidențialitate ale Apple și Google. Acest site este static și găzduit pe GitHub Pages; GitHub poate înregistra cereri tehnice standard. Site-ul nu setează cookie-uri și nu folosește analitice; fonturile sunt încărcate de la Google Fonts, ceea ce presupune o cerere standard către Google. Pe iPhone, stilurile opționale de hartă Modern și Satelit încarcă dale prin Apple Maps; acele cereri merg la Apple conform politicii de confidențialitate Apple. Hărțile Atlas și de Hârtie sunt complet offline pe ambele platforme."}},
   {"h":{"en":"Your rights","fr":"Vos droits","es":"Tus derechos","it":"I tuoi diritti","de":"Deine Rechte","ro":"Drepturile tale"},
    "p":{"en":"Under the GDPR you have rights of access, rectification, erasure and portability. Because Voymark holds no data about you, these rights are exercised directly on your own device: your data is already in your hands, and the export tools give you portability in open formats.",
         "fr":"Au titre du RGPD, vous disposez de droits d'accès, de rectification, d'effacement et de portabilité. Comme Voymark ne détient aucune donnée vous concernant, ces droits s'exercent directement sur votre appareil : vos données sont déjà entre vos mains, et les outils d'export assurent la portabilité en formats ouverts.",
