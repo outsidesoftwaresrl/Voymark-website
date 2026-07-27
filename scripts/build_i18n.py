@@ -93,9 +93,9 @@ T = {
  "it": "Esplora", "de": "Entdecken", "ro": "Explorează",
 },
 "s1_h": {
- "en": "Four maps. One passport.", "fr": "Quatre cartes. Un passeport.",
- "es": "Cuatro mapas. Un pasaporte.", "it": "Quattro mappe. Un passaporto.",
- "de": "Vier Karten. Ein Pass.", "ro": "Patru hărți. Un pașaport.",
+ "en": "Two maps. One passport.", "fr": "Deux cartes. Un passeport.",
+ "es": "Dos mapas. Un pasaporte.", "it": "Due mappe. Un passaporto.",
+ "de": "Zwei Karten. Ein Pass.", "ro": "Două hărți. Un pașaport.",
 },
 "atlas_h": {"en": "🗺️ Atlas", "fr": "🗺️ Atlas", "es": "🗺️ Atlas", "it": "🗺️ Atlante", "de": "🗺️ Atlas", "ro": "🗺️ Atlas"},
 "atlas_p": {
@@ -116,16 +116,16 @@ T = {
  "ro": "Același pașaport, desenat ca un atlas vechi — ștampile burgundy presate în pergament. Istoria ta de călătorie așa cum merită să arate.",
 },
 "modern_h": {
- "en": "🧭 Modern &amp; Satellite", "fr": "🧭 Moderne &amp; Satellite", "es": "🧭 Moderno &amp; Satélite",
- "it": "🧭 Moderna &amp; Satellite", "de": "🧭 Modern &amp; Satellit", "ro": "🧭 Modern &amp; Satelit",
+ "en": "🧭 Layers &amp; routes", "fr": "🧭 Calques &amp; itinéraires", "es": "🧭 Capas &amp; rutas",
+ "it": "🧭 Livelli &amp; rotte", "de": "🧭 Ebenen &amp; Routen", "ro": "🧭 Straturi &amp; rute",
 },
 "modern_p": {
- "en": "Apple Maps styles with your visited countries inked over them, place pins, trip routes and photo markers — all in sync with the Atlas.",
- "fr": "Les styles Apple Plans avec vos pays visités encrés par-dessus, épingles de lieux, itinéraires et marqueurs photo — tout en synchro avec l'Atlas.",
- "es": "Los estilos de Apple Maps con tus países visitados entintados encima, pines de lugares, rutas de viajes y marcadores de fotos — todo en sincronía con el Atlas.",
- "it": "Gli stili di Mappe Apple con i tuoi paesi visitati inchiostrati sopra, segnaposto, rotte dei viaggi e marcatori foto — tutto in sincronia con l'Atlante.",
- "de": "Apple-Karten-Stile mit deinen besuchten Ländern darüber, Orts-Pins, Reiserouten und Foto-Markern — alles synchron mit dem Atlas.",
- "ro": "Stilurile Apple Maps cu țările tale vizitate colorate deasupra, pinuri de locuri, rute de călătorie și marcaje foto — totul în sincron cu Atlasul.",
+ "en": "Place pins, trip routes, photo markers, cities and wishlist shading — flip each layer on or off, on both the Atlas and the Paper map.",
+ "fr": "Épingles de lieux, itinéraires de voyage, marqueurs photo, villes et liste d'envies — activez ou coupez chaque calque, sur l'Atlas comme sur la carte Papier.",
+ "es": "Pines de lugares, rutas de viaje, marcadores de fotos, ciudades y lista de deseos — activa o desactiva cada capa, tanto en el Atlas como en el mapa de Papel.",
+ "it": "Segnaposto, rotte dei viaggi, marcatori foto, città e lista dei desideri — accendi o spegni ogni livello, sia sull'Atlante sia sulla mappa di Carta.",
+ "de": "Orts-Pins, Reiserouten, Foto-Marker, Städte und Wunschliste — jede Ebene einzeln schaltbar, auf dem Atlas wie auf der Papierkarte.",
+ "ro": "Pinuri de locuri, rute de călătorie, marcaje foto, orașe și lista de dorințe — aprinzi sau stingi fiecare strat, atât pe Atlas, cât și pe harta de Hârtie.",
 },
 "cities_h": {"en": "🏙️ Cities", "fr": "🏙️ Villes", "es": "🏙️ Ciudades", "it": "🏙️ Città", "de": "🏙️ Städte", "ro": "🏙️ Orașe"},
 "cities_p": {
