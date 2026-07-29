@@ -162,14 +162,24 @@ body {
   text-align: center;
 }
 
-/* Centered flex instead of a grid: sections carry 4 or 5 cards, and a
-   grid leaves the odd one dangling on desktop (Florentin, 2026-07-29) —
-   a wrapped flex row centers every incomplete row. */
+/* Fixed column counts that divide each section's card count, so every
+   row is full at every width (Florentin, 2026-07-29): the 6-card maps
+   section is 3 columns (grid-3), the 4-card section 2 — both collapse
+   to 2 columns on tablets (3 and 2 full rows) and 1 on phones. */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
+}
+
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 900px) {
+  .grid, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 580px) {
+  .grid, .grid-3 { grid-template-columns: 1fr; }
 }
 
 .grid article {
@@ -177,8 +187,6 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 22px;
-  flex: 1 1 260px;
-  max-width: 380px;
 }
 
 .grid h3 {
