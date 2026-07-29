@@ -162,9 +162,13 @@ body {
   text-align: center;
 }
 
+/* Centered flex instead of a grid: sections carry 4 or 5 cards, and a
+   grid leaves the odd one dangling on desktop (Florentin, 2026-07-29) —
+   a wrapped flex row centers every incomplete row. */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 18px;
 }
 
@@ -173,6 +177,8 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 22px;
+  flex: 1 1 260px;
+  max-width: 380px;
 }
 
 .grid h3 {
