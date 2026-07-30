@@ -28,6 +28,22 @@ T = {
  "de": "Voymark ist dein Weltpass: eine lebendige Karte aus Ländern, Reisen, Orten und Erinnerungen — gebaut aus den Fotos, die schon auf deinem Handy sind. Offline-first, ohne Konto, ohne Tracking.",
  "ro": "Voymark este pașaportul lumii tale: o hartă vie de țări, călătorii, locuri și amintiri — construită din pozele aflate deja pe telefonul tău. Offline mai întâi, fără cont, fără urmărire.",
 },
+"regions_h": {
+ "en": "🏛️ States &amp; regions",
+ "fr": "🏛️ États &amp; régions",
+ "es": "🏛️ Estados y regiones",
+ "it": "🏛️ Stati e regioni",
+ "de": "🏛️ Staaten &amp; Regionen",
+ "ro": "🏛️ State și regiuni",
+},
+"regions_p": {
+ "en": "Twelve countries go deeper: US states, German Länder, Japanese prefectures and more — 290 regions on their own tap-to-stamp maps.",
+ "fr": "Douze pays vont plus loin : États américains, Länder allemands, préfectures japonaises et plus — 290 régions sur leurs propres cartes à tamponner.",
+ "es": "Doce países van más allá: estados de EE.&nbsp;UU., Länder alemanes, prefecturas japonesas y más — 290 regiones en sus propios mapas para sellar.",
+ "it": "Dodici paesi vanno più a fondo: stati USA, Länder tedeschi, prefetture giapponesi e altro — 290 regioni su mappe proprie, da timbrare al tocco.",
+ "de": "Zwölf Länder gehen tiefer: US-Bundesstaaten, deutsche Bundesländer, japanische Präfekturen und mehr — 290 Regionen auf eigenen Karten zum Stempeln.",
+ "ro": "Douăsprezece țări merg mai departe: statele americane, landurile germane, prefecturile japoneze și altele — 290 de regiuni pe propriile hărți de ștampilat.",
+},
 "h1": {
  "en": "Every journey leaves a&nbsp;mark.",
  "fr": "Chaque voyage laisse une&nbsp;trace.",
@@ -294,6 +310,9 @@ TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{root}assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 </head>
 <body>
 
@@ -324,12 +343,13 @@ TEMPLATE = """<!DOCTYPE html>
   <main>
     <section class="band">
       <h2>{s1_h}</h2>
-      <div class="grid">
+      <div class="grid grid-3">
         <article><h3>{atlas_h}</h3><p>{atlas_p}</p></article>
         <article><h3>{paper_h}</h3><p>{paper_p}</p></article>
         <article><h3>{modern_h}</h3><p>{modern_p}</p></article>
         <article><h3>{layers_h}</h3><p>{layers_p}</p></article>
         <article><h3>{cities_h}</h3><p>{cities_p}</p></article>
+              <article><h3>{regions_h}</h3><p>{regions_p}</p></article>
       </div>
     </section>
 
@@ -832,6 +852,9 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{root}assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 </head>
 <body>
 
