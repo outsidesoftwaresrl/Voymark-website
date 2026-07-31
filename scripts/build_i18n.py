@@ -7,7 +7,9 @@ English lands at /index.html; the rest at /<lang>/index.html.
 Keep translations in tone with the app's Strings*.swift tables.
 """
 
+import json
 import os
+import subprocess
 
 LANGS = ["en", "fr", "es", "it", "de", "ro"]
 
@@ -402,14 +404,15 @@ TEMPLATE = """<!DOCTYPE html>
   <meta property="og:description" content="{meta}">
   <meta property="og:type" content="website">
 {social}
+  <link rel="canonical" href="{canonical}">
 {hreflangs}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="{root}assets/fonts/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{root}assets/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{root}assets/style.css">
   <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
+{jsonld}
 </head>
 <body>
 
@@ -557,6 +560,181 @@ def social_block(lang, url, title, description):
   <meta name="twitter:description" content="{description}">
   <meta name="twitter:image" content="{OG_IMAGE}">
   <meta name="twitter:image:alt" content="{OG_ALT[lang]}">'''
+
+
+# ---------------------------------------------------------------------------
+# Structured data
+#
+# Search engines and answer engines read JSON-LD to decide what this site
+# *is*; without it Voymark was an unlabelled document to both (SEO/GEO
+# audit, 2026-07-31). Three rules hold here:
+#
+# 1. Only claims the app can back. `price: "0"` is true — there is no
+#    subscription and no paid tier. There is no `aggregateRating`, because
+#    there are no reviews; inventing one would be a fabricated record.
+# 2. `applicationCategory` and `operatingSystem` name both platforms,
+#    since both ship.
+# 3. The graph is the same on every language; only @id/url/inLanguage move.
+#    One Organization and one WebSite node, referenced by @id from the
+#    per-page nodes, so the six locales describe one entity rather than six.
+# ---------------------------------------------------------------------------
+
+ORG_ID = BASE_URL + "#organization"
+SITE_ID = BASE_URL + "#website"
+APP_ID = BASE_URL + "#app"
+
+APP_DESCRIPTION = {
+ "en": "A world passport for your travels: mark the countries you have visited, turn geotagged photos into trips, and keep the whole record on your device. Free, offline, no account.",
+ "fr": "Un passeport du monde pour vos voyages : marquez les pays visités, transformez vos photos géolocalisées en voyages et gardez tout sur votre appareil. Gratuit, hors ligne, sans compte.",
+ "es": "Un pasaporte del mundo para tus viajes: marca los países visitados, convierte tus fotos geolocalizadas en viajes y guarda todo en tu dispositivo. Gratis, offline, sin cuenta.",
+ "it": "Un passaporto del mondo per i tuoi viaggi: segna i paesi visitati, trasforma le foto geolocalizzate in viaggi e tieni tutto sul tuo dispositivo. Gratis, offline, senza account.",
+ "de": "Ein Weltpass für deine Reisen: markiere besuchte Länder, mach aus Fotos mit GPS-Daten fertige Reisen und behalte alles auf deinem Gerät. Kostenlos, offline, ohne Konto.",
+ "ro": "Un pașaport al lumii pentru călătoriile tale: marchează țările vizitate, transformă pozele cu locație în călătorii și păstrează totul pe dispozitiv. Gratuit, offline, fără cont.",
+}
+
+# Every line here must be a feature both platforms ship. Checked against
+# the app repo's docs/FEATURES.md — the site's standing rule.
+FEATURE_LIST = {
+ "en": ["Visited-countries world map", "Passport with stamps and seals",
+        "Geotagged photos turned into trips", "Cities and regions",
+        "Travel journal and companions", "Time machine by year",
+        "PDF travel book and share cards", "Works offline, no account",
+        "Export to GPX, KML, GeoJSON, CSV and plain text"],
+ "fr": ["Carte du monde des pays visités", "Passeport avec tampons et sceaux",
+        "Photos géolocalisées transformées en voyages", "Villes et régions",
+        "Journal de voyage et compagnons", "Machine à remonter le temps par année",
+        "Livre de voyage PDF et cartes à partager", "Fonctionne hors ligne, sans compte",
+        "Export GPX, KML, GeoJSON, CSV et texte brut"],
+ "es": ["Mapa mundial de países visitados", "Pasaporte con sellos y medallas",
+        "Fotos geolocalizadas convertidas en viajes", "Ciudades y regiones",
+        "Diario de viaje y acompañantes", "Máquina del tiempo por año",
+        "Libro de viaje en PDF y tarjetas para compartir", "Funciona offline, sin cuenta",
+        "Exportación a GPX, KML, GeoJSON, CSV y texto plano"],
+ "it": ["Mappa del mondo dei paesi visitati", "Passaporto con timbri e sigilli",
+        "Foto geolocalizzate trasformate in viaggi", "Città e regioni",
+        "Diario di viaggio e compagni", "Macchina del tempo per anno",
+        "Libro di viaggio PDF e card da condividere", "Funziona offline, senza account",
+        "Esportazione in GPX, KML, GeoJSON, CSV e testo semplice"],
+ "de": ["Weltkarte der besuchten Länder", "Reisepass mit Stempeln und Siegeln",
+        "Fotos mit GPS-Daten werden zu Reisen", "Städte und Regionen",
+        "Reisetagebuch und Begleiter", "Zeitmaschine nach Jahr",
+        "PDF-Reisebuch und Sharing-Karten", "Funktioniert offline, ohne Konto",
+        "Export als GPX, KML, GeoJSON, CSV und Klartext"],
+ "ro": ["Harta lumii cu țările vizitate", "Pașaport cu ștampile și sigilii",
+        "Poze cu locație transformate în călătorii", "Orașe și regiuni",
+        "Jurnal de călătorie și însoțitori", "Mașina timpului, an cu an",
+        "Carte de călătorie PDF și cărți de partajat", "Funcționează offline, fără cont",
+        "Export în GPX, KML, GeoJSON, CSV și text simplu"],
+}
+
+
+def _shared_nodes(lang):
+    """Organization, WebSite and SoftwareApplication — one set, every page."""
+    return [
+        {
+            "@type": "Organization",
+            "@id": ORG_ID,
+            "name": "Outside Software SRL",
+            "url": BASE_URL,
+            "logo": {
+                "@type": "ImageObject",
+                "url": BASE_URL + "assets/img/voymark-avatar-seal-1024.png",
+                "width": 1024,
+                "height": 1024,
+            },
+        },
+        {
+            "@type": "WebSite",
+            "@id": SITE_ID,
+            "name": "Voymark",
+            "url": BASE_URL,
+            "inLanguage": LANGS,
+            "publisher": {"@id": ORG_ID},
+        },
+        {
+            "@type": "SoftwareApplication",
+            "@id": APP_ID,
+            "name": "Voymark",
+            "alternateName": "Voymark — World Passport",
+            "applicationCategory": "TravelApplication",
+            "applicationSubCategory": "Travel tracker",
+            "operatingSystem": "iOS 17+, Android 8+",
+            "description": APP_DESCRIPTION[lang],
+            "inLanguage": LANGS,
+            "isAccessibleForFree": True,
+            "image": OG_IMAGE,
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "EUR",
+                "availability": "https://schema.org/InStock",
+            },
+            "featureList": FEATURE_LIST[lang],
+            "publisher": {"@id": ORG_ID},
+        },
+    ]
+
+
+def _script(graph):
+    body = json.dumps({"@context": "https://schema.org", "@graph": graph},
+                      ensure_ascii=False, indent=2)
+    body = "\n".join("  " + line for line in body.splitlines())
+    return f'  <script type="application/ld+json">\n{body}\n  </script>'
+
+
+def jsonld_home(lang):
+    url = url_for(lang)
+    graph = _shared_nodes(lang) + [{
+        "@type": "WebPage",
+        "@id": url + "#webpage",
+        "url": url,
+        "name": T["title"][lang],
+        "description": T["meta"][lang],
+        "inLanguage": lang,
+        "isPartOf": {"@id": SITE_ID},
+        "about": {"@id": APP_ID},
+    }]
+    return _script(graph)
+
+
+def jsonld_page(slug, lang, faq=None):
+    url = page_url(slug, lang)
+    home = url_for(lang)
+    page = PAGES[slug]
+    graph = _shared_nodes(lang) + [
+        {
+            "@type": "WebPage",
+            "@id": url + "#webpage",
+            "url": url,
+            "name": page["title"][lang],
+            "description": page["meta"][lang],
+            "inLanguage": lang,
+            "isPartOf": {"@id": SITE_ID},
+            "about": {"@id": APP_ID},
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": url + "#breadcrumbs",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Voymark", "item": home},
+                {"@type": "ListItem", "position": 2, "name": page["nav"][lang], "item": url},
+            ],
+        },
+    ]
+    if faq:
+        graph.append({
+            "@type": "FAQPage",
+            "@id": url + "#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": q["q"][lang],
+                    "acceptedAnswer": {"@type": "Answer", "text": q["a"][lang]},
+                }
+                for q in faq
+            ],
+        })
+    return _script(graph)
 
 
 # ---------------------------------------------------------------------------
@@ -1041,14 +1219,15 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
   <meta property="og:description" content="{meta}">
   <meta property="og:type" content="website">
 {social}
+  <link rel="canonical" href="{canonical}">
 {hreflangs}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preload" href="{root}assets/fonts/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{root}assets/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{root}assets/style.css">
   <link rel="icon" type="image/svg+xml" href="{root}assets/img/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
+{jsonld}
 </head>
 <body>
 
@@ -1169,6 +1348,8 @@ def build_index(lang):
         lang, url_for(lang), T["title"][lang], T["meta"][lang])
     html = TEMPLATE.format(
         lang=lang, root=root,
+        canonical=url_for(lang),
+        jsonld=jsonld_home(lang),
         hreflangs=hreflang_block(url_for),
         langlinks=langlinks_block(lang, url_for),
         footnav=footnav_block(lang),
@@ -1194,6 +1375,8 @@ def build_page(slug, lang):
         social=social_block(lang, page_url(slug, lang),
                             page["title"][lang], page["meta"][lang]),
         lang=lang, root=root,
+        canonical=page_url(slug, lang),
+        jsonld=jsonld_page(slug, lang, page.get("faq")),
         title=page["title"][lang], meta=page["meta"][lang],
         h1=page["h1"][lang], lede=page["lede"][lang],
         sections_html=sections,
@@ -1215,13 +1398,44 @@ def build_page(slug, lang):
     print("wrote", out)
 
 
+def last_modified():
+    """The date of the last commit, as YYYY-MM-DD.
+
+    Crawlers use <lastmod> to decide what to re-fetch, and a sitemap that
+    never carries one gets ignored on that signal (SEO audit, 2026-07-31).
+    Every page here is regenerated by this script from one source, so they
+    genuinely all change together — a single site-wide date is the honest
+    answer, not a per-file fiction. Falls back to today outside a
+    checkout.
+    """
+    try:
+        out = subprocess.run(
+            ["git", "log", "-1", "--format=%cs"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        if len(out) == 10:
+            return out
+    except Exception:
+        pass
+    import datetime
+    return datetime.date.today().isoformat()
+
+
 def build_sitemap():
+    stamp = last_modified()
     urls = []
     for lang in LANGS:
-        urls.append(url_for(lang))
+        urls.append((url_for(lang), "1.0"))
         for slug in ALL_SLUGS:
-            urls.append(page_url(slug, lang))
-    body = "\n".join(f"  <url><loc>{u}</loc></url>" for u in urls)
+            # The keyword landing pages are what search should reach for;
+            # privacy and terms are required reading, not entry points.
+            priority = "0.3" if slug in LEGAL_SLUGS else "0.8"
+            urls.append((page_url(slug, lang), priority))
+    body = "\n".join(
+        f"  <url><loc>{u}</loc><lastmod>{stamp}</lastmod>"
+        f"<changefreq>monthly</changefreq><priority>{p}</priority></url>"
+        for u, p in urls
+    )
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
