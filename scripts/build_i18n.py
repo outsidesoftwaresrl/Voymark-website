@@ -384,7 +384,12 @@ T = {
 },
 }
 
-BASE_URL = "https://outsidesoftwaresrl.github.io/Voymark-website/"
+# The site moved to its own apex domain (Florentin, 2026-07-31). Everything
+# absolute is built from here — canonical, og:url, hreflang, the visible
+# language switcher, the sitemap and robots.txt — so this one line is the
+# whole move. The CNAME file next to it keeps GitHub Pages pointed at the
+# domain across deploys.
+BASE_URL = "https://voymark.app/"
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="{lang}">

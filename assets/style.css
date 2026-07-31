@@ -113,7 +113,18 @@ body {
   margin: 0 auto 32px;
 }
 
-.cta { margin-bottom: 48px; }
+/* Centers in both homes: the hero centers its children anyway, but the
+   sub-page CTA sits in a plain band and was hugging the left edge
+   (Florentin, 2026-07-31). Flex also gives the two badges a real gap
+   instead of relying on the whitespace between the tags, and lets them
+   stack instead of overflowing on a narrow phone. */
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+}
 
 .badge {
   display: inline-flex;
