@@ -401,6 +401,7 @@ TEMPLATE = """<!DOCTYPE html>
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{meta}">
   <meta property="og:type" content="website">
+{social}
 {hreflangs}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -514,6 +515,49 @@ TEMPLATE = """<!DOCTYPE html>
 """
 
 LANG_LABELS = {"en": "EN", "fr": "FR", "es": "ES", "it": "IT", "de": "DE", "ro": "RO"}
+
+# Open Graph needs a full locale, not a language code.
+OG_LOCALE = {"en": "en_US", "fr": "fr_FR", "es": "es_ES",
+             "it": "it_IT", "de": "de_DE", "ro": "ro_RO"}
+
+OG_IMAGE = BASE_URL + "assets/img/voymark-og.png"
+
+OG_ALT = {
+ "en": "Voymark — a world passport for your travels. Offline, no account, free.",
+ "fr": "Voymark — un passeport du monde pour vos voyages. Hors ligne, sans compte, gratuit.",
+ "es": "Voymark — un pasaporte del mundo para tus viajes. Offline, sin cuenta, gratis.",
+ "it": "Voymark — un passaporto del mondo per i tuoi viaggi. Offline, senza account, gratis.",
+ "de": "Voymark — ein Weltpass für deine Reisen. Offline, ohne Konto, kostenlos.",
+ "ro": "Voymark — un pașaport al lumii pentru călătoriile tale. Offline, fără cont, gratuit.",
+}
+
+
+def social_block(lang, url, title, description):
+    """og:image and the Twitter card, shared by both templates.
+
+    Without og:image every share of the site — X, Slack, WhatsApp,
+    LinkedIn, Discord — rendered as a bare text link (SEO audit,
+    2026-07-31). One card serves all 48 pages: the site is small enough
+    that a per-page image would be six translations of the same claim.
+    """
+    others = "\n".join(
+        f'  <meta property="og:locale:alternate" content="{OG_LOCALE[l]}">'
+        for l in LANGS if l != lang
+    )
+    return f'''  <meta property="og:url" content="{url}">
+  <meta property="og:site_name" content="Voymark">
+  <meta property="og:locale" content="{OG_LOCALE[lang]}">
+{others}
+  <meta property="og:image" content="{OG_IMAGE}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{OG_ALT[lang]}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{title}">
+  <meta name="twitter:description" content="{description}">
+  <meta name="twitter:image" content="{OG_IMAGE}">
+  <meta name="twitter:image:alt" content="{OG_ALT[lang]}">'''
+
 
 # ---------------------------------------------------------------------------
 # Subpages: legal + keyword landing pages. Slugs stay English everywhere
@@ -996,6 +1040,7 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{meta}">
   <meta property="og:type" content="website">
+{social}
 {hreflangs}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1120,6 +1165,8 @@ def footnav_block(lang):
 def build_index(lang):
     root = "" if lang == "en" else "../"
     values = {key: T[key][lang] for key in T}
+    values["social"] = social_block(
+        lang, url_for(lang), T["title"][lang], T["meta"][lang])
     html = TEMPLATE.format(
         lang=lang, root=root,
         hreflangs=hreflang_block(url_for),
@@ -1144,6 +1191,8 @@ def build_page(slug, lang):
         for s in page["sections"]
     )
     html = SUBPAGE_TEMPLATE.format(
+        social=social_block(lang, page_url(slug, lang),
+                            page["title"][lang], page["meta"][lang]),
         lang=lang, root=root,
         title=page["title"][lang], meta=page["meta"][lang],
         h1=page["h1"][lang], lede=page["lede"][lang],
