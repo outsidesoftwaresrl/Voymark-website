@@ -274,6 +274,97 @@ T = {
  "de": "Jede Funktion. Wir nehmen dir nie weg, was du schon hast.",
  "ro": "Fiecare funcție. Nu îți vom lua niciodată ce ai deja.",
 },
+"collections_h": {
+ "en": "🏛️ Landmark collections", "fr": "🏛️ Collections de sites",
+ "es": "🏛️ Colecciones de lugares", "it": "🏛️ Collezioni di luoghi",
+ "de": "🏛️ Sehenswürdigkeiten", "ro": "🏛️ Colecții de locuri",
+},
+"collections_p": {
+ "en": "All 197 capitals, 1,351 UNESCO World Heritage sites, the New 7 Wonders and the 7 Natural Wonders. Your trips and geotagged photos claim them for you, dated by the earliest evidence — the rest you tick off by hand.",
+ "fr": "Les 197 capitales, 1 351 sites du patrimoine mondial de l'UNESCO, les 7 nouvelles merveilles et les 7 merveilles naturelles. Vos voyages et vos photos géolocalisées les réclament pour vous, datés par la première preuve — le reste se coche à la main.",
+ "es": "Las 197 capitales, 1351 sitios del Patrimonio Mundial de la UNESCO, las 7 nuevas maravillas y las 7 maravillas naturales. Tus viajes y tus fotos geolocalizadas los reclaman por ti, fechados por la primera evidencia — el resto lo marcas a mano.",
+ "it": "Tutte le 197 capitali, 1.351 siti del Patrimonio Mondiale UNESCO, le 7 nuove meraviglie e le 7 meraviglie naturali. I tuoi viaggi e le tue foto geolocalizzate li reclamano per te, datati dalla prima prova — il resto lo spunti a mano.",
+ "de": "Alle 197 Hauptstädte, 1.351 UNESCO-Welterbestätten, die 7 neuen Weltwunder und die 7 Naturwunder. Deine Reisen und deine verorteten Fotos holen sie für dich, datiert auf den frühesten Beleg — den Rest hakst du selbst ab.",
+ "ro": "Toate cele 197 de capitale, 1.351 de situri din patrimoniul mondial UNESCO, cele 7 noi minuni și cele 7 minuni naturale. Călătoriile și pozele tale geolocalizate le revendică singure, datate după cea mai veche dovadă — restul le bifezi manual.",
+},
+"journal_h": {
+ "en": "📔 Journal &amp; companions", "fr": "📔 Journal &amp; compagnons",
+ "es": "📔 Diario y compañeros", "it": "📔 Diario e compagni",
+ "de": "📔 Tagebuch &amp; Begleiter", "ro": "📔 Jurnal și însoțitori",
+},
+"journal_p": {
+ "en": "Write a page for any day of a trip, and record who you were with. The names filter your timeline; the pages are printed into your PDF travel book.",
+ "fr": "Écrivez une page pour n'importe quel jour d'un voyage, et notez avec qui vous étiez. Les noms filtrent votre chronologie ; les pages s'impriment dans votre livre de voyage PDF.",
+ "es": "Escribe una página para cualquier día de un viaje y anota con quién estabas. Los nombres filtran tu cronología; las páginas se imprimen en tu libro de viaje en PDF.",
+ "it": "Scrivi una pagina per ogni giorno di un viaggio e annota con chi eri. I nomi filtrano la tua cronologia; le pagine finiscono stampate nel tuo libro di viaggio PDF.",
+ "de": "Schreib eine Seite zu jedem Reisetag und halt fest, mit wem du unterwegs warst. Die Namen filtern deine Zeitleiste; die Seiten werden in dein PDF-Reisebuch gedruckt.",
+ "ro": "Scrie o pagină pentru orice zi dintr-o călătorie și notează cu cine ai fost. Numele îți filtrează cronologia; paginile se tipăresc în cartea ta de călătorie PDF.",
+},
+"s6_h": {
+ "en": "The passport keeps score", "fr": "Le passeport tient les comptes",
+ "es": "El pasaporte lleva la cuenta", "it": "Il passaporto tiene il conto",
+ "de": "Der Pass führt Buch", "ro": "Pașaportul ține socoteala",
+},
+"seals_h": {
+ "en": "🏅 Seals", "fr": "🏅 Sceaux", "es": "🏅 Sellos",
+ "it": "🏅 Sigilli", "de": "🏅 Siegel", "ro": "🏅 Sigilii",
+},
+"seals_p": {
+ "en": "Around 29 seals pressed automatically from your own record — country milestones, every continent, the Arctic Circle, the equator, your antipode. Change your counting rule and a borderline seal can honestly lock again.",
+ "fr": "Environ 29 sceaux apposés automatiquement d'après votre propre histoire — jalons de pays, chaque continent, le cercle polaire, l'équateur, votre antipode. Changez de règle de comptage et un sceau limite peut honnêtement se reverrouiller.",
+ "es": "Unos 29 sellos estampados automáticamente desde tu propio registro — hitos de países, cada continente, el círculo polar, el ecuador, tu antípoda. Cambia tu regla de conteo y un sello límite puede bloquearse de nuevo, con toda honestidad.",
+ "it": "Circa 29 sigilli impressi automaticamente dal tuo stesso archivio — traguardi di paesi, ogni continente, il circolo polare, l'equatore, il tuo antipodo. Cambia la regola di conteggio e un sigillo al limite può onestamente richiudersi.",
+ "de": "Rund 29 Siegel, automatisch aus deiner eigenen Bilanz gestempelt — Länder-Meilensteine, jeder Kontinent, der Polarkreis, der Äquator, dein Antipode. Änderst du deine Zählregel, darf ein Grenzfall-Siegel ehrlich wieder zufallen.",
+ "ro": "Aproximativ 29 de sigilii aplicate automat din propria ta evidență — praguri de țări, fiecare continent, cercul polar, ecuatorul, antipodul tău. Schimbi regula de numărare și un sigiliu la limită se poate încuia din nou, cinstit.",
+},
+"timemachine_h": {
+ "en": "🕰️ Time machine", "fr": "🕰️ Machine à remonter le temps",
+ "es": "🕰️ Máquina del tiempo", "it": "🕰️ Macchina del tempo",
+ "de": "🕰️ Zeitmaschine", "ro": "🕰️ Mașina timpului",
+},
+"timemachine_p": {
+ "en": "Drag a year and the world recolours to exactly where you had been by then. Export any year as an eight-second vertical video — countries stamping in on their real dates, routes drawing themselves.",
+ "fr": "Faites glisser une année et le monde se recolore exactement selon vos voyages d'alors. Exportez n'importe quelle année en vidéo verticale de huit secondes — les pays s'y tamponnent à leurs vraies dates, les itinéraires se tracent seuls.",
+ "es": "Arrastra un año y el mundo se recolorea justo hasta donde habías llegado entonces. Exporta cualquier año como un vídeo vertical de ocho segundos — los países se sellan en sus fechas reales y las rutas se dibujan solas.",
+ "it": "Trascina un anno e il mondo si ricolora esattamente su dove eri arrivato allora. Esporta qualsiasi anno come video verticale di otto secondi — i paesi si timbrano alle loro date vere, le rotte si disegnano da sole.",
+ "de": "Zieh an einem Jahr und die Welt färbt sich genau so ein, wie weit du damals warst. Exportier jedes Jahr als acht Sekunden langes Hochkant-Video — Länder stempeln sich an ihren echten Daten ein, Routen zeichnen sich selbst.",
+ "ro": "Trage de un an și lumea se recolorează exact până unde ajunseseși atunci. Exportă orice an ca video vertical de opt secunde — țările se ștampilează la datele lor reale, traseele se desenează singure.",
+},
+"widgets_h": {
+ "en": "📱 Widgets &amp; voice", "fr": "📱 Widgets &amp; voix",
+ "es": "📱 Widgets y voz", "it": "📱 Widget e voce",
+ "de": "📱 Widgets &amp; Sprache", "ro": "📱 Widgeturi și voce",
+},
+"widgets_p": {
+ "en": "Your count, your best continent and your share of the world, on the home screen. On iPhone you can also just ask Siri how many countries you've visited.",
+ "fr": "Votre total, votre meilleur continent et votre part du monde, sur l'écran d'accueil. Sur iPhone, vous pouvez aussi simplement demander à Siri combien de pays vous avez visités.",
+ "es": "Tu cuenta, tu mejor continente y tu porcentaje del mundo, en la pantalla de inicio. En iPhone también puedes preguntarle a Siri cuántos países has visitado.",
+ "it": "Il tuo conteggio, il tuo continente migliore e la tua fetta di mondo, sulla schermata home. Su iPhone puoi anche chiedere a Siri quanti paesi hai visitato.",
+ "de": "Dein Zähler, dein bester Kontinent und dein Anteil an der Welt, auf dem Homescreen. Auf dem iPhone kannst du Siri auch einfach fragen, in wie vielen Ländern du warst.",
+ "ro": "Numărul tău, continentul tău cel mai bun și partea ta de lume, direct pe ecranul principal. Pe iPhone poți pur și simplu să o întrebi pe Siri în câte țări ai fost.",
+},
+"icloud_h": {
+ "en": "☁️ Your own iCloud <small>· iPhone</small>", "fr": "☁️ Votre propre iCloud <small>· iPhone</small>",
+ "es": "☁️ Tu propio iCloud <small>· iPhone</small>", "it": "☁️ Il tuo iCloud <small>· iPhone</small>",
+ "de": "☁️ Deine eigene iCloud <small>· iPhone</small>", "ro": "☁️ Propriul tău iCloud <small>· iPhone</small>",
+},
+"icloud_p": {
+ "en": "Switch on iCloud sync and your passport travels between your own devices — through your iCloud account, not ours. There is no Voymark account to make, and the app keeps working when iCloud doesn't.",
+ "fr": "Activez la synchronisation iCloud et votre passeport circule entre vos appareils — via votre compte iCloud, pas le nôtre. Il n'y a aucun compte Voymark à créer, et l'application continue de fonctionner quand iCloud ne répond pas.",
+ "es": "Activa la sincronización con iCloud y tu pasaporte viaja entre tus dispositivos — por tu cuenta de iCloud, no la nuestra. No hay ninguna cuenta Voymark que crear, y la app sigue funcionando cuando iCloud no lo hace.",
+ "it": "Attiva la sincronizzazione iCloud e il tuo passaporto viaggia tra i tuoi dispositivi — attraverso il tuo account iCloud, non il nostro. Non c'è nessun account Voymark da creare, e l'app continua a funzionare quando iCloud non risponde.",
+ "de": "Schalte die iCloud-Synchronisierung ein und dein Pass wandert zwischen deinen Geräten — über deine iCloud, nicht unsere. Es gibt kein Voymark-Konto anzulegen, und die App läuft weiter, wenn iCloud es nicht tut.",
+ "ro": "Pornește sincronizarea iCloud și pașaportul tău circulă între dispozitivele tale — prin contul tău de iCloud, nu al nostru. Nu ai niciun cont Voymark de creat, iar aplicația merge mai departe și când iCloud nu merge.",
+},
+"p5s": {"en": "Readable.", "fr": "Lisible.", "es": "Legible.", "it": "Leggibile.", "de": "Lesbar.", "ro": "Lizibil."},
+"p5": {
+ "en": "One export writes your whole travel record as plain text — every country, trip, place and note, in a file you can open anywhere, forever, without us.",
+ "fr": "Un export écrit toute votre histoire de voyage en texte brut — chaque pays, voyage, lieu et note, dans un fichier lisible partout, pour toujours, sans nous.",
+ "es": "Una exportación escribe todo tu registro de viajes en texto plano — cada país, viaje, lugar y nota, en un archivo que puedes abrir en cualquier parte, para siempre, sin nosotros.",
+ "it": "Un export scrive tutta la tua storia di viaggio in testo semplice — ogni paese, viaggio, luogo e nota, in un file che puoi aprire ovunque, per sempre, senza di noi.",
+ "de": "Ein Export schreibt deine ganze Reisebilanz als reinen Text — jedes Land, jede Reise, jeden Ort und jede Notiz, in einer Datei, die du überall öffnen kannst, für immer, auch ohne uns.",
+ "ro": "Un export îți scrie toată istoria de călătorie ca text simplu — fiecare țară, călătorie, loc și notiță, într-un fișier pe care îl deschizi oriunde, oricând, și fără noi.",
+},
 "s5_h": {
  "en": "Six languages", "fr": "Six langues", "es": "Seis idiomas",
  "it": "Sei lingue", "de": "Sechs Sprachen", "ro": "Șase limbi",
@@ -367,10 +458,22 @@ TEMPLATE = """<!DOCTYPE html>
         <article><h3>{hand_h}</h3><p>{hand_p}</p></article>
         <article><h3>{rules_h}</h3><p>{rules_p}</p></article>
         <article><h3>{story_h}</h3><p>{story_p}</p></article>
+        <article><h3>{collections_h}</h3><p>{collections_p}</p></article>
+        <article><h3>{journal_h}</h3><p>{journal_p}</p></article>
       </div>
     </section>
 
     <section class="band">
+      <h2>{s6_h}</h2>
+      <div class="grid">
+        <article><h3>{seals_h}</h3><p>{seals_p}</p></article>
+        <article><h3>{timemachine_h}</h3><p>{timemachine_p}</p></article>
+        <article><h3>{widgets_h}</h3><p>{widgets_p}</p></article>
+        <article><h3>{icloud_h}</h3><p>{icloud_p}</p></article>
+      </div>
+    </section>
+
+    <section class="band band-alt">
       <h2>{s3_h}</h2>
       <p class="wide">{s3_p}</p>
     </section>
@@ -382,6 +485,7 @@ TEMPLATE = """<!DOCTYPE html>
         <li><strong>{p2s}</strong> {p2}</li>
         <li><strong>{p3s}</strong> {p3}</li>
         <li><strong>{p4s}</strong> {p4}</li>
+        <li><strong>{p5s}</strong> {p5}</li>
       </ul>
     </section>
 
@@ -620,6 +724,14 @@ PAGES = {
         "it":"Tutta la mappa è inclusa nell'app. Niente account, niente tracciamento, nulla di caricato — la tua storia di viaggio appartiene a te.",
         "de":"Die ganze Karte steckt in der App. Keine Konten, kein Tracking, nichts wird hochgeladen — deine Reisegeschichte gehört dir.",
         "ro":"Întreaga hartă vine în aplicație. Fără conturi, fără urmărire, nimic încărcat — istoria ta de călătorie îți aparține."}},
+  {"h": {"en":"Past the border lines","fr":"Au-delà des frontières","es":"Más allá de las fronteras","it":"Oltre i confini","de":"Jenseits der Grenzlinien","ro":"Dincolo de granițe"},
+   "p": {
+        "en":"A country is a coarse unit. Twelve countries go deeper — US states, German Länder, Japanese prefectures and more, 290 regions on their own tap-to-stamp maps. And four landmark collections fill themselves in from the same evidence: all 197 capitals, 1,351 UNESCO World Heritage sites, the New 7 Wonders and the 7 Natural Wonders.",
+        "fr":"Un pays est une unité grossière. Douze pays vont plus loin — États américains, Länder allemands, préfectures japonaises et plus encore, 290 régions sur leurs propres cartes à tamponner. Et quatre collections de sites se remplissent des mêmes preuves : les 197 capitales, 1 351 sites du patrimoine mondial de l'UNESCO, les 7 nouvelles merveilles et les 7 merveilles naturelles.",
+        "es":"Un país es una unidad gruesa. Doce países van más a fondo — estados de EE. UU., Länder alemanes, prefecturas japonesas y más, 290 regiones en sus propios mapas para sellar. Y cuatro colecciones de lugares se rellenan con la misma evidencia: las 197 capitales, 1351 sitios del Patrimonio Mundial de la UNESCO, las 7 nuevas maravillas y las 7 maravillas naturales.",
+        "it":"Un paese è un'unità grossolana. Dodici paesi vanno più a fondo — stati USA, Länder tedeschi, prefetture giapponesi e altri, 290 regioni sulle loro mappe da timbrare. E quattro collezioni di luoghi si riempiono dalle stesse prove: tutte le 197 capitali, 1.351 siti del Patrimonio Mondiale UNESCO, le 7 nuove meraviglie e le 7 meraviglie naturali.",
+        "de":"Ein Land ist eine grobe Einheit. Zwölf Länder gehen tiefer — US-Bundesstaaten, deutsche Länder, japanische Präfekturen und mehr, 290 Regionen auf eigenen Karten zum Stempeln. Und vier Sammlungen füllen sich aus denselben Belegen: alle 197 Hauptstädte, 1.351 UNESCO-Welterbestätten, die 7 neuen Weltwunder und die 7 Naturwunder.",
+        "ro":"O țară e o unitate grosieră. Douăsprezece țări merg mai adânc — state americane, landuri germane, prefecturi japoneze și altele, 290 de regiuni pe propriile hărți de ștampilat. Iar patru colecții de locuri se completează din aceleași dovezi: toate cele 197 de capitale, 1.351 de situri UNESCO, cele 7 noi minuni și cele 7 minuni naturale."}},
  ],
 },
 
@@ -659,12 +771,12 @@ PAGES = {
         "de":"Baue Reisen automatisch aus deinen Fotos, füge sie in Sekunden von Hand hinzu oder importiere GPX- und KML-Tracks aus anderen Tools. Egal woher — dein Pass bleibt konsistent.",
         "ro":"Construiește călătorii automat din pozele tale, adaugă-le manual în câteva secunde sau importă trasee GPX și KML din alte instrumente. Oricum ar veni, pașaportul tău rămâne coerent."}},
   {"h":{"en":"Stats that mean something","fr":"Des stats qui veulent dire quelque chose","es":"Estadísticas con sentido","it":"Statistiche che contano","de":"Statistiken mit Bedeutung","ro":"Statistici cu sens"},
-   "p":{"en":"Countries, trips, unique places, travel days, kilometers, flights versus overland — plus an annual recap that replays your year's routes on the map and exports as a share card or PDF travel book.",
-        "fr":"Pays, voyages, lieux uniques, jours de voyage, kilomètres, vols contre trajets terrestres — plus une rétrospective annuelle qui rejoue vos itinéraires de l'année sur la carte et s'exporte en carte à partager ou en livre de voyage PDF.",
-        "es":"Países, viajes, lugares únicos, días de viaje, kilómetros, vuelos frente a trayectos por tierra — más un resumen anual que reproduce tus rutas del año en el mapa y se exporta como tarjeta o libro de viaje en PDF.",
-        "it":"Paesi, viaggi, luoghi unici, giorni di viaggio, chilometri, voli contro tratte via terra — più un riepilogo annuale che rigioca le rotte dell'anno sulla mappa e si esporta come card o libro di viaggio PDF.",
-        "de":"Länder, Reisen, einzigartige Orte, Reisetage, Kilometer, Flüge versus Landwege — plus ein Jahresrückblick, der die Routen des Jahres auf der Karte abspielt und sich als Share-Karte oder PDF-Reisebuch exportiert.",
-        "ro":"Țări, călătorii, locuri unice, zile de călătorie, kilometri, zboruri versus trasee terestre — plus o retrospectivă anuală care redă rutele anului pe hartă și se exportă drept card sau carte de călătorie PDF."}},
+   "p":{"en":"Countries, trips, unique places, travel days, kilometers, flights versus overland — plus the furthest place you have ever been from home, your compass extremes, and your longest run of consecutive travelling years. An annual recap replays the year's routes on the map and exports as a share card or PDF travel book.",
+        "fr":"Pays, voyages, lieux uniques, jours de voyage, kilomètres, vols contre trajets terrestres — plus le lieu le plus éloigné de chez vous où vous soyez allé, vos extrêmes cardinaux et votre plus longue série d'années de voyage consécutives. Une rétrospective annuelle rejoue les itinéraires de l'année sur la carte et s'exporte en carte à partager ou en livre de voyage PDF.",
+        "es":"Países, viajes, lugares únicos, días de viaje, kilómetros, vuelos frente a trayectos por tierra — más el lugar más lejano de casa al que has llegado, tus extremos cardinales y tu racha más larga de años viajando seguidos. Un resumen anual reproduce las rutas del año en el mapa y se exporta como tarjeta o libro de viaje en PDF.",
+        "it":"Paesi, viaggi, luoghi unici, giorni di viaggio, chilometri, voli contro tratte via terra — più il luogo più lontano da casa in cui tu sia mai stato, i tuoi estremi cardinali e la serie più lunga di anni di viaggio consecutivi. Un riepilogo annuale rigioca le rotte dell'anno sulla mappa e si esporta come card o libro di viaggio PDF.",
+        "de":"Länder, Reisen, einzigartige Orte, Reisetage, Kilometer, Flüge versus Landwege — plus der am weitesten von zu Hause entfernte Ort, an dem du je warst, deine Himmelsrichtungs-Extreme und deine längste Serie aufeinanderfolgender Reisejahre. Ein Jahresrückblick spielt die Routen des Jahres auf der Karte ab und exportiert sich als Share-Karte oder PDF-Reisebuch.",
+        "ro":"Țări, călătorii, locuri unice, zile de călătorie, kilometri, zboruri versus trasee terestre — plus cel mai îndepărtat loc de acasă în care ai ajuns vreodată, extremele tale cardinale și cea mai lungă serie de ani consecutivi cu călătorii. O retrospectivă anuală redă rutele anului pe hartă și se exportă drept card sau carte de călătorie PDF."}},
   {"h":{"en":"No account, no lock-in","fr":"Sans compte, sans verrouillage","es":"Sin cuenta, sin ataduras","it":"Senza account, senza vincoli","de":"Kein Konto, kein Lock-in","ro":"Fără cont, fără blocaje"},
    "p":{"en":"Everything exports in open formats — CSV, GPX, KML, GeoJSON, plus a full readable-JSON backup. Your data is never locked in, because it was never ours to lock.",
         "fr":"Tout s'exporte en formats ouverts — CSV, GPX, KML, GeoJSON, plus une sauvegarde complète en JSON lisible. Vos données ne sont jamais verrouillées, car elles n'ont jamais été à nous.",
@@ -672,6 +784,14 @@ PAGES = {
         "it":"Tutto si esporta in formati aperti — CSV, GPX, KML, GeoJSON, più un backup completo in JSON leggibile. I tuoi dati non restano mai bloccati, perché non sono mai stati nostri.",
         "de":"Alles exportiert in offene Formate — CSV, GPX, KML, GeoJSON, plus ein vollständiges Backup als lesbares JSON. Deine Daten sind nie eingesperrt — sie waren nie unsere.",
         "ro":"Totul se exportă în formate deschise — CSV, GPX, KML, GeoJSON, plus o copie completă în JSON lizibil. Datele tale nu sunt niciodată blocate, pentru că n-au fost niciodată ale noastre."}},
+  {"h": {"en":"A diary, not just a log","fr":"Un journal, pas seulement un registre","es":"Un diario, no solo un registro","it":"Un diario, non solo un registro","de":"Ein Tagebuch, nicht nur ein Logbuch","ro":"Un jurnal, nu doar o evidență"},
+   "p": {
+        "en":"Write a page for any day of a trip and record who you were with — the names filter your timeline, and the pages are printed into your PDF travel book. Meanwhile the passport keeps score on its own: around 29 seals press themselves from your record, for country milestones, every continent, the Arctic Circle, the equator and the point exactly opposite your home.",
+        "fr":"Écrivez une page pour n'importe quel jour d'un voyage et notez avec qui vous étiez — les noms filtrent votre chronologie, et les pages s'impriment dans votre livre de voyage PDF. Pendant ce temps le passeport tient les comptes tout seul : environ 29 sceaux s'apposent d'après votre histoire, pour les jalons de pays, chaque continent, le cercle polaire, l'équateur et le point exactement opposé à chez vous.",
+        "es":"Escribe una página para cualquier día de un viaje y anota con quién estabas — los nombres filtran tu cronología y las páginas se imprimen en tu libro de viaje en PDF. Mientras tanto el pasaporte lleva la cuenta solo: unos 29 sellos se estampan desde tu registro, por hitos de países, cada continente, el círculo polar, el ecuador y el punto exactamente opuesto a tu casa.",
+        "it":"Scrivi una pagina per ogni giorno di un viaggio e annota con chi eri — i nomi filtrano la tua cronologia e le pagine finiscono nel tuo libro di viaggio PDF. Intanto il passaporto tiene il conto da solo: circa 29 sigilli si imprimono dal tuo archivio, per traguardi di paesi, ogni continente, il circolo polare, l'equatore e il punto esattamente opposto a casa tua.",
+        "de":"Schreib eine Seite zu jedem Reisetag und halt fest, mit wem du unterwegs warst — die Namen filtern deine Zeitleiste, und die Seiten werden in dein PDF-Reisebuch gedruckt. Derweil führt der Pass von selbst Buch: rund 29 Siegel stempeln sich aus deiner Bilanz, für Länder-Meilensteine, jeden Kontinent, den Polarkreis, den Äquator und den Punkt genau gegenüber deinem Zuhause.",
+        "ro":"Scrie o pagină pentru orice zi dintr-o călătorie și notează cu cine ai fost — numele îți filtrează cronologia, iar paginile se tipăresc în cartea ta de călătorie PDF. Între timp pașaportul ține socoteala singur: aproximativ 29 de sigilii se aplică din evidența ta, pentru praguri de țări, fiecare continent, cercul polar, ecuatorul și punctul exact opus casei tale."}},
  ],
 },
 
@@ -724,6 +844,14 @@ PAGES = {
         "it":"La Turchia in Europa o in Asia? Taiwan conta a parte? Voymark ti lascia impostare il tuo punto di vista per paesi transcontinentali e territori contesi, e ogni statistica lo segue con coerenza.",
         "de":"Türkei in Europa oder Asien? Zählt Taiwan eigenständig? Voymark lässt dich deinen Standpunkt für transkontinentale Länder und umstrittene Gebiete festlegen — jede Statistik folgt ihm konsistent.",
         "ro":"Turcia în Europa sau în Asia? Taiwanul se numără separat? Voymark te lasă să-ți setezi punctul de vedere pentru țările transcontinentale și teritoriile disputate, iar fiecare statistică îl urmează consecvent."}},
+  {"h": {"en":"The rule reaches everything","fr":"La règle s'applique à tout","es":"La regla alcanza a todo","it":"La regola arriva ovunque","de":"Die Regel gilt überall","ro":"Regula ajunge peste tot"},
+   "p": {
+        "en":"Whichever definition you pick, it governs the whole app — not just the headline. Your percentage of the world, your continent rows, your share cards and even your seals follow it: around 29 seals press themselves from your record, and change the rule and a borderline seal can honestly lock again. The statistics go further than a count, too — total distance travelled, your longest run of consecutive travelling years, and the furthest place from home with the kilometres to prove it.",
+        "fr":"Quelle que soit la définition choisie, elle régit toute l'application — pas seulement le titre. Votre pourcentage du monde, vos lignes par continent, vos cartes à partager et même vos sceaux la suivent : environ 29 sceaux s'apposent d'après votre histoire, et si vous changez de règle, un sceau limite peut honnêtement se reverrouiller. Les statistiques vont aussi plus loin qu'un simple compte — distance totale parcourue, plus longue série d'années de voyage consécutives, et le lieu le plus éloigné de chez vous avec les kilomètres à l'appui.",
+        "es":"Elijas la definición que elijas, gobierna toda la app — no solo el titular. Tu porcentaje del mundo, tus filas por continente, tus tarjetas para compartir e incluso tus sellos la siguen: unos 29 sellos se estampan desde tu registro, y si cambias la regla un sello límite puede bloquearse de nuevo, con toda honestidad. Las estadísticas también van más allá de una cuenta — distancia total recorrida, tu racha más larga de años viajando seguidos y el lugar más lejano de casa con los kilómetros que lo demuestran.",
+        "it":"Qualunque definizione scegli, governa tutta l'app — non solo il titolo. La tua percentuale di mondo, le righe per continente, le card da condividere e persino i tuoi sigilli la seguono: circa 29 sigilli si imprimono dal tuo archivio, e se cambi regola un sigillo al limite può onestamente richiudersi. Anche le statistiche vanno oltre un conteggio — distanza totale percorsa, la serie più lunga di anni di viaggio consecutivi e il luogo più lontano da casa con i chilometri a dimostrarlo.",
+        "de":"Welche Definition du auch wählst, sie gilt für die ganze App — nicht nur für die Überschrift. Dein Weltanteil, deine Kontinentzeilen, deine Share-Karten und selbst deine Siegel folgen ihr: rund 29 Siegel stempeln sich aus deiner Bilanz, und änderst du die Regel, darf ein Grenzfall-Siegel ehrlich wieder zufallen. Auch die Statistik geht über das Zählen hinaus — zurückgelegte Gesamtstrecke, deine längste Serie aufeinanderfolgender Reisejahre und der am weitesten von zu Hause entfernte Ort samt Kilometern als Beleg.",
+        "ro":"Oricare definiție alegi, ea guvernează toată aplicația — nu doar titlul. Procentul tău din lume, rândurile pe continente, cardurile de share și chiar sigiliile tale o urmează: aproximativ 29 de sigilii se aplică din evidența ta, iar dacă schimbi regula, un sigiliu la limită se poate încuia din nou, cinstit. Și statisticile merg mai departe decât un număr — distanța totală parcursă, cea mai lungă serie de ani consecutivi cu călătorii și cel mai îndepărtat loc de acasă, cu kilometrii care o dovedesc."}},
  ],
 },
 
@@ -776,6 +904,14 @@ PAGES = {
         "it":"La scansione funziona in modalità aereo — è proprio questo il punto. Luoghi e date si leggono sul telefono, le immagini non vengono mai copiate né caricate, e revocare l'accesso alle foto è un interruttore nelle impostazioni.",
         "de":"Der Scan funktioniert im Flugmodus — genau darum geht es. Orte und Daten werden auf deinem Handy gelesen, Bilder nie kopiert oder hochgeladen, und der Fotozugriff lässt sich mit einem Schalter in den Einstellungen widerrufen.",
         "ro":"Scanarea funcționează în modul avion — exact asta e ideea. Locațiile și datele se citesc pe telefonul tău, imaginile nu sunt niciodată copiate sau încărcate, iar accesul la poze se revocă dintr-un comutator în setări."}},
+  {"h": {"en":"Photos that aren't in your library","fr":"Les photos qui ne sont pas dans votre photothèque","es":"Fotos que no están en tu fototeca","it":"Le foto che non sono nella tua libreria","de":"Fotos, die nicht in deiner Mediathek liegen","ro":"Pozele care nu sunt în galeria ta"},
+   "p": {
+        "en":"Old trips are often on a memory card, an external drive or in a restored backup folder rather than in the phone's photo library. Voymark can scan a folder too, reading the same locations and dates and proposing the same reviewable trips — so the decade before this phone isn't lost to it.",
+        "fr":"Les anciens voyages sont souvent sur une carte mémoire, un disque externe ou dans un dossier de sauvegarde restauré plutôt que dans la photothèque du téléphone. Voymark peut aussi analyser un dossier, en lisant les mêmes lieux et dates et en proposant les mêmes voyages à valider — pour que la décennie d'avant ce téléphone ne soit pas perdue.",
+        "es":"Los viajes antiguos suelen estar en una tarjeta de memoria, un disco externo o una carpeta de copia restaurada, no en la fototeca del teléfono. Voymark también puede escanear una carpeta, leyendo las mismas ubicaciones y fechas y proponiendo los mismos viajes para revisar — así la década anterior a este teléfono no se pierde.",
+        "it":"I viaggi vecchi stanno spesso su una scheda di memoria, un disco esterno o in una cartella di backup ripristinata, non nella libreria foto del telefono. Voymark può analizzare anche una cartella, leggendo le stesse posizioni e date e proponendo gli stessi viaggi da rivedere — così il decennio prima di questo telefono non va perso.",
+        "de":"Alte Reisen liegen oft auf einer Speicherkarte, einer externen Platte oder in einem wiederhergestellten Backup-Ordner statt in der Fotomediathek des Handys. Voymark kann auch einen Ordner durchsuchen, liest dieselben Orte und Daten und schlägt dieselben prüfbaren Reisen vor — damit das Jahrzehnt vor diesem Handy nicht verloren geht.",
+        "ro":"Călătoriile vechi stau adesea pe un card de memorie, pe un disc extern sau într-un folder de backup restaurat, nu în galeria telefonului. Voymark poate scana și un folder, citind aceleași locații și date și propunând aceleași călătorii de verificat — ca deceniul dinaintea acestui telefon să nu se piardă."}},
  ],
 },
 
@@ -828,6 +964,14 @@ PAGES = {
         "it":"È la tua mappa, non un feed. Vive sul tuo telefono, non richiede account e lascia il tuo dispositivo solo quando la esporti o condividi tu — come card da condividere, libro di viaggio PDF o file in formato aperto.",
         "de":"Das ist deine Karte, kein Feed. Sie lebt auf deinem Handy, braucht kein Konto und verlässt dein Gerät nur, wenn du sie selbst exportierst oder teilst — als Share-Karte, PDF-Reisebuch oder offenes Dateiformat.",
         "ro":"E harta ta, nu un feed. Trăiește pe telefonul tău, nu cere cont și îți părăsește dispozitivul doar când o exporți sau o distribui chiar tu — drept card de share, carte de călătorie PDF sau fișier în format deschis."}},
+  {"h": {"en":"Watch it fill in","fr":"Regardez-la se remplir","es":"Míralo llenarse","it":"Guardala riempirsi","de":"Sieh zu, wie sie sich füllt","ro":"Privește-o cum se umple"},
+   "p": {
+        "en":"Drag the year slider and the world recolours to exactly where you had been by then — a map of 2019, of 2015, of the year you first left the country. Any year exports as an eight-second vertical video: countries stamping in on their real dates, routes drawing themselves across the paper.",
+        "fr":"Faites glisser le curseur des années et le monde se recolore exactement selon vos voyages d'alors — une carte de 2019, de 2015, de l'année où vous avez quitté le pays pour la première fois. Chaque année s'exporte en vidéo verticale de huit secondes : les pays s'y tamponnent à leurs vraies dates, les itinéraires se tracent seuls sur le papier.",
+        "es":"Arrastra el control de años y el mundo se recolorea justo hasta donde habías llegado entonces — un mapa de 2019, de 2015, del año en que saliste del país por primera vez. Cualquier año se exporta como vídeo vertical de ocho segundos: los países se sellan en sus fechas reales y las rutas se dibujan solas sobre el papel.",
+        "it":"Trascina il cursore degli anni e il mondo si ricolora esattamente su dove eri arrivato allora — una mappa del 2019, del 2015, dell'anno in cui hai lasciato il paese per la prima volta. Ogni anno si esporta come video verticale di otto secondi: i paesi si timbrano alle loro date vere, le rotte si disegnano da sole sulla carta.",
+        "de":"Zieh am Jahresregler und die Welt färbt sich genau so ein, wie weit du damals warst — eine Karte von 2019, von 2015, von dem Jahr, in dem du zum ersten Mal das Land verlassen hast. Jedes Jahr lässt sich als acht Sekunden langes Hochkant-Video exportieren: Länder stempeln sich an ihren echten Daten ein, Routen zeichnen sich selbst über das Papier.",
+        "ro":"Trage de cursorul anilor și lumea se recolorează exact până unde ajunseseși atunci — o hartă a lui 2019, a lui 2015, a anului în care ai ieșit prima dată din țară. Orice an se exportă ca video vertical de opt secunde: țările se ștampilează la datele lor reale, traseele se desenează singure peste hârtie."}},
  ],
 },
 
