@@ -143,6 +143,52 @@
             "item": "https://voymark.app/fr/travel-photos-to-trips.html"
           }
         ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://voymark.app/fr/travel-photos-to-trips.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Mes photos sont-elles envoyées quelque part ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Non. L'analyse tourne entièrement sur le téléphone et fonctionne réseau coupé — essayez en mode avion. Les images ne quittent jamais votre photothèque, et l'application n'a aucun serveur où les envoyer, même si elle le voulait."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Et si mes photos n'ont pas de données de localisation ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Elles sont simplement ignorées — rien n'est deviné. Vous pouvez toujours créer ces voyages à la main et y attacher les photos ensuite : quelques secondes, et les dates et lieux restent exactement ceux dont vous vous souvenez."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Va-t-il transformer mes photos du quotidien en voyages ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Définissez une fois votre zone de domicile et tout ce qui se trouve dans un rayon de 25 km en est exclu. Voymark ne devine jamais où vous habitez : si vous sautez cette étape, rien n'est considéré comme domicile plutôt que supposé."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Puis-je annuler un import ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rien n'est écrit avant votre accord, et tout ce qui est accepté peut ensuite être modifié ou supprimé. Une proposition ignorée est mémorisée comme telle : le prochain scan ne la reproposera pas."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Jusqu'où peut-il remonter ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Aussi loin que votre photothèque. Analysez tout d'un coup, la dernière année, tout depuis le dernier scan, ou une période choisie. Les photos sur carte mémoire, disque externe ou sauvegarde restaurée s'analysent en tant que dossier : les années d'avant ce téléphone ne sont pas perdues."
+            }
+          }
+        ]
       }
     ]
   }
@@ -178,6 +224,18 @@
       <article class="prose"><h2>Analysez une année, ou tout</h2><p>Analysez toute votre photothèque, l'année écoulée, tout depuis la dernière fois, ou n'importe quelle période — une époque à la fois. Votre zone de domicile confirmée est exclue : les photos du quotidien ne deviennent jamais des « voyages ».</p></article>
       <article class="prose"><h2>Sur l'appareil, vérifiable</h2><p>L'analyse fonctionne en mode avion — c'est tout l'intérêt. Lieux et dates sont lus sur votre téléphone, les images ne sont jamais copiées ni envoyées, et révoquer l'accès aux photos ne prend qu'un interrupteur dans les réglages.</p></article>
       <article class="prose"><h2>Les photos qui ne sont pas dans votre photothèque</h2><p>Les anciens voyages sont souvent sur une carte mémoire, un disque externe ou dans un dossier de sauvegarde restauré plutôt que dans la photothèque du téléphone. Voymark peut aussi analyser un dossier, en lisant les mêmes lieux et dates et en proposant les mêmes voyages à valider — pour que la décennie d'avant ce téléphone ne soit pas perdue.</p></article>
+      <article class="prose"><h2>Comment un tas de photos devient un voyage</h2><p>Les photos prises près les unes des autres le même jour deviennent une étape. Les étapes de jours consécutifs forment un voyage, et un écart de plus de deux jours y met fin : un été à trois vacances revient en trois voyages, pas en une longue bouillie.</p><p>Chaque étape est ensuite nommée par le géocodeur du téléphone, qui préfère la ville au quartier : une journée à Rome se lit « Rome », pas « Municipio I ». Un voyage exige au moins trois photos géolocalisées pour exister, ce qui empêche un cliché d'aéroport isolé de devenir une expédition.</p></article>
+      <article class="prose"><h2>Ce que l'app ne fait jamais de vos photos</h2><p>Elle ne les copie pas, ne les téléverse pas et ne les envoie nulle part pour analyse. Pas de reconnaissance d'image, pas de détection de visages, aucune étape dans le cloud : seules sont lues les coordonnées et la date déjà inscrites dans le fichier par votre appareil.</p><p>Les photos attachées à un voyage sont stockées comme références, pas comme copies : rien ne double votre espace. Supprimez une photo de votre photothèque et Voymark remarque que la référence est morte et propose de faire le ménage.</p></article>
+    </section>
+    <section class="band">
+      <h2>Questions fréquentes</h2>
+      <div class="faq">
+        <div class="faq-item"><h3>Mes photos sont-elles envoyées quelque part ?</h3><p>Non. L'analyse tourne entièrement sur le téléphone et fonctionne réseau coupé — essayez en mode avion. Les images ne quittent jamais votre photothèque, et l'application n'a aucun serveur où les envoyer, même si elle le voulait.</p></div>
+        <div class="faq-item"><h3>Et si mes photos n'ont pas de données de localisation ?</h3><p>Elles sont simplement ignorées — rien n'est deviné. Vous pouvez toujours créer ces voyages à la main et y attacher les photos ensuite : quelques secondes, et les dates et lieux restent exactement ceux dont vous vous souvenez.</p></div>
+        <div class="faq-item"><h3>Va-t-il transformer mes photos du quotidien en voyages ?</h3><p>Définissez une fois votre zone de domicile et tout ce qui se trouve dans un rayon de 25 km en est exclu. Voymark ne devine jamais où vous habitez : si vous sautez cette étape, rien n'est considéré comme domicile plutôt que supposé.</p></div>
+        <div class="faq-item"><h3>Puis-je annuler un import ?</h3><p>Rien n'est écrit avant votre accord, et tout ce qui est accepté peut ensuite être modifié ou supprimé. Une proposition ignorée est mémorisée comme telle : le prochain scan ne la reproposera pas.</p></div>
+        <div class="faq-item"><h3>Jusqu'où peut-il remonter ?</h3><p>Aussi loin que votre photothèque. Analysez tout d'un coup, la dernière année, tout depuis le dernier scan, ou une période choisie. Les photos sur carte mémoire, disque externe ou sauvegarde restaurée s'analysent en tant que dossier : les années d'avant ce téléphone ne sont pas perdues.</p></div>
+      </div>
     </section>
     <section class="band band-alt">
       <div class="cta">
@@ -202,6 +260,7 @@
       <a href="https://voymark.app/fr/travel-tracker-app.html">Suivi de voyages</a>
       <a href="https://voymark.app/fr/country-counter.html">Compteur de pays</a>
       <a href="https://voymark.app/fr/travel-photos-to-trips.html">Photos → voyages</a>
+      <a href="https://voymark.app/fr/how-many-countries-in-the-world.html">Combien de pays ?</a>
       <a href="https://voymark.app/fr/privacy.html">Confidentialité</a>
       <a href="https://voymark.app/fr/terms.html">Conditions</a>
     </nav>

@@ -7,8 +7,10 @@ English lands at /index.html; the rest at /<lang>/index.html.
 Keep translations in tone with the app's Strings*.swift tables.
 """
 
+import html
 import json
 import os
+import re
 import subprocess
 
 LANGS = ["en", "fr", "es", "it", "de", "ro"]
@@ -376,6 +378,11 @@ T = {
  "es": "Cada viaje deja una huella.", "it": "Ogni viaggio lascia un segno.",
  "de": "Jede Reise hinterlässt eine Spur.", "ro": "Fiecare călătorie lasă o urmă.",
 },
+"faq_title": {
+ "en": "Common questions", "fr": "Questions fréquentes",
+ "es": "Preguntas frecuentes", "it": "Domande frequenti",
+ "de": "Häufige Fragen", "ro": "Întrebări frecvente",
+},
 "credits": {
  "en": "Map data: Natural Earth (public domain). UNESCO sites: Wikidata (CC0).",
  "fr": "Données cartographiques : Natural Earth (domaine public). Sites UNESCO : Wikidata (CC0).",
@@ -675,6 +682,16 @@ def _shared_nodes(lang):
     ]
 
 
+def plain(markup):
+    """Copy written for HTML, as a search engine's Answer field wants it.
+
+    The visible answer carries entities and the odd link; the JSON-LD field
+    is plain text, so "&amp;" there would be read literally as those five
+    characters. Structured data has to say the same thing the page says.
+    """
+    return html.unescape(re.sub(r"<[^>]+>", "", markup))
+
+
 def _script(graph):
     body = json.dumps({"@context": "https://schema.org", "@graph": graph},
                       ensure_ascii=False, indent=2)
@@ -728,8 +745,8 @@ def jsonld_page(slug, lang, faq=None):
             "mainEntity": [
                 {
                     "@type": "Question",
-                    "name": q["q"][lang],
-                    "acceptedAnswer": {"@type": "Answer", "text": q["a"][lang]},
+                    "name": plain(q["q"][lang]),
+                    "acceptedAnswer": {"@type": "Answer", "text": plain(q["a"][lang])},
                 }
                 for q in faq
             ],
@@ -959,6 +976,69 @@ PAGES = {
         "it":"Un paese è un'unità grossolana. Dodici paesi vanno più a fondo — stati USA, Länder tedeschi, prefetture giapponesi e altri, 290 regioni sulle loro mappe da timbrare. E quattro collezioni di luoghi si riempiono dalle stesse prove: tutte le 197 capitali, 1.351 siti del Patrimonio Mondiale UNESCO, le 7 nuove meraviglie e le 7 meraviglie naturali.",
         "de":"Ein Land ist eine grobe Einheit. Zwölf Länder gehen tiefer — US-Bundesstaaten, deutsche Länder, japanische Präfekturen und mehr, 290 Regionen auf eigenen Karten zum Stempeln. Und vier Sammlungen füllen sich aus denselben Belegen: alle 197 Hauptstädte, 1.351 UNESCO-Welterbestätten, die 7 neuen Weltwunder und die 7 Naturwunder.",
         "ro":"O țară e o unitate grosieră. Douăsprezece țări merg mai adânc — state americane, landuri germane, prefecturi japoneze și altele, 290 de regiuni pe propriile hărți de ștampilat. Iar patru colecții de locuri se completează din aceleași dovezi: toate cele 197 de capitale, 1.351 de situri UNESCO, cele 7 noi minuni și cele 7 minuni naturale."}},
+  {"h":{"en":"Wishlist, in gold","fr":"Liste de souhaits, en or","es":"Lista de deseos, en oro","it":"Lista dei desideri, in oro","de":"Wunschliste, in Gold","ro":"Lista de dorințe, în auriu"},
+   "p":{"en":"Not every country on the map is one you have been to. Mark the ones you want next and they fill in gold instead of burgundy, so a single map holds your record and your plan at the same time.",
+        "fr":"Tous les pays de la carte ne sont pas des pays visités. Marquez ceux que vous visez et ils se remplissent en or plutôt qu'en bordeaux : une seule carte porte à la fois votre histoire et vos projets.",
+        "es":"No todos los países del mapa son países que has pisado. Marca los que quieres visitar y se llenan de oro en lugar de burdeos: un mismo mapa guarda tu historial y tus planes.",
+        "it":"Non tutti i paesi sulla mappa sono paesi in cui sei stato. Segna quelli che vuoi visitare e si riempiono d'oro invece che di bordeaux: una sola mappa tiene insieme il tuo archivio e i tuoi piani.",
+        "de":"Nicht jedes Land auf der Karte ist eines, in dem du warst. Markiere die, die als Nächstes dran sind, und sie füllen sich golden statt burgunderrot — eine Karte trägt Bilanz und Vorhaben zugleich.",
+        "ro":"Nu toate țările de pe hartă sunt țări în care ai fost. Marchează-le pe cele pe care le vrei și se umplu cu auriu în loc de bordo: o singură hartă ține și evidența, și planul."},
+   "p2":{"en":"The two never mix in the arithmetic. Wishlist countries stay out of your visited count and out of your percentage of the world. The day you arrive, one tap moves a country from gold to burgundy and the stamp carries the date.",
+         "fr":"Les deux ne se mélangent jamais dans les calculs. Les pays souhaités restent hors de votre compte et hors de votre pourcentage du monde. Le jour où vous arrivez, un appui fait passer le pays de l'or au bordeaux et le tampon porte la date.",
+         "es":"Las dos cosas nunca se mezclan en las cuentas. Los países deseados quedan fuera de tu recuento y de tu porcentaje del mundo. El día que llegas, un toque pasa el país de oro a burdeos y el sello lleva la fecha.",
+         "it":"Le due cose non si mescolano mai nei conti. I paesi desiderati restano fuori dal conteggio e dalla tua percentuale di mondo. Il giorno in cui arrivi, un tocco porta il paese dall'oro al bordeaux e il timbro riporta la data.",
+         "de":"In der Rechnung vermischt sich beides nie. Wunschländer bleiben aus deiner Zählung und aus deinem Weltanteil heraus. Am Tag der Ankunft macht ein Tippen aus Gold Burgunderrot — und der Stempel trägt das Datum.",
+         "ro":"Cele două nu se amestecă niciodată în socoteli. Țările dorite rămân în afara numărătorii și a procentului tău din lume. În ziua în care ajungi, o atingere mută țara din auriu în bordo, iar ștampila poartă data."}},
+  {"h":{"en":"The map leaves the app when you say so","fr":"La carte sort de l'app quand vous le décidez","es":"El mapa sale de la app cuando tú quieres","it":"La mappa esce dall'app quando lo decidi tu","de":"Die Karte verlässt die App, wenn du es willst","ro":"Harta iese din aplicație când vrei tu"},
+   "p":{"en":"Export it as a share card sized for stories, print your trips into a PDF travel book with maps, photos and journal pages, or keep a widget on your home screen showing your stamps, your continent progress or a ring of the world you have covered.",
+        "fr":"Exportez-la en carte à partager au format stories, imprimez vos voyages dans un livre PDF avec cartes, photos et pages de journal, ou gardez un widget sur votre écran d'accueil avec vos tampons, votre progression par continent ou l'anneau du monde parcouru.",
+        "es":"Expórtalo como tarjeta para historias, imprime tus viajes en un libro de viaje PDF con mapas, fotos y páginas de diario, o deja un widget en tu pantalla de inicio con tus sellos, tu progreso por continente o el anillo del mundo recorrido.",
+        "it":"Esportala come card per le storie, stampa i tuoi viaggi in un libro PDF con mappe, foto e pagine di diario, oppure tieni un widget sulla schermata home con i timbri, i progressi per continente o l'anello di mondo percorso.",
+        "de":"Exportiere sie als Share-Karte im Story-Format, drucke deine Reisen in ein PDF-Reisebuch mit Karten, Fotos und Tagebuchseiten, oder behalte ein Widget auf dem Homescreen mit deinen Stempeln, deinem Kontinent-Fortschritt oder dem Ring der bereisten Welt.",
+        "ro":"Exportă harta ca un card de partajat pe format de story, tipărește-ți călătoriile într-o carte PDF cu hărți, poze și pagini de jurnal, sau ține un widget pe ecranul principal cu ștampilele tale, progresul pe continente ori inelul lumii parcurse."},
+   "p2":{"en":"Everything underneath exports too — CSV, GPX, KML and GeoJSON for other tools, a full backup for a new phone, and a plain-text file you can read years from now without any app at all.",
+         "fr":"Tout ce qu'il y a dessous s'exporte aussi — CSV, GPX, KML et GeoJSON pour d'autres outils, une sauvegarde complète pour un nouveau téléphone, et un fichier texte lisible dans dix ans sans aucune application.",
+         "es":"Todo lo que hay debajo también se exporta — CSV, GPX, KML y GeoJSON para otras herramientas, una copia completa para un móvil nuevo y un archivo de texto que podrás leer dentro de años sin ninguna app.",
+         "it":"Anche tutto ciò che sta sotto si esporta — CSV, GPX, KML e GeoJSON per altri strumenti, un backup completo per un telefono nuovo e un file di testo leggibile fra anni senza nessuna app.",
+         "de":"Auch alles darunter lässt sich exportieren — CSV, GPX, KML und GeoJSON für andere Werkzeuge, ein vollständiges Backup fürs neue Telefon und eine Textdatei, die du in Jahren ganz ohne App noch lesen kannst.",
+         "ro":"Se exportă și tot ce e dedesubt — CSV, GPX, KML și GeoJSON pentru alte unelte, un backup complet pentru un telefon nou și un fișier text pe care îl vei putea citi peste ani fără nicio aplicație."}},
+ ],
+ "faq": [
+  {"q":{"en":"Does the visited countries map work offline?","fr":"La carte des pays visités fonctionne-t-elle hors ligne ?","es":"¿El mapa de países visitados funciona sin conexión?","it":"La mappa dei paesi visitati funziona offline?","de":"Funktioniert die Karte der besuchten Länder offline?","ro":"Harta țărilor vizitate funcționează offline?"},
+   "a":{"en":"Yes. The world map ships inside the app, so stamping countries, browsing your history and exporting a share card all work in airplane mode. Only two extras need a connection: satellite map tiles and searching for a place by name.",
+        "fr":"Oui. La carte du monde est intégrée à l'application : tamponner des pays, parcourir votre histoire et exporter une carte fonctionnent en mode avion. Seuls deux extras demandent une connexion : les tuiles satellite et la recherche d'un lieu par son nom.",
+        "es":"Sí. El mapa del mundo viene dentro de la app, así que sellar países, revisar tu historial y exportar una tarjeta funcionan en modo avión. Solo dos extras necesitan conexión: las teselas de satélite y buscar un lugar por su nombre.",
+        "it":"Sì. La mappa del mondo è dentro l'app: timbrare paesi, sfogliare la tua storia ed esportare una card funzionano in modalità aereo. Solo due extra richiedono connessione: le tile satellitari e la ricerca di un luogo per nome.",
+        "de":"Ja. Die Weltkarte steckt in der App: Länder stempeln, die eigene Historie durchgehen und eine Karte exportieren geht im Flugmodus. Nur zwei Extras brauchen Netz: Satelliten-Kacheln und die Ortssuche nach Namen.",
+        "ro":"Da. Harta lumii vine în aplicație, așa că ștampilarea țărilor, răsfoirea istoricului și exportul unui card merg în modul avion. Doar două lucruri au nevoie de conexiune: tile-urile satelit și căutarea unui loc după nume."}},
+  {"q":{"en":"How many countries can I mark?","fr":"Combien de pays puis-je marquer ?","es":"¿Cuántos países puedo marcar?","it":"Quanti paesi posso segnare?","de":"Wie viele Länder kann ich markieren?","ro":"Câte țări pot marca?"},
+   "a":{"en":"All of them, under whichever definition you choose: 197 world countries, 193 UN members, or the full 249 ISO countries and territories. Twelve countries go further still, with 290 regions on their own tap-to-stamp maps.",
+        "fr":"Tous, selon la définition que vous choisissez : 197 pays du monde, 193 membres de l'ONU, ou les 249 pays et territoires ISO. Douze pays vont plus loin encore, avec 290 régions sur leurs propres cartes à tamponner.",
+        "es":"Todos, según la definición que elijas: 197 países del mundo, 193 miembros de la ONU o los 249 países y territorios ISO. Doce países van aún más lejos, con 290 regiones en sus propios mapas para sellar.",
+        "it":"Tutti, secondo la definizione che scegli: 197 paesi del mondo, 193 membri ONU o tutti i 249 paesi e territori ISO. Dodici paesi vanno anche oltre, con 290 regioni su mappe proprie da timbrare.",
+        "de":"Alle — je nach gewählter Definition: 197 Länder der Welt, 193 UN-Mitglieder oder die vollen 249 ISO-Länder und -Territorien. Zwölf Länder gehen noch weiter, mit 290 Regionen auf eigenen Stempelkarten.",
+        "ro":"Pe toate, în funcție de definiția aleasă: 197 de țări ale lumii, 193 de membri ONU sau toate cele 249 de țări și teritorii ISO. Douăsprezece țări merg și mai departe, cu 290 de regiuni pe hărți proprii de ștampilat."}},
+  {"q":{"en":"Is it free?","fr":"Est-ce gratuit ?","es":"¿Es gratis?","it":"È gratis?","de":"Ist es kostenlos?","ro":"Este gratuit?"},
+   "a":{"en":"Every feature is free today, with no subscription, no ads and no account. If paid features ever arrive they will be new capabilities — what you already have stays yours.",
+        "fr":"Toutes les fonctionnalités sont gratuites aujourd'hui, sans abonnement, sans publicité et sans compte. Si des fonctions payantes arrivent un jour, ce seront de nouvelles capacités — ce que vous avez déjà reste à vous.",
+        "es":"Hoy todas las funciones son gratuitas, sin suscripción, sin anuncios y sin cuenta. Si algún día llegan funciones de pago, serán capacidades nuevas — lo que ya tienes sigue siendo tuyo.",
+        "it":"Oggi ogni funzione è gratuita, senza abbonamento, senza pubblicità e senza account. Se un giorno arriveranno funzioni a pagamento, saranno nuove capacità — quello che hai già resta tuo.",
+        "de":"Heute ist jede Funktion kostenlos — kein Abo, keine Werbung, kein Konto. Sollten je kostenpflichtige Funktionen kommen, wären es neue Fähigkeiten; was du schon hast, bleibt dir.",
+        "ro":"Astăzi fiecare funcție este gratuită, fără abonament, fără reclame și fără cont. Dacă vor apărea vreodată funcții cu plată, vor fi capabilități noi — ce ai deja rămâne al tău."}},
+  {"q":{"en":"Can I get my data out again?","fr":"Puis-je récupérer mes données ?","es":"¿Puedo sacar mis datos?","it":"Posso riprendermi i miei dati?","de":"Komme ich wieder an meine Daten?","ro":"Îmi pot scoate datele înapoi?"},
+   "a":{"en":"At any time, without asking anyone. CSV, GPX, KML, GeoJSON, a full backup file and a readable plain-text export are all one tap away in More → Import &amp; Export.",
+        "fr":"À tout moment, sans rien demander à personne. CSV, GPX, KML, GeoJSON, une sauvegarde complète et un export texte lisible sont à un appui dans Plus → Import et export.",
+        "es":"Cuando quieras, sin pedir permiso a nadie. CSV, GPX, KML, GeoJSON, una copia de seguridad completa y una exportación de texto legible están a un toque en Más → Importar y exportar.",
+        "it":"Quando vuoi, senza chiedere niente a nessuno. CSV, GPX, KML, GeoJSON, un backup completo e un export di testo leggibile sono a un tocco in Altro → Importa ed esporta.",
+        "de":"Jederzeit, ohne jemanden zu fragen. CSV, GPX, KML, GeoJSON, ein vollständiges Backup und ein lesbarer Textexport liegen unter Mehr → Import &amp; Export.",
+        "ro":"Oricând, fără să ceri voie nimănui. CSV, GPX, KML, GeoJSON, un backup complet și un export text lizibil sunt la o atingere în Mai multe → Import și export."}},
+  {"q":{"en":"How is this different from a scratch map?","fr":"En quoi est-ce différent d'une carte à gratter ?","es":"¿En qué se diferencia de un mapa rascable?","it":"In cosa è diversa da una mappa da grattare?","de":"Was unterscheidet das von einer Rubbelkarte?","ro":"Cu ce diferă de o hartă răzuibilă?"},
+   "a":{"en":"A scratch map records one bit per country and cannot be undone. Voymark records when you went, how you got there, which cities and regions you saw, and whether a layover should count at all — and you can change your mind.",
+        "fr":"Une carte à gratter retient un seul bit par pays, et sans retour en arrière. Voymark retient quand vous y étiez, comment vous y êtes allé, quelles villes et régions vous avez vues, et si une escale doit compter — et vous pouvez changer d'avis.",
+        "es":"Un mapa rascable guarda un solo bit por país y no tiene marcha atrás. Voymark guarda cuándo fuiste, cómo llegaste, qué ciudades y regiones viste y si una escala debe contar — y puedes cambiar de opinión.",
+        "it":"Una mappa da grattare registra un solo bit per paese e non torna indietro. Voymark registra quando ci sei stato, come ci sei arrivato, quali città e regioni hai visto e se uno scalo debba contare — e puoi cambiare idea.",
+        "de":"Eine Rubbelkarte speichert ein Bit pro Land, unwiderruflich. Voymark hält fest, wann du dort warst, wie du hinkamst, welche Städte und Regionen du gesehen hast und ob ein Zwischenstopp überhaupt zählen soll — und du darfst es dir anders überlegen.",
+        "ro":"O hartă răzuibilă reține un singur bit pe țară și nu se mai poate întoarce. Voymark reține când ai fost, cum ai ajuns, ce orașe și regiuni ai văzut și dacă o escală ar trebui să conteze — iar tu te poți răzgândi."}},
  ],
 },
 
@@ -1019,6 +1099,69 @@ PAGES = {
         "it":"Scrivi una pagina per ogni giorno di un viaggio e annota con chi eri — i nomi filtrano la tua cronologia e le pagine finiscono nel tuo libro di viaggio PDF. Intanto il passaporto tiene il conto da solo: circa 29 sigilli si imprimono dal tuo archivio, per traguardi di paesi, ogni continente, il circolo polare, l'equatore e il punto esattamente opposto a casa tua.",
         "de":"Schreib eine Seite zu jedem Reisetag und halt fest, mit wem du unterwegs warst — die Namen filtern deine Zeitleiste, und die Seiten werden in dein PDF-Reisebuch gedruckt. Derweil führt der Pass von selbst Buch: rund 29 Siegel stempeln sich aus deiner Bilanz, für Länder-Meilensteine, jeden Kontinent, den Polarkreis, den Äquator und den Punkt genau gegenüber deinem Zuhause.",
         "ro":"Scrie o pagină pentru orice zi dintr-o călătorie și notează cu cine ai fost — numele îți filtrează cronologia, iar paginile se tipăresc în cartea ta de călătorie PDF. Între timp pașaportul ține socoteala singur: aproximativ 29 de sigilii se aplică din evidența ta, pentru praguri de țări, fiecare continent, cercul polar, ecuatorul și punctul exact opus casei tale."}},
+  {"h":{"en":"A timeline that reads like a life","fr":"Une chronologie qui se lit comme une vie","es":"Una línea de tiempo que se lee como una vida","it":"Una cronologia che si legge come una vita","de":"Eine Zeitleiste, die sich wie ein Leben liest","ro":"O cronologie care se citește ca o viață"},
+   "p":{"en":"Trips stack by year, newest first, each with its countries, its dates and its cover photo. Filter by country to see every time you went back, or by the person you travelled with to pull out the years you were never alone.",
+        "fr":"Les voyages s'empilent par année, du plus récent au plus ancien, chacun avec ses pays, ses dates et sa photo de couverture. Filtrez par pays pour revoir tous vos retours, ou par compagnon de voyage pour isoler les années où vous n'étiez jamais seul.",
+        "es":"Los viajes se apilan por año, del más reciente al más antiguo, cada uno con sus países, sus fechas y su foto de portada. Filtra por país para ver todas las veces que volviste, o por la persona con quien viajaste para sacar los años en que nunca estuviste solo.",
+        "it":"I viaggi si impilano per anno, dal più recente, ognuno con i suoi paesi, le sue date e la sua foto di copertina. Filtra per paese per rivedere tutte le volte che ci sei tornato, o per la persona con cui hai viaggiato per estrarre gli anni in cui non sei mai stato solo.",
+        "de":"Reisen stapeln sich nach Jahr, die neueste oben, jede mit ihren Ländern, ihren Daten und ihrem Titelbild. Filtere nach Land, um jede Rückkehr zu sehen, oder nach Reisebegleitung, um die Jahre herauszuziehen, in denen du nie allein warst.",
+        "ro":"Călătoriile se așază pe ani, cea mai nouă prima, fiecare cu țările, datele și poza ei de copertă. Filtrează după țară ca să vezi de câte ori te-ai întors sau după persoana cu care ai călătorit ca să scoți anii în care nu ai fost niciodată singur."},
+   "p2":{"en":"Open a trip and it is all there: the places in order, the route on the map, the photos you linked, the journal pages you wrote and the notes you would otherwise have forgotten. Nothing is spread across three apps.",
+         "fr":"Ouvrez un voyage et tout y est : les lieux dans l'ordre, l'itinéraire sur la carte, les photos liées, les pages de journal écrites et les notes que vous auriez sinon oubliées. Rien n'est éparpillé entre trois applications.",
+         "es":"Abre un viaje y está todo: los lugares en orden, la ruta en el mapa, las fotos que enlazaste, las páginas de diario que escribiste y las notas que si no habrías olvidado. Nada queda repartido entre tres apps.",
+         "it":"Apri un viaggio ed è tutto lì: i luoghi in ordine, il percorso sulla mappa, le foto collegate, le pagine di diario che hai scritto e le note che altrimenti avresti dimenticato. Niente sparso fra tre app.",
+         "de":"Öffne eine Reise, und alles ist da: die Orte in Reihenfolge, die Route auf der Karte, die verknüpften Fotos, die geschriebenen Tagebuchseiten und die Notizen, die du sonst vergessen hättest. Nichts liegt in drei Apps verstreut.",
+         "ro":"Deschizi o călătorie și e tot acolo: locurile în ordine, traseul pe hartă, pozele legate, paginile de jurnal scrise și notițele pe care altfel le-ai fi uitat. Nimic nu e împrăștiat prin trei aplicații."}},
+  {"h":{"en":"Built to outlive the app","fr":"Conçu pour survivre à l'application","es":"Hecho para sobrevivir a la app","it":"Fatto per sopravvivere all'app","de":"Gebaut, um die App zu überleben","ro":"Făcut să supraviețuiască aplicației"},
+   "p":{"en":"A travel record is only worth keeping if it survives a new phone, a change of platform and eventually the app itself. Voymark's backup file is readable JSON, its exports are the same formats the rest of the world uses, and one of them is plain text you can open in any editor.",
+        "fr":"Un carnet de voyage ne vaut d'être tenu que s'il survit à un nouveau téléphone, à un changement de plateforme et, un jour, à l'application elle-même. La sauvegarde de Voymark est du JSON lisible, ses exports sont les formats que tout le monde utilise, et l'un d'eux est du texte brut ouvrable dans n'importe quel éditeur.",
+        "es":"Un registro de viajes solo merece la pena si sobrevive a un móvil nuevo, a un cambio de plataforma y, algún día, a la propia app. La copia de seguridad de Voymark es JSON legible, sus exportaciones son los formatos que usa todo el mundo, y una de ellas es texto plano que abre cualquier editor.",
+        "it":"Un archivio di viaggi vale la pena solo se sopravvive a un telefono nuovo, a un cambio di piattaforma e un giorno all'app stessa. Il backup di Voymark è JSON leggibile, le esportazioni usano i formati che usa tutto il mondo, e una di esse è testo semplice apribile in qualsiasi editor.",
+        "de":"Eine Reisebilanz lohnt sich nur, wenn sie ein neues Telefon, einen Plattformwechsel und irgendwann die App selbst überlebt. Voymarks Backup ist lesbares JSON, die Exporte nutzen die Formate, die alle nutzen, und einer davon ist reiner Text für jeden Editor.",
+        "ro":"O evidență de călătorii merită ținută doar dacă supraviețuiește unui telefon nou, unei schimbări de platformă și, într-o zi, aplicației înseși. Backupul Voymark este JSON lizibil, exporturile folosesc formatele pe care le folosește toată lumea, iar unul dintre ele e text simplu, deschis de orice editor."},
+   "p2":{"en":"The same file moves between iPhone and Android in both directions, because both apps read and write one format. There is no server in the middle, so there is nothing to shut down.",
+         "fr":"Le même fichier passe de l'iPhone à Android et inversement, parce que les deux applications lisent et écrivent le même format. Aucun serveur au milieu : il n'y a donc rien qui puisse fermer.",
+         "es":"El mismo archivo va de iPhone a Android y al revés, porque ambas apps leen y escriben un solo formato. No hay servidor en medio, así que no hay nada que pueda cerrar.",
+         "it":"Lo stesso file passa da iPhone ad Android e viceversa, perché entrambe le app leggono e scrivono un unico formato. Non c'è nessun server in mezzo, quindi non c'è niente che possa chiudere.",
+         "de":"Dieselbe Datei wandert zwischen iPhone und Android in beide Richtungen, weil beide Apps ein Format lesen und schreiben. Kein Server dazwischen — also nichts, das abgeschaltet werden könnte.",
+         "ro":"Același fișier trece între iPhone și Android în ambele sensuri, pentru că ambele aplicații citesc și scriu un singur format. Nu există niciun server la mijloc, deci nu există nimic care să se închidă."}},
+ ],
+ "faq": [
+  {"q":{"en":"What makes this different from a travel app with an account?","fr":"Qu'est-ce qui change par rapport à une app de voyage avec compte ?","es":"¿Qué lo diferencia de una app de viajes con cuenta?","it":"Cosa cambia rispetto a un'app di viaggio con account?","de":"Was unterscheidet das von einer Reise-App mit Konto?","ro":"Cu ce diferă de o aplicație de călătorii cu cont?"},
+   "a":{"en":"There is nothing to sign up for and nothing to log in to. Your trips live in the app's own storage on your phone, which means no servers hold them, no analytics watch you use them, and no subscription stands between you and your own history.",
+        "fr":"Il n'y a rien à créer et rien à connecter. Vos voyages vivent dans le stockage de l'application sur votre téléphone : aucun serveur ne les détient, aucune analytique ne vous observe, aucun abonnement ne s'interpose entre vous et votre propre histoire.",
+        "es":"No hay nada que registrar ni con qué iniciar sesión. Tus viajes viven en el almacenamiento de la app en tu móvil: ningún servidor los guarda, ninguna analítica te observa y ninguna suscripción se interpone entre tú y tu propia historia.",
+        "it":"Non c'è nulla a cui iscriversi e nulla in cui accedere. I tuoi viaggi vivono nello spazio dell'app sul tuo telefono: nessun server li conserva, nessuna analitica ti osserva, nessun abbonamento si mette fra te e la tua storia.",
+        "de":"Es gibt nichts zu registrieren und nichts einzuloggen. Deine Reisen liegen im Speicher der App auf deinem Telefon: kein Server hält sie, keine Analyse beobachtet dich, kein Abo steht zwischen dir und deiner eigenen Geschichte.",
+        "ro":"Nu ai la ce să te înregistrezi și în ce să te autentifici. Călătoriile tale stau în spațiul aplicației, pe telefonul tău: niciun server nu le ține, nicio analitică nu te privește, niciun abonament nu stă între tine și propria ta istorie."}},
+  {"q":{"en":"Do I have to type every trip in by hand?","fr":"Dois-je saisir chaque voyage à la main ?","es":"¿Tengo que meter cada viaje a mano?","it":"Devo inserire ogni viaggio a mano?","de":"Muss ich jede Reise von Hand eintragen?","ro":"Trebuie să introduc fiecare călătorie manual?"},
+   "a":{"en":"No. Point Voymark at your photo library and it proposes finished trips — dates, places and countries — from the coordinates your photos already carry. You review every candidate before anything is saved, and you can still add a trip by hand in about fifteen seconds.",
+        "fr":"Non. Pointez Voymark vers votre photothèque et il propose des voyages déjà constitués — dates, lieux, pays — à partir des coordonnées que vos photos portent déjà. Vous validez chaque proposition avant tout enregistrement, et vous pouvez toujours ajouter un voyage à la main en une quinzaine de secondes.",
+        "es":"No. Apunta Voymark a tu fototeca y te propone viajes ya montados — fechas, lugares y países — a partir de las coordenadas que tus fotos ya llevan. Revisas cada candidato antes de guardar nada, y siempre puedes añadir un viaje a mano en unos quince segundos.",
+        "it":"No. Punta Voymark alla tua libreria foto e ti propone viaggi già pronti — date, luoghi e paesi — dalle coordinate che le foto portano già. Rivedi ogni proposta prima che venga salvato qualcosa, e puoi comunque aggiungere un viaggio a mano in una quindicina di secondi.",
+        "de":"Nein. Richte Voymark auf deine Fotomediathek, und es schlägt fertige Reisen vor — Daten, Orte, Länder — aus den Koordinaten, die deine Fotos ohnehin tragen. Du prüfst jeden Vorschlag, bevor etwas gespeichert wird, und kannst eine Reise weiterhin in rund fünfzehn Sekunden von Hand anlegen.",
+        "ro":"Nu. Îndreaptă Voymark spre galeria ta foto și îți propune călătorii gata făcute — date, locuri și țări — din coordonatele pe care pozele le poartă deja. Verifici fiecare propunere înainte să se salveze ceva și poți oricând adăuga o călătorie manual, în vreo cincisprezece secunde."}},
+  {"q":{"en":"Can I move my history to a new phone?","fr":"Puis-je transférer mon historique sur un nouveau téléphone ?","es":"¿Puedo pasar mi historial a un móvil nuevo?","it":"Posso spostare la mia storia su un telefono nuovo?","de":"Kann ich meine Historie auf ein neues Telefon holen?","ro":"Îmi pot muta istoricul pe un telefon nou?"},
+   "a":{"en":"Export a backup file, move it however you like — AirDrop, a cable, a cloud folder you already trust — and restore it on the new phone. It works from iPhone to Android and back, because both apps use the same format.",
+        "fr":"Exportez un fichier de sauvegarde, transférez-le comme vous voulez — AirDrop, câble, dossier cloud de confiance — et restaurez-le sur le nouveau téléphone. Cela marche de l'iPhone vers Android et inversement, les deux apps utilisant le même format.",
+        "es":"Exporta un archivo de copia de seguridad, muévelo como prefieras — AirDrop, un cable, una carpeta en la nube de tu confianza — y restáuralo en el móvil nuevo. Funciona de iPhone a Android y al revés, porque ambas apps usan el mismo formato.",
+        "it":"Esporta un file di backup, spostalo come preferisci — AirDrop, un cavo, una cartella cloud di cui ti fidi — e ripristinalo sul telefono nuovo. Funziona da iPhone ad Android e viceversa, perché entrambe le app usano lo stesso formato.",
+        "de":"Exportiere eine Backup-Datei, bring sie wie du magst hinüber — AirDrop, Kabel, ein Cloud-Ordner, dem du ohnehin traust — und stelle sie auf dem neuen Telefon wieder her. Das klappt vom iPhone zu Android und zurück, denn beide Apps nutzen dasselbe Format.",
+        "ro":"Exportă un fișier de backup, mută-l cum vrei — AirDrop, un cablu, un folder în cloud în care ai deja încredere — și restaurează-l pe telefonul nou. Merge de la iPhone la Android și invers, pentru că ambele aplicații folosesc același format."}},
+  {"q":{"en":"Does it keep a travel diary as well?","fr":"Tient-il aussi un journal de voyage ?","es":"¿Lleva también un diario de viaje?","it":"Tiene anche un diario di viaggio?","de":"Führt es auch ein Reisetagebuch?","ro":"Ține și un jurnal de călătorie?"},
+   "a":{"en":"Each trip has a page per day for what happened, and each trip records who you were with. Both are printed into the PDF travel book alongside the maps and photos, so the diary is not stranded inside the app.",
+        "fr":"Chaque voyage dispose d'une page par jour pour ce qui s'est passé, et retient avec qui vous étiez. Les deux s'impriment dans le livre de voyage PDF, à côté des cartes et des photos : le journal n'est pas prisonnier de l'application.",
+        "es":"Cada viaje tiene una página por día para lo que pasó, y guarda con quién ibas. Ambas cosas se imprimen en el libro de viaje PDF junto a los mapas y las fotos, así que el diario no se queda atrapado en la app.",
+        "it":"Ogni viaggio ha una pagina al giorno per ciò che è successo e registra con chi eri. Entrambe finiscono stampate nel libro di viaggio PDF accanto a mappe e foto, così il diario non resta prigioniero dell'app.",
+        "de":"Jede Reise hat eine Seite pro Tag für das, was passiert ist, und hält fest, mit wem du unterwegs warst. Beides wird ins PDF-Reisebuch neben Karten und Fotos gedruckt — das Tagebuch bleibt also nicht in der App gefangen.",
+        "ro":"Fiecare călătorie are câte o pagină pe zi pentru ce s-a întâmplat și reține cu cine ai fost. Ambele se tipăresc în cartea de călătorie PDF, lângă hărți și poze, așa că jurnalul nu rămâne prizonier în aplicație."}},
+  {"q":{"en":"Which languages does it speak?","fr":"Quelles langues parle-t-elle ?","es":"¿Qué idiomas habla?","it":"Che lingue parla?","de":"Welche Sprachen spricht die App?","ro":"Ce limbi vorbește?"},
+   "a":{"en":"English, French, Spanish, Italian, German and Romanian, all fully translated rather than partly. You pick the language inside the app, independently of the phone's own setting.",
+        "fr":"Anglais, français, espagnol, italien, allemand et roumain, entièrement traduits et non à moitié. Vous choisissez la langue dans l'application, indépendamment du réglage du téléphone.",
+        "es":"Inglés, francés, español, italiano, alemán y rumano, todos traducidos por completo y no a medias. Eliges el idioma dentro de la app, independientemente del ajuste del móvil.",
+        "it":"Inglese, francese, spagnolo, italiano, tedesco e rumeno, tradotti per intero e non a metà. Scegli la lingua dentro l'app, indipendentemente dall'impostazione del telefono.",
+        "de":"Englisch, Französisch, Spanisch, Italienisch, Deutsch und Rumänisch — vollständig übersetzt, nicht halb. Die Sprache wählst du in der App, unabhängig von der Systemeinstellung.",
+        "ro":"Engleză, franceză, spaniolă, italiană, germană și română, traduse complet, nu pe jumătate. Alegi limba din aplicație, independent de setarea telefonului."}},
  ],
 },
 
@@ -1051,12 +1194,12 @@ PAGES = {
   "ro":"Depinde cine numără. Voymark te lasă să alegi regulile — și păstrează răspunsul onest."},
  "sections": [
   {"h":{"en":"197, 193 or 249?","fr":"197, 193 ou 249 ?","es":"¿197, 193 o 249?","it":"197, 193 o 249?","de":"197, 193 oder 249?","ro":"197, 193 sau 249?"},
-   "p":{"en":"The classic \"world\" list has 197 countries; the UN recognizes 193 members; ISO lists 249 countries and territories. Voymark supports all three definitions, and every number in the app — passport, stats, continents, share cards — follows the one you choose.",
-        "fr":"La liste « monde » classique compte 197 pays ; l'ONU reconnaît 193 membres ; l'ISO recense 249 pays et territoires. Voymark prend en charge les trois définitions, et chaque nombre de l'app — passeport, stats, continents, cartes — suit celle que vous choisissez.",
-        "es":"La lista clásica del \"mundo\" tiene 197 países; la ONU reconoce 193 miembros; la ISO lista 249 países y territorios. Voymark admite las tres definiciones, y cada número de la app — pasaporte, estadísticas, continentes, tarjetas — sigue la que elijas.",
-        "it":"La classica lista \"mondo\" ha 197 paesi; l'ONU riconosce 193 membri; l'ISO elenca 249 paesi e territori. Voymark supporta tutte e tre le definizioni, e ogni numero dell'app — passaporto, statistiche, continenti, card — segue quella che scegli.",
-        "de":"Die klassische \"Welt\"-Liste hat 197 Länder; die UN erkennt 193 Mitglieder an; die ISO führt 249 Länder und Territorien. Voymark unterstützt alle drei Definitionen — und jede Zahl in der App folgt der, die du wählst.",
-        "ro":"Lista clasică a \"lumii\" are 197 de țări; ONU recunoaște 193 de membri; ISO listează 249 de țări și teritorii. Voymark suportă toate cele trei definiții, iar fiecare număr din aplicație — pașaport, statistici, continente, carduri — o urmează pe cea aleasă de tine."}},
+   "p":{"en":"The classic \"world\" list has 197 countries; the UN recognizes 193 members; ISO lists 249 countries and territories. Voymark supports all three definitions, and every number in the app — passport, stats, continents, share cards — follows the one you choose. What sits inside each of those numbers is unpacked on <a href=\"how-many-countries-in-the-world.html\">how many countries there are in the world</a>.",
+        "fr":"La liste « monde » classique compte 197 pays ; l'ONU reconnaît 193 membres ; l'ISO recense 249 pays et territoires. Voymark prend en charge les trois définitions, et chaque nombre de l'app — passeport, stats, continents, cartes — suit celle que vous choisissez. Ce que contient chacun de ces chiffres est détaillé sur <a href=\"how-many-countries-in-the-world.html\">combien y a-t-il de pays dans le monde</a>.",
+        "es":"La lista clásica del \"mundo\" tiene 197 países; la ONU reconoce 193 miembros; la ISO lista 249 países y territorios. Voymark admite las tres definiciones, y cada número de la app — pasaporte, estadísticas, continentes, tarjetas — sigue la que elijas. Lo que hay dentro de cada cifra se desglosa en <a href=\"how-many-countries-in-the-world.html\">cuántos países hay en el mundo</a>.",
+        "it":"La classica lista \"mondo\" ha 197 paesi; l'ONU riconosce 193 membri; l'ISO elenca 249 paesi e territori. Voymark supporta tutte e tre le definizioni, e ogni numero dell'app — passaporto, statistiche, continenti, card — segue quella che scegli. Cosa c'è dentro ognuno di questi numeri è spiegato in <a href=\"how-many-countries-in-the-world.html\">quanti paesi ci sono nel mondo</a>.",
+        "de":"Die klassische \"Welt\"-Liste hat 197 Länder; die UN erkennt 193 Mitglieder an; die ISO führt 249 Länder und Territorien. Voymark unterstützt alle drei Definitionen — und jede Zahl in der App folgt der, die du wählst. Was in jeder dieser Zahlen steckt, steht unter <a href=\"how-many-countries-in-the-world.html\">wie viele Länder es auf der Welt gibt</a>.",
+        "ro":"Lista clasică a \"lumii\" are 197 de țări; ONU recunoaște 193 de membri; ISO listează 249 de țări și teritorii. Voymark suportă toate cele trei definiții, iar fiecare număr din aplicație — pașaport, statistici, continente, carduri — o urmează pe cea aleasă de tine. Ce se află în fiecare dintre aceste numere este desfăcut pe <a href=\"how-many-countries-in-the-world.html\">câte țări sunt în lume</a>."}},
   {"h":{"en":"Does an airport count?","fr":"Une escale compte-t-elle ?","es":"¿Cuenta un aeropuerto?","it":"Conta un aeroporto?","de":"Zählt ein Flughafen?","ro":"Contează un aeroport?"},
    "p":{"en":"Travelers argue about this forever. Voymark's answer: you decide. Mark a country as visited, overnight, lived — or as transit, airport-only or border-dash, which ink the map without adding to your count.",
         "fr":"Les voyageurs en débattent sans fin. La réponse de Voymark : c'est vous qui décidez. Marquez un pays comme visité, nuité, vécu — ou comme transit, aéroport ou passage de frontière, qui encrent la carte sans gonfler votre compte.",
@@ -1079,6 +1222,69 @@ PAGES = {
         "it":"Qualunque definizione scegli, governa tutta l'app — non solo il titolo. La tua percentuale di mondo, le righe per continente, le card da condividere e persino i tuoi sigilli la seguono: circa 29 sigilli si imprimono dal tuo archivio, e se cambi regola un sigillo al limite può onestamente richiudersi. Anche le statistiche vanno oltre un conteggio — distanza totale percorsa, la serie più lunga di anni di viaggio consecutivi e il luogo più lontano da casa con i chilometri a dimostrarlo.",
         "de":"Welche Definition du auch wählst, sie gilt für die ganze App — nicht nur für die Überschrift. Dein Weltanteil, deine Kontinentzeilen, deine Share-Karten und selbst deine Siegel folgen ihr: rund 29 Siegel stempeln sich aus deiner Bilanz, und änderst du die Regel, darf ein Grenzfall-Siegel ehrlich wieder zufallen. Auch die Statistik geht über das Zählen hinaus — zurückgelegte Gesamtstrecke, deine längste Serie aufeinanderfolgender Reisejahre und der am weitesten von zu Hause entfernte Ort samt Kilometern als Beleg.",
         "ro":"Oricare definiție alegi, ea guvernează toată aplicația — nu doar titlul. Procentul tău din lume, rândurile pe continente, cardurile de share și chiar sigiliile tale o urmează: aproximativ 29 de sigilii se aplică din evidența ta, iar dacă schimbi regula, un sigiliu la limită se poate încuia din nou, cinstit. Și statisticile merg mai departe decât un număr — distanța totală parcursă, cea mai lungă serie de ani consecutivi cu călătorii și cel mai îndepărtat loc de acasă, cu kilometrii care o dovedesc."}},
+  {"h":{"en":"Six ways to have been somewhere","fr":"Six façons d'être passé quelque part","es":"Seis formas de haber estado en un sitio","it":"Sei modi di esserci stato","de":"Sechs Arten, dort gewesen zu sein","ro":"Șase feluri de a fi fost undeva"},
+   "p":{"en":"Visited, stayed overnight, lived there, in transit, airport only, border crossing. Three of them add to your count and three of them do not, and the app is explicit about which is which rather than quietly deciding for you.",
+        "fr":"Visité, nuit sur place, vécu, en transit, aéroport seulement, passage de frontière. Trois comptent, trois ne comptent pas, et l'application le dit clairement au lieu de trancher en douce à votre place.",
+        "es":"Visitado, con noche, vivido, en tránsito, solo aeropuerto, cruce de frontera. Tres suman a tu recuento y tres no, y la app lo dice con claridad en vez de decidirlo por ti en silencio.",
+        "it":"Visitato, con pernottamento, vissuto, in transito, solo aeroporto, valico di frontiera. Tre contano e tre no, e l'app lo dichiara invece di decidere di nascosto al posto tuo.",
+        "de":"Besucht, übernachtet, gelebt, im Transit, nur Flughafen, Grenzübertritt. Drei zählen mit, drei nicht — und die App sagt es offen, statt still für dich zu entscheiden.",
+        "ro":"Vizitat, cu înnoptare, locuit, în tranzit, doar aeroport, trecere de graniță. Trei se adaugă la numărătoare și trei nu, iar aplicația spune limpede care sunt, în loc să decidă pe tăcute în locul tău."},
+   "p2":{"en":"The non-counting kinds still ink the country on the map, in a lighter shade, so a nine-hour layover in Doha shows up in your history without pretending you saw Qatar. Change a country's kind later and every number recomputes.",
+         "fr":"Les catégories qui ne comptent pas encrent quand même le pays sur la carte, dans une teinte plus claire : neuf heures d'escale à Doha apparaissent dans votre histoire sans prétendre que vous avez vu le Qatar. Changez la catégorie plus tard et tous les nombres se recalculent.",
+         "es":"Las categorías que no cuentan igualmente entintan el país en el mapa, en un tono más claro: nueve horas de escala en Doha aparecen en tu historial sin fingir que viste Catar. Cambia la categoría luego y todos los números se recalculan.",
+         "it":"Le categorie che non contano inchiostrano comunque il paese sulla mappa, in una tinta più chiara: nove ore di scalo a Doha compaiono nella tua storia senza far finta che tu abbia visto il Qatar. Cambia categoria più tardi e ogni numero si ricalcola.",
+         "de":"Die nicht zählenden Arten färben das Land trotzdem ein, nur heller: neun Stunden Zwischenstopp in Doha erscheinen in deiner Historie, ohne zu behaupten, du hättest Katar gesehen. Ändere die Art später, und alle Zahlen rechnen sich neu.",
+         "ro":"Categoriile care nu contează colorează totuși țara pe hartă, într-o nuanță mai deschisă: nouă ore de escală în Doha apar în istoricul tău fără să pretindă că ai văzut Qatarul. Schimbi categoria mai târziu și fiecare cifră se recalculează."}},
+  {"h":{"en":"A percentage you can defend","fr":"Un pourcentage défendable","es":"Un porcentaje que puedes defender","it":"Una percentuale che puoi difendere","de":"Ein Prozentsatz, den du verteidigen kannst","ro":"Un procent pe care îl poți susține"},
+   "p":{"en":"\"I've done 12% of the world\" only means something if the denominator is stated. Voymark shows both halves of the fraction — countries counted over countries in your chosen definition — so the claim survives being questioned at a dinner table.",
+        "fr":"« J'ai fait 12 % du monde » n'a de sens que si le dénominateur est indiqué. Voymark affiche les deux moitiés de la fraction — pays comptés sur pays de la définition choisie — pour que l'affirmation résiste à une question posée à table.",
+        "es":"\"He hecho el 12% del mundo\" solo significa algo si se dice el denominador. Voymark muestra las dos mitades de la fracción — países contados sobre países de la definición elegida — para que la afirmación aguante una pregunta en una cena.",
+        "it":"\"Ho fatto il 12% del mondo\" significa qualcosa solo se dichiari il denominatore. Voymark mostra entrambe le metà della frazione — paesi contati su paesi della definizione scelta — così l'affermazione regge a una domanda a tavola.",
+        "de":"\"Ich habe 12 % der Welt gesehen\" heißt nur etwas, wenn der Nenner dabeisteht. Voymark zeigt beide Hälften des Bruchs — gezählte Länder über Länder deiner gewählten Definition —, damit die Aussage eine Nachfrage beim Abendessen übersteht.",
+        "ro":"„Am făcut 12% din lume\" înseamnă ceva doar dacă spui și numitorul. Voymark arată ambele jumătăți ale fracției — țări numărate din țările definiției alese — ca afirmația să reziste la o întrebare pusă la masă."},
+   "p2":{"en":"The same honesty runs through the continents: seven rows, each with its own fraction, and a setting for where you put the countries that sit on two of them. Nothing rounds in your favour without telling you.",
+         "fr":"La même honnêteté traverse les continents : sept lignes, chacune avec sa fraction, et un réglage pour placer les pays à cheval sur deux d'entre eux. Rien n'arrondit en votre faveur sans le dire.",
+         "es":"La misma honestidad recorre los continentes: siete filas, cada una con su fracción, y un ajuste para colocar los países que están en dos. Nada redondea a tu favor sin decírtelo.",
+         "it":"La stessa onestà attraversa i continenti: sette righe, ciascuna con la sua frazione, e un'impostazione per collocare i paesi che stanno su due. Niente arrotonda a tuo favore senza dirtelo.",
+         "de":"Dieselbe Ehrlichkeit zieht sich durch die Kontinente: sieben Zeilen, jede mit eigenem Bruch, und eine Einstellung für Länder, die auf zweien liegen. Nichts rundet zu deinen Gunsten, ohne es zu sagen.",
+         "ro":"Aceeași onestitate străbate continentele: șapte rânduri, fiecare cu fracția lui, și o setare pentru țările care stau pe două dintre ele. Nimic nu rotunjește în favoarea ta fără să-ți spună."}},
+ ],
+ "faq": [
+  {"q":{"en":"How many countries are there in the world?","fr":"Combien y a-t-il de pays dans le monde ?","es":"¿Cuántos países hay en el mundo?","it":"Quanti paesi ci sono nel mondo?","de":"Wie viele Länder gibt es auf der Welt?","ro":"Câte țări sunt în lume?"},
+   "a":{"en":"There is no single answer. The travellers' list is 197 — the 193 UN member states plus the two observers and two widely recognized states. The ISO country code standard lists 249 entries including territories. Voymark supports all three.",
+        "fr":"Il n'y a pas de réponse unique. La liste des voyageurs en compte 197 — les 193 États membres de l'ONU, plus deux observateurs et deux États largement reconnus. La norme ISO des codes pays en recense 249, territoires compris. Voymark prend en charge les trois.",
+        "es":"No hay una única respuesta. La lista de los viajeros son 197 — los 193 estados miembros de la ONU más dos observadores y dos estados ampliamente reconocidos. La norma ISO de códigos de país recoge 249 entradas, territorios incluidos. Voymark admite las tres.",
+        "it":"Non c'è una risposta sola. La lista dei viaggiatori è 197 — i 193 stati membri ONU più due osservatori e due stati ampiamente riconosciuti. Lo standard ISO dei codici paese elenca 249 voci, territori compresi. Voymark supporta tutte e tre.",
+        "de":"Es gibt keine einzelne Antwort. Die Reisendenliste hat 197 — die 193 UN-Mitgliedstaaten plus zwei Beobachter und zwei weithin anerkannte Staaten. Der ISO-Ländercode-Standard führt 249 Einträge inklusive Territorien. Voymark unterstützt alle drei.",
+        "ro":"Nu există un singur răspuns. Lista călătorilor are 197 — cele 193 de state membre ONU plus doi observatori și două state larg recunoscute. Standardul ISO al codurilor de țară listează 249 de intrări, teritorii incluse. Voymark le suportă pe toate trei."}},
+  {"q":{"en":"Does a layover count as visiting a country?","fr":"Une escale compte-t-elle comme une visite ?","es":"¿Una escala cuenta como visitar un país?","it":"Uno scalo conta come visita?","de":"Zählt ein Zwischenstopp als Länderbesuch?","ro":"Contează o escală ca vizitarea unei țări?"},
+   "a":{"en":"Most seasoned travellers say no, and Voymark's default agrees: airport-only and transit ink the map without adding to your count. But it is a setting, not a verdict — if leaving the terminal counts for you, mark it as visited and the number follows.",
+        "fr":"La plupart des voyageurs aguerris disent non, et le réglage par défaut de Voymark aussi : aéroport seul et transit encrent la carte sans gonfler le compte. Mais c'est un réglage, pas un verdict — si sortir du terminal compte pour vous, marquez visité et le nombre suit.",
+        "es":"La mayoría de los viajeros veteranos dice que no, y el ajuste por defecto de Voymark coincide: solo aeropuerto y tránsito entintan el mapa sin sumar. Pero es un ajuste, no un veredicto — si salir de la terminal cuenta para ti, márcalo como visitado y el número te sigue.",
+        "it":"La maggior parte dei viaggiatori esperti dice di no, e il default di Voymark è d'accordo: solo aeroporto e transito inchiostrano la mappa senza sommare. Ma è un'impostazione, non una sentenza — se per te uscire dal terminal conta, segnalo come visitato e il numero ti segue.",
+        "de":"Die meisten erfahrenen Reisenden sagen nein, und Voymarks Voreinstellung stimmt zu: Nur-Flughafen und Transit färben die Karte, ohne mitzuzählen. Aber das ist eine Einstellung, kein Urteil — wenn für dich zählt, das Terminal verlassen zu haben, markiere besucht, und die Zahl folgt.",
+        "ro":"Majoritatea călătorilor experimentați spun nu, iar setarea implicită din Voymark e de acord: doar aeroport și tranzit colorează harta fără să adauge la numărătoare. Dar este o setare, nu o sentință — dacă pentru tine contează ieșirea din terminal, marchează vizitat și cifra te urmează."}},
+  {"q":{"en":"Can I change the counting rule later?","fr":"Puis-je changer la règle de comptage plus tard ?","es":"¿Puedo cambiar la regla de recuento después?","it":"Posso cambiare la regola di conteggio dopo?","de":"Kann ich die Zählregel später ändern?","ro":"Pot schimba regula de numărare mai târziu?"},
+   "a":{"en":"Yes, at any time, and nothing is lost. The rule is a lens over the same records, so switching from 197 to 193 changes every total, percentage, continent row and seal at once — and switching back restores exactly what you had.",
+        "fr":"Oui, à tout moment, sans rien perdre. La règle est une lentille posée sur les mêmes données : passer de 197 à 193 change d'un coup tous les totaux, pourcentages, lignes de continent et sceaux — et revenir en arrière restitue exactement l'état précédent.",
+        "es":"Sí, cuando quieras, y no se pierde nada. La regla es una lente sobre los mismos registros: pasar de 197 a 193 cambia de golpe todos los totales, porcentajes, filas de continente y sellos — y volver atrás restaura exactamente lo que tenías.",
+        "it":"Sì, quando vuoi, e non si perde nulla. La regola è una lente sugli stessi dati: passare da 197 a 193 cambia in un colpo totali, percentuali, righe dei continenti e sigilli — e tornare indietro ripristina esattamente ciò che avevi.",
+        "de":"Ja, jederzeit, und nichts geht verloren. Die Regel ist eine Linse über denselben Daten: von 197 auf 193 zu wechseln ändert auf einen Schlag alle Summen, Prozente, Kontinentzeilen und Siegel — und zurückwechseln stellt genau den alten Stand her.",
+        "ro":"Da, oricând, și nu se pierde nimic. Regula este o lentilă peste aceleași date: trecerea de la 197 la 193 schimbă dintr-odată toate totalurile, procentele, rândurile pe continente și sigiliile — iar întoarcerea readuce exact ce aveai."}},
+  {"q":{"en":"How does it count countries I have lived in?","fr":"Comment compte-t-il les pays où j'ai vécu ?","es":"¿Cómo cuenta los países donde he vivido?","it":"Come conta i paesi in cui ho vissuto?","de":"Wie zählt es Länder, in denen ich gelebt habe?","ro":"Cum numără țările în care am locuit?"},
+   "a":{"en":"\"Lived there\" is its own visit kind and counts like a visit, but stays distinguishable in your history — so a year in Berlin never reads as a weekend. The home area you set is separately excluded from photo scanning, so everyday photos never invent trips.",
+        "fr":"« Vécu » est une catégorie à part entière : elle compte comme une visite mais reste distincte dans votre historique — une année à Berlin ne se lit jamais comme un week-end. La zone de domicile que vous définissez est par ailleurs exclue du scan photo, pour que le quotidien n'invente pas de voyages.",
+        "es":"\"Vivido\" es una categoría propia: cuenta como visita pero sigue distinguiéndose en tu historial — un año en Berlín nunca se lee como un fin de semana. Además, la zona de casa que definas queda excluida del escaneo de fotos, para que lo cotidiano no invente viajes.",
+        "it":"\"Vissuto\" è una categoria a sé: conta come visita ma resta distinguibile nella tua storia — un anno a Berlino non si legge mai come un weekend. L'area di casa che imposti è inoltre esclusa dalla scansione foto, così la quotidianità non inventa viaggi.",
+        "de":"\"Gelebt\" ist eine eigene Besuchsart: Sie zählt wie ein Besuch, bleibt in deiner Historie aber unterscheidbar — ein Jahr in Berlin liest sich nie wie ein Wochenende. Der von dir gesetzte Heimatbereich wird zudem vom Foto-Scan ausgenommen, damit Alltag keine Reisen erfindet.",
+        "ro":"„Locuit\" este o categorie de sine stătătoare: contează ca vizită, dar rămâne distinctă în istoricul tău — un an la Berlin nu se citește niciodată ca un weekend. În plus, zona de acasă pe care o setezi e exclusă din scanarea pozelor, ca rutina să nu inventeze călătorii."}},
+  {"q":{"en":"Is there a leaderboard or a social feed?","fr":"Y a-t-il un classement ou un fil social ?","es":"¿Hay clasificación o feed social?","it":"C'è una classifica o un feed social?","de":"Gibt es eine Rangliste oder einen Social Feed?","ro":"Există un clasament sau un flux social?"},
+   "a":{"en":"None. There is no ranking, no follower count and no feed, because there is no server to host one. If you want to compare, you can exchange a passport with a friend directly — by QR code or a file — and see the overlap side by side.",
+        "fr":"Aucun. Pas de classement, pas d'abonnés, pas de fil, car aucun serveur ne pourrait l'héberger. Pour comparer, échangez un passeport avec un ami en direct — par QR code ou par fichier — et voyez le recoupement côte à côte.",
+        "es":"Ninguno. No hay ranking, ni seguidores, ni feed, porque no hay servidor que lo aloje. Si quieres comparar, intercambia un pasaporte con un amigo directamente — por código QR o por archivo — y ved la coincidencia lado a lado.",
+        "it":"Nessuno. Niente classifica, niente follower, niente feed, perché non c'è un server che possa ospitarli. Se vuoi confrontare, scambia un passaporto con un amico direttamente — con un codice QR o un file — e guardate la sovrapposizione affiancata.",
+        "de":"Gar keine. Keine Rangliste, keine Follower, kein Feed — es gibt keinen Server, der so etwas hosten könnte. Zum Vergleichen tauschst du direkt einen Reisepass mit Freunden aus — per QR-Code oder Datei — und seht die Schnittmenge nebeneinander.",
+        "ro":"Niciunul. Nu există clasament, nu există urmăritori, nu există flux, pentru că nu există server care să le găzduiască. Dacă vrei să compari, schimbă un pașaport cu un prieten direct — prin cod QR sau printr-un fișier — și vedeți suprapunerea una lângă alta."}},
  ],
 },
 
@@ -1139,6 +1345,69 @@ PAGES = {
         "it":"I viaggi vecchi stanno spesso su una scheda di memoria, un disco esterno o in una cartella di backup ripristinata, non nella libreria foto del telefono. Voymark può analizzare anche una cartella, leggendo le stesse posizioni e date e proponendo gli stessi viaggi da rivedere — così il decennio prima di questo telefono non va perso.",
         "de":"Alte Reisen liegen oft auf einer Speicherkarte, einer externen Platte oder in einem wiederhergestellten Backup-Ordner statt in der Fotomediathek des Handys. Voymark kann auch einen Ordner durchsuchen, liest dieselben Orte und Daten und schlägt dieselben prüfbaren Reisen vor — damit das Jahrzehnt vor diesem Handy nicht verloren geht.",
         "ro":"Călătoriile vechi stau adesea pe un card de memorie, pe un disc extern sau într-un folder de backup restaurat, nu în galeria telefonului. Voymark poate scana și un folder, citind aceleași locații și date și propunând aceleași călătorii de verificat — ca deceniul dinaintea acestui telefon să nu se piardă."}},
+  {"h":{"en":"How a pile of photos becomes a trip","fr":"Comment un tas de photos devient un voyage","es":"Cómo un montón de fotos se convierte en un viaje","it":"Come un mucchio di foto diventa un viaggio","de":"Wie aus einem Fotostapel eine Reise wird","ro":"Cum devine un morman de poze o călătorie"},
+   "p":{"en":"Photos taken near each other on the same day become a stop. Stops on consecutive days become a trip, and a gap of more than two days ends it — so a summer with three holidays comes back as three trips, not one long blur.",
+        "fr":"Les photos prises près les unes des autres le même jour deviennent une étape. Les étapes de jours consécutifs forment un voyage, et un écart de plus de deux jours y met fin : un été à trois vacances revient en trois voyages, pas en une longue bouillie.",
+        "es":"Las fotos hechas cerca unas de otras el mismo día forman una parada. Las paradas de días consecutivos forman un viaje, y un hueco de más de dos días lo cierra: un verano con tres vacaciones vuelve como tres viajes, no como una única mancha larga.",
+        "it":"Le foto scattate vicine tra loro nello stesso giorno diventano una tappa. Le tappe di giorni consecutivi diventano un viaggio, e un intervallo di più di due giorni lo chiude: un'estate con tre vacanze torna come tre viaggi, non come un unico blocco confuso.",
+        "de":"Fotos, die am selben Tag nah beieinander entstanden, werden zu einem Halt. Halte an aufeinanderfolgenden Tagen werden zu einer Reise, und eine Lücke von mehr als zwei Tagen beendet sie — ein Sommer mit drei Urlauben kommt als drei Reisen zurück, nicht als ein langer Brei.",
+        "ro":"Pozele făcute aproape una de alta în aceeași zi devin o oprire. Opririle din zile consecutive devin o călătorie, iar o pauză de peste două zile o încheie: o vară cu trei vacanțe se întoarce ca trei călătorii, nu ca o singură pată lungă."},
+   "p2":{"en":"Each stop is then named by your phone's own geocoder, preferring the city over the district — so a day in Rome reads \"Rome\", not \"Municipio I\". A trip needs at least three geotagged photos to exist at all, which is what stops a stray airport snapshot from becoming a journey.",
+         "fr":"Chaque étape est ensuite nommée par le géocodeur du téléphone, qui préfère la ville au quartier : une journée à Rome se lit « Rome », pas « Municipio I ». Un voyage exige au moins trois photos géolocalisées pour exister, ce qui empêche un cliché d'aéroport isolé de devenir une expédition.",
+         "es":"Cada parada la nombra el geocodificador del propio móvil, que prefiere la ciudad al distrito: un día en Roma se lee \"Roma\", no \"Municipio I\". Un viaje necesita al menos tres fotos geolocalizadas para existir, y eso evita que una foto suelta de aeropuerto se convierta en una travesía.",
+         "it":"Ogni tappa viene poi nominata dal geocoder del telefono, che preferisce la città al quartiere: una giornata a Roma si legge \"Roma\", non \"Municipio I\". Un viaggio ha bisogno di almeno tre foto geolocalizzate per esistere, ed è questo che impedisce a uno scatto sperduto in aeroporto di diventare una spedizione.",
+         "de":"Jeden Halt benennt dann der Geocoder des Telefons, der die Stadt dem Bezirk vorzieht: ein Tag in Rom liest sich \"Rom\", nicht \"Municipio I\". Eine Reise braucht mindestens drei Fotos mit Koordinaten, um überhaupt zu existieren — das verhindert, dass ein verirrter Flughafenschnappschuss zur Expedition wird.",
+         "ro":"Fiecare oprire e apoi numită de geocoderul telefonului, care preferă orașul cartierului: o zi la Roma se citește „Roma\", nu „Municipio I\". O călătorie are nevoie de cel puțin trei poze cu locație ca să existe, iar asta oprește o poză răzleață de aeroport să devină o expediție."}},
+  {"h":{"en":"What the app never does with your photos","fr":"Ce que l'app ne fait jamais de vos photos","es":"Lo que la app nunca hace con tus fotos","it":"Cosa l'app non fa mai con le tue foto","de":"Was die App mit deinen Fotos nie tut","ro":"Ce nu face niciodată aplicația cu pozele tale"},
+   "p":{"en":"It does not copy them, does not upload them and does not send them anywhere for analysis. There is no image recognition, no face detection and no cloud step: the only thing read is the coordinate and the timestamp already written into the file by your camera.",
+        "fr":"Elle ne les copie pas, ne les téléverse pas et ne les envoie nulle part pour analyse. Pas de reconnaissance d'image, pas de détection de visages, aucune étape dans le cloud : seules sont lues les coordonnées et la date déjà inscrites dans le fichier par votre appareil.",
+        "es":"No las copia, no las sube y no las envía a ningún sitio para analizarlas. No hay reconocimiento de imagen, ni detección de caras, ni paso por la nube: lo único que se lee son las coordenadas y la fecha que tu cámara ya escribió en el archivo.",
+        "it":"Non le copia, non le carica e non le manda da nessuna parte per l'analisi. Nessun riconoscimento di immagini, nessun rilevamento dei volti, nessun passaggio nel cloud: si leggono solo le coordinate e la data che la tua fotocamera ha già scritto nel file.",
+        "de":"Sie kopiert sie nicht, lädt sie nicht hoch und schickt sie nirgends zur Analyse. Keine Bilderkennung, keine Gesichtserkennung, kein Cloud-Schritt: gelesen werden nur Koordinate und Zeitstempel, die deine Kamera ohnehin in die Datei geschrieben hat.",
+        "ro":"Nu le copiază, nu le încarcă și nu le trimite nicăieri pentru analiză. Nu există recunoaștere de imagini, nu există detecție de fețe, nu există pas prin cloud: se citesc doar coordonatele și data pe care camera ta le-a scris deja în fișier."},
+   "p2":{"en":"Photos you attach to a trip are stored as references, not duplicates, so nothing doubles your storage. Delete a photo from your library and Voymark notices the reference has gone stale and offers to clean it up.",
+         "fr":"Les photos attachées à un voyage sont stockées comme références, pas comme copies : rien ne double votre espace. Supprimez une photo de votre photothèque et Voymark remarque que la référence est morte et propose de faire le ménage.",
+         "es":"Las fotos que adjuntas a un viaje se guardan como referencias, no como copias, así que nada duplica tu almacenamiento. Borra una foto de tu galería y Voymark detecta que la referencia quedó huérfana y ofrece limpiarla.",
+         "it":"Le foto che alleghi a un viaggio sono salvate come riferimenti, non come copie: nulla raddoppia il tuo spazio. Elimina una foto dalla libreria e Voymark si accorge che il riferimento è morto e propone di ripulirlo.",
+         "de":"An eine Reise angehängte Fotos werden als Verweise gespeichert, nicht als Kopien — nichts verdoppelt deinen Speicher. Löschst du ein Foto aus der Mediathek, merkt Voymark, dass der Verweis ins Leere zeigt, und bietet an, ihn aufzuräumen.",
+         "ro":"Pozele pe care le atașezi unei călătorii sunt salvate ca referințe, nu ca dubluri, așa că nimic nu-ți dublează spațiul. Șterge o poză din galerie și Voymark observă că referința a rămas fără țintă și îți propune să o curețe."}},
+ ],
+ "faq": [
+  {"q":{"en":"Do my photos get uploaded anywhere?","fr":"Mes photos sont-elles envoyées quelque part ?","es":"¿Mis fotos se suben a algún sitio?","it":"Le mie foto vengono caricate da qualche parte?","de":"Werden meine Fotos irgendwohin hochgeladen?","ro":"Pozele mele se încarcă undeva?"},
+   "a":{"en":"No. The scan runs entirely on the phone and works with the network switched off — try it in airplane mode. Images are never copied out of your library, and the app has no server to send them to even if it wanted one.",
+        "fr":"Non. L'analyse tourne entièrement sur le téléphone et fonctionne réseau coupé — essayez en mode avion. Les images ne quittent jamais votre photothèque, et l'application n'a aucun serveur où les envoyer, même si elle le voulait.",
+        "es":"No. El escaneo funciona íntegramente en el móvil y va con la red apagada — pruébalo en modo avión. Las imágenes nunca salen de tu galería, y la app no tiene ningún servidor al que mandarlas aunque quisiera.",
+        "it":"No. La scansione gira interamente sul telefono e funziona con la rete spenta — provala in modalità aereo. Le immagini non escono mai dalla tua libreria, e l'app non ha alcun server a cui mandarle nemmeno volendo.",
+        "de":"Nein. Der Scan läuft vollständig auf dem Telefon und funktioniert ohne Netz — probier es im Flugmodus. Bilder verlassen deine Mediathek nie, und die App hätte gar keinen Server, an den sie sie schicken könnte.",
+        "ro":"Nu. Scanarea rulează integral pe telefon și merge cu rețeaua oprită — încearcă în modul avion. Imaginile nu ies niciodată din galeria ta, iar aplicația nu are niciun server către care să le trimită, chiar dacă ar vrea."}},
+  {"q":{"en":"What if my photos have no location data?","fr":"Et si mes photos n'ont pas de données de localisation ?","es":"¿Y si mis fotos no tienen datos de ubicación?","it":"E se le mie foto non hanno dati di posizione?","de":"Und wenn meine Fotos keine Standortdaten haben?","ro":"Dacă pozele mele nu au date de locație?"},
+   "a":{"en":"Then they are simply skipped — nothing is guessed. You can still build those trips by hand and attach the photos afterwards, which takes seconds and keeps the dates and places exactly as you remember them.",
+        "fr":"Elles sont simplement ignorées — rien n'est deviné. Vous pouvez toujours créer ces voyages à la main et y attacher les photos ensuite : quelques secondes, et les dates et lieux restent exactement ceux dont vous vous souvenez.",
+        "es":"Entonces se omiten sin más — no se adivina nada. Puedes crear esos viajes a mano y adjuntar las fotos después: son segundos, y las fechas y lugares quedan tal y como los recuerdas.",
+        "it":"Vengono semplicemente saltate — non si indovina nulla. Puoi comunque creare quei viaggi a mano e allegare le foto dopo: pochi secondi, e date e luoghi restano esattamente come li ricordi.",
+        "de":"Dann werden sie schlicht übersprungen — es wird nichts geraten. Du kannst solche Reisen weiterhin von Hand anlegen und die Fotos danach anhängen: Sekundensache, und Daten wie Orte bleiben genau so, wie du sie erinnerst.",
+        "ro":"Atunci sunt pur și simplu sărite — nu se ghicește nimic. Poți construi acele călătorii manual și atașa pozele după aceea: durează secunde, iar datele și locurile rămân exact cum ți le amintești."}},
+  {"q":{"en":"Will it turn my everyday photos into trips?","fr":"Va-t-il transformer mes photos du quotidien en voyages ?","es":"¿Convertirá mis fotos cotidianas en viajes?","it":"Trasformerà le mie foto di tutti i giorni in viaggi?","de":"Macht es aus Alltagsfotos Reisen?","ro":"Îmi va transforma pozele de zi cu zi în călătorii?"},
+   "a":{"en":"Set your home area once and everything within 25 km of it is excluded from detection. Voymark never guesses where you live — if you skip that step, nothing is treated as home rather than something being assumed.",
+        "fr":"Définissez une fois votre zone de domicile et tout ce qui se trouve dans un rayon de 25 km en est exclu. Voymark ne devine jamais où vous habitez : si vous sautez cette étape, rien n'est considéré comme domicile plutôt que supposé.",
+        "es":"Define tu zona de casa una vez y todo lo que esté a menos de 25 km queda excluido de la detección. Voymark nunca adivina dónde vives: si te saltas ese paso, no se considera nada como casa en vez de suponerlo.",
+        "it":"Imposta una volta la tua area di casa e tutto ciò che si trova entro 25 km ne resta escluso. Voymark non indovina mai dove abiti: se salti quel passaggio, niente viene considerato casa invece di essere presunto.",
+        "de":"Lege deinen Heimatbereich einmal fest, und alles im Umkreis von 25 km fällt aus der Erkennung heraus. Voymark rät nie, wo du wohnst — überspringst du den Schritt, gilt lieber gar nichts als Zuhause, statt etwas anzunehmen.",
+        "ro":"Setează o dată zona de acasă și tot ce se află pe o rază de 25 km este exclus din detecție. Voymark nu ghicește niciodată unde locuiești: dacă sari peste pasul acela, nimic nu e tratat drept acasă, în loc să se presupună ceva."}},
+  {"q":{"en":"Can I undo an import?","fr":"Puis-je annuler un import ?","es":"¿Puedo deshacer una importación?","it":"Posso annullare un'importazione?","de":"Kann ich einen Import rückgängig machen?","ro":"Pot anula un import?"},
+   "a":{"en":"Nothing is written until you accept it, and anything accepted can be edited or deleted afterwards. A candidate you skip is remembered as skipped, so the next scan does not offer it again.",
+        "fr":"Rien n'est écrit avant votre accord, et tout ce qui est accepté peut ensuite être modifié ou supprimé. Une proposition ignorée est mémorisée comme telle : le prochain scan ne la reproposera pas.",
+        "es":"No se escribe nada hasta que lo aceptas, y todo lo aceptado se puede editar o borrar después. Un candidato que descartas queda recordado como descartado, así que el siguiente escaneo no vuelve a ofrecerlo.",
+        "it":"Non viene scritto nulla finché non accetti, e tutto ciò che accetti può essere modificato o eliminato dopo. Una proposta che salti resta memorizzata come saltata, così la scansione successiva non te la ripropone.",
+        "de":"Nichts wird geschrieben, bevor du zustimmst, und alles Zugestimmte lässt sich danach ändern oder löschen. Ein übersprungener Vorschlag wird als übersprungen gemerkt — der nächste Scan bietet ihn nicht erneut an.",
+        "ro":"Nu se scrie nimic până nu accepți, iar orice ai acceptat poate fi editat sau șters după aceea. O propunere pe care o sari e ținută minte ca sărită, așa că scanarea următoare nu ți-o mai oferă."}},
+  {"q":{"en":"How far back can it go?","fr":"Jusqu'où peut-il remonter ?","es":"¿Hasta cuándo puede llegar hacia atrás?","it":"Fin dove può risalire?","de":"Wie weit zurück kommt es?","ro":"Cât de departe poate merge în urmă?"},
+   "a":{"en":"As far as your library does. Scan everything at once, the past year, everything since the last scan, or a period you choose. Photos on a memory card, an external drive or a restored backup can be scanned as a folder, so the years before this phone are not lost.",
+        "fr":"Aussi loin que votre photothèque. Analysez tout d'un coup, la dernière année, tout depuis le dernier scan, ou une période choisie. Les photos sur carte mémoire, disque externe ou sauvegarde restaurée s'analysent en tant que dossier : les années d'avant ce téléphone ne sont pas perdues.",
+        "es":"Tan atrás como llegue tu galería. Escanea todo de golpe, el último año, todo desde el último escaneo o un periodo que elijas. Las fotos en una tarjeta, un disco externo o una copia restaurada se pueden escanear como carpeta, así que los años anteriores a este móvil no se pierden.",
+        "it":"Fin dove arriva la tua libreria. Scansiona tutto in una volta, l'ultimo anno, tutto dall'ultima scansione o un periodo che scegli tu. Le foto su scheda di memoria, disco esterno o backup ripristinato si scansionano come cartella: gli anni precedenti a questo telefono non vanno persi.",
+        "de":"So weit wie deine Mediathek. Scanne alles auf einmal, das letzte Jahr, alles seit dem letzten Scan oder einen selbst gewählten Zeitraum. Fotos auf Speicherkarte, externer Platte oder in einem wiederhergestellten Backup lassen sich als Ordner scannen — die Jahre vor diesem Telefon sind nicht verloren.",
+        "ro":"Cât de departe merge galeria ta. Scanează tot deodată, ultimul an, tot de la ultima scanare sau o perioadă aleasă de tine. Pozele de pe un card, un disc extern sau un backup restaurat se pot scana ca folder, așa că anii dinaintea acestui telefon nu se pierd."}},
  ],
 },
 
@@ -1199,12 +1468,219 @@ PAGES = {
         "it":"Trascina il cursore degli anni e il mondo si ricolora esattamente su dove eri arrivato allora — una mappa del 2019, del 2015, dell'anno in cui hai lasciato il paese per la prima volta. Ogni anno si esporta come video verticale di otto secondi: i paesi si timbrano alle loro date vere, le rotte si disegnano da sole sulla carta.",
         "de":"Zieh am Jahresregler und die Welt färbt sich genau so ein, wie weit du damals warst — eine Karte von 2019, von 2015, von dem Jahr, in dem du zum ersten Mal das Land verlassen hast. Jedes Jahr lässt sich als acht Sekunden langes Hochkant-Video exportieren: Länder stempeln sich an ihren echten Daten ein, Routen zeichnen sich selbst über das Papier.",
         "ro":"Trage de cursorul anilor și lumea se recolorează exact până unde ajunseseși atunci — o hartă a lui 2019, a lui 2015, a anului în care ai ieșit prima dată din țară. Orice an se exportă ca video vertical de opt secunde: țările se ștampilează la datele lor reale, traseele se desenează singure peste hârtie."}},
+  {"h":{"en":"From the whole world down to one street corner","fr":"Du monde entier à un coin de rue","es":"Del mundo entero a una esquina","it":"Dal mondo intero a un angolo di strada","de":"Von der ganzen Welt bis zur Straßenecke","ro":"De la lumea întreagă la un colț de stradă"},
+   "p":{"en":"Zoomed out, the map is a passport: burgundy where you have been, gold where you want to go. Pinch in and it becomes a record of a single afternoon — the cities you marked, the route between them, and a gold dot for every place a photo was taken.",
+        "fr":"Dézoomée, la carte est un passeport : bordeaux là où vous êtes allé, or là où vous voulez aller. Zoomez et elle devient le récit d'un seul après-midi — les villes marquées, l'itinéraire entre elles et un point doré à chaque endroit photographié.",
+        "es":"Alejado, el mapa es un pasaporte: burdeos donde has estado, oro donde quieres ir. Acércate y se convierte en el registro de una sola tarde — las ciudades que marcaste, la ruta entre ellas y un punto dorado en cada lugar donde hiciste una foto.",
+        "it":"Da lontano la mappa è un passaporto: bordeaux dove sei stato, oro dove vuoi andare. Avvicinati e diventa il racconto di un solo pomeriggio — le città che hai segnato, il percorso fra loro e un punto dorato per ogni luogo fotografato.",
+        "de":"Herausgezoomt ist die Karte ein Reisepass: burgunderrot, wo du warst, golden, wohin du willst. Zoom hinein, und sie wird zum Protokoll eines einzelnen Nachmittags — die markierten Städte, die Route dazwischen und ein goldener Punkt für jeden fotografierten Ort.",
+        "ro":"Depărtată, harta e un pașaport: bordo unde ai fost, auriu unde vrei să ajungi. Apropie-te și devine povestea unei singure după-amiezi — orașele marcate, traseul dintre ele și un punct auriu pentru fiecare loc fotografiat."},
+   "p2":{"en":"Tap a gold dot and the photo opens full-screen. Every layer — countries, routes, cities, photos — has its own switch, so the map can be a clean atlas one minute and a dense diary of one week the next.",
+         "fr":"Touchez un point doré et la photo s'ouvre en plein écran. Chaque couche — pays, itinéraires, villes, photos — a son interrupteur : la carte peut être un atlas épuré à un instant et le journal dense d'une semaine à l'autre.",
+         "es":"Toca un punto dorado y la foto se abre a pantalla completa. Cada capa — países, rutas, ciudades, fotos — tiene su interruptor, así que el mapa puede ser un atlas limpio un momento y el diario denso de una semana al siguiente.",
+         "it":"Tocca un punto dorato e la foto si apre a schermo intero. Ogni livello — paesi, percorsi, città, foto — ha il suo interruttore: la mappa può essere un atlante pulito in un momento e il diario fitto di una settimana in quello dopo.",
+         "de":"Tippe auf einen goldenen Punkt, und das Foto öffnet sich formatfüllend. Jede Ebene — Länder, Routen, Städte, Fotos — hat einen eigenen Schalter: mal klarer Atlas, mal dichtes Tagebuch einer Woche.",
+         "ro":"Atinge un punct auriu și poza se deschide pe tot ecranul. Fiecare strat — țări, trasee, orașe, poze — are propriul comutator, așa că harta poate fi un atlas curat într-o clipă și jurnalul dens al unei săptămâni în următoarea."}},
+  {"h":{"en":"It never asks where you are","fr":"Elle ne demande jamais où vous êtes","es":"Nunca pregunta dónde estás","it":"Non chiede mai dove sei","de":"Sie fragt nie, wo du bist","ro":"Nu întreabă niciodată unde ești"},
+   "p":{"en":"Voymark requests no location permission at all — not once, not in the background. There is no GPS log, no live tracking, nothing following you between trips. The map knows where you have been because you told it, or because a photo you already had carried the coordinates.",
+        "fr":"Voymark ne demande aucune autorisation de localisation — jamais, ni en arrière-plan. Pas de journal GPS, pas de suivi en direct, rien qui vous suive entre deux voyages. La carte sait où vous êtes allé parce que vous le lui avez dit, ou parce qu'une photo que vous aviez déjà portait les coordonnées.",
+        "es":"Voymark no pide ningún permiso de ubicación — ni una vez, ni en segundo plano. No hay registro de GPS, ni rastreo en vivo, nada que te siga entre viajes. El mapa sabe dónde has estado porque tú se lo dijiste, o porque una foto que ya tenías llevaba las coordenadas.",
+        "it":"Voymark non chiede alcun permesso di localizzazione — mai, nemmeno in background. Nessun log GPS, nessun tracciamento dal vivo, niente che ti segua fra un viaggio e l'altro. La mappa sa dove sei stato perché gliel'hai detto tu, o perché una foto che avevi già portava le coordinate.",
+        "de":"Voymark fragt überhaupt nicht nach Standortfreigabe — kein einziges Mal, auch nicht im Hintergrund. Kein GPS-Log, kein Live-Tracking, nichts, das dir zwischen Reisen folgt. Die Karte weiß, wo du warst, weil du es ihr gesagt hast oder weil ein Foto die Koordinaten schon trug.",
+        "ro":"Voymark nu cere nicio permisiune de locație — nici măcar o dată, nici în fundal. Nu există jurnal GPS, nu există urmărire în timp real, nimic care să te urmeze între călătorii. Harta știe unde ai fost pentru că i-ai spus tu sau pentru că o poză pe care o aveai deja purta coordonatele."},
+   "p2":{"en":"That is why the whole map works in airplane mode: the borders, the labels and the region outlines are files inside the app, not tiles fetched from a server that would learn what you are looking at.",
+         "fr":"C'est pourquoi toute la carte fonctionne en mode avion : les frontières, les libellés et les contours de régions sont des fichiers dans l'application, pas des tuiles récupérées sur un serveur qui saurait ce que vous regardez.",
+         "es":"Por eso el mapa entero funciona en modo avión: las fronteras, las etiquetas y los contornos de regiones son archivos dentro de la app, no teselas pedidas a un servidor que sabría qué estás mirando.",
+         "it":"Per questo l'intera mappa funziona in modalità aereo: confini, etichette e contorni delle regioni sono file dentro l'app, non tile chieste a un server che saprebbe cosa stai guardando.",
+         "de":"Darum funktioniert die ganze Karte im Flugmodus: Grenzen, Beschriftungen und Regionsumrisse sind Dateien in der App, keine Kacheln von einem Server, der mitbekäme, was du dir ansiehst.",
+         "ro":"De aceea toată harta merge în modul avion: granițele, etichetele și conturul regiunilor sunt fișiere din aplicație, nu tile-uri cerute unui server care ar afla ce anume privești."}},
+ ],
+ "faq": [
+  {"q":{"en":"Which map styles are available?","fr":"Quels styles de carte sont disponibles ?","es":"¿Qué estilos de mapa hay?","it":"Quali stili di mappa ci sono?","de":"Welche Kartenstile gibt es?","ro":"Ce stiluri de hartă există?"},
+   "a":{"en":"Atlas and Paper are drawn from data bundled in the app and work offline on both iPhone and Android. On iPhone there are two more, Modern and Satellite, drawn by Apple Maps — those fetch tiles, so they need a connection.",
+        "fr":"Atlas et Papier sont dessinés à partir de données intégrées et fonctionnent hors ligne sur iPhone comme sur Android. Sur iPhone, deux styles s'ajoutent, Moderne et Satellite, dessinés par Apple Plans — ils téléchargent des tuiles et demandent donc une connexion.",
+        "es":"Atlas y Papel se dibujan con datos incluidos en la app y funcionan sin conexión tanto en iPhone como en Android. En iPhone hay dos más, Moderno y Satélite, dibujados por Apple Maps — esos descargan teselas, así que necesitan conexión.",
+        "it":"Atlas e Carta sono disegnati da dati inclusi nell'app e funzionano offline su iPhone e Android. Su iPhone se ne aggiungono due, Moderno e Satellite, disegnati da Apple Mappe — quelli scaricano tile, quindi richiedono connessione.",
+        "de":"Atlas und Papier werden aus mitgelieferten Daten gezeichnet und funktionieren offline auf iPhone wie Android. Auf dem iPhone kommen Modern und Satellit hinzu, gezeichnet von Apple Karten — die laden Kacheln und brauchen daher Netz.",
+        "ro":"Atlas și Hârtie sunt desenate din date incluse în aplicație și merg offline atât pe iPhone, cât și pe Android. Pe iPhone mai există două, Modern și Satelit, desenate de Apple Maps — acelea descarcă tile-uri, deci au nevoie de conexiune."}},
+  {"q":{"en":"Can the map show the route of each trip?","fr":"La carte peut-elle montrer l'itinéraire de chaque voyage ?","es":"¿El mapa puede mostrar la ruta de cada viaje?","it":"La mappa può mostrare il percorso di ogni viaggio?","de":"Kann die Karte die Route jeder Reise zeigen?","ro":"Poate harta să arate traseul fiecărei călătorii?"},
+   "a":{"en":"Yes. Places are joined in the order you visited them, and each leg is classified as a flight, an overland journey or a local hop from its distance and speed, so a trip reads as a route rather than a scatter of pins. Press play and it draws itself.",
+        "fr":"Oui. Les lieux sont reliés dans l'ordre de visite, et chaque étape est classée en vol, trajet terrestre ou déplacement local selon la distance et la vitesse : un voyage se lit comme un itinéraire, pas comme un nuage d'épingles. Appuyez sur lecture et il se dessine.",
+        "es":"Sí. Los lugares se unen en el orden en que los visitaste, y cada tramo se clasifica como vuelo, trayecto terrestre o salto local según distancia y velocidad, así que un viaje se lee como una ruta y no como un puñado de chinchetas. Pulsa reproducir y se dibuja solo.",
+        "it":"Sì. I luoghi sono uniti nell'ordine in cui li hai visitati e ogni tratta è classificata come volo, viaggio via terra o spostamento locale in base a distanza e velocità: un viaggio si legge come un percorso, non come uno sparpaglio di spilli. Premi play e si disegna da solo.",
+        "de":"Ja. Orte werden in der Reihenfolge deines Besuchs verbunden, und jede Etappe wird nach Distanz und Tempo als Flug, Landreise oder lokaler Sprung eingestuft — eine Reise liest sich als Route, nicht als Nadelhaufen. Auf Play tippen, und sie zeichnet sich selbst.",
+        "ro":"Da. Locurile sunt unite în ordinea în care le-ai vizitat, iar fiecare etapă e clasificată drept zbor, drum pe uscat sau deplasare locală după distanță și viteză, așa că o călătorie se citește ca un traseu, nu ca un pumn de bolduri. Apeși play și se desenează singură."}},
+  {"q":{"en":"Can I make a map of the year I travelled most?","fr":"Puis-je faire la carte de l'année où j'ai le plus voyagé ?","es":"¿Puedo hacer un mapa del año que más viajé?","it":"Posso fare la mappa dell'anno in cui ho viaggiato di più?","de":"Kann ich eine Karte meines reisereichsten Jahres machen?","ro":"Pot face harta anului în care am călătorit cel mai mult?"},
+   "a":{"en":"Drag the year slider and the world recolours to exactly what you had marked by that date. Any single year exports as an eight-second vertical video, and the annual recap adds the numbers: countries, distance, flights and the routes replayed.",
+        "fr":"Faites glisser le curseur d'année et le monde se recolore exactement selon ce que vous aviez marqué à cette date. Toute année s'exporte en vidéo verticale de huit secondes, et le bilan annuel ajoute les chiffres : pays, distance, vols et itinéraires rejoués.",
+        "es":"Arrastra el control de año y el mundo se recolorea con exactamente lo que tenías marcado en esa fecha. Cualquier año se exporta como vídeo vertical de ocho segundos, y el resumen anual añade las cifras: países, distancia, vuelos y las rutas reproducidas.",
+        "it":"Trascina il cursore degli anni e il mondo si ricolora esattamente con ciò che avevi segnato a quella data. Ogni singolo anno si esporta come video verticale di otto secondi, e il riepilogo annuale aggiunge i numeri: paesi, distanza, voli e i percorsi riprodotti.",
+        "de":"Zieh den Jahresregler, und die Welt färbt sich genau so, wie sie zu diesem Datum markiert war. Jedes Jahr lässt sich als achtsekündiges Hochformat-Video exportieren, und der Jahresrückblick liefert die Zahlen: Länder, Distanz, Flüge und die abgespielten Routen.",
+        "ro":"Trage cursorul anilor și lumea se recolorează exact cu ce aveai marcat la acea dată. Orice an se exportă ca video vertical de opt secunde, iar recapitularea anuală adaugă cifrele: țări, distanță, zboruri și traseele rulate."}},
+  {"q":{"en":"Does Voymark track my location?","fr":"Voymark suit-il ma position ?","es":"¿Voymark rastrea mi ubicación?","it":"Voymark traccia la mia posizione?","de":"Verfolgt Voymark meinen Standort?","ro":"Voymark îmi urmărește locația?"},
+   "a":{"en":"No. It never requests location permission, in the foreground or the background, so there is no GPS trail to keep. What lands on the map is what you marked yourself or what the coordinates in your own photos already said.",
+        "fr":"Non. Il ne demande jamais l'autorisation de localisation, au premier plan comme en arrière-plan : il n'y a donc aucune trace GPS à conserver. Ce qui arrive sur la carte, c'est ce que vous avez marqué ou ce que disaient déjà les coordonnées de vos photos.",
+        "es":"No. Nunca pide permiso de ubicación, ni en primer plano ni en segundo, así que no hay rastro de GPS que guardar. Lo que llega al mapa es lo que marcaste tú o lo que ya decían las coordenadas de tus propias fotos.",
+        "it":"No. Non chiede mai il permesso di localizzazione, né in primo piano né in background: non c'è alcuna traccia GPS da conservare. Sulla mappa finisce ciò che hai segnato tu o ciò che dicevano già le coordinate delle tue foto.",
+        "de":"Nein. Die App fragt nie nach Standortfreigabe, weder im Vorder- noch im Hintergrund — es gibt also keine GPS-Spur. Auf der Karte landet, was du selbst markiert hast oder was die Koordinaten deiner eigenen Fotos ohnehin sagten.",
+        "ro":"Nu. Nu cere niciodată permisiunea de locație, nici în prim-plan, nici în fundal, deci nu există nicio urmă GPS de păstrat. Pe hartă ajunge ce ai marcat tu sau ce spuneau deja coordonatele din pozele tale."}},
+  {"q":{"en":"Can I import a map or tracks I already have?","fr":"Puis-je importer une carte ou des traces existantes ?","es":"¿Puedo importar un mapa o tracks que ya tengo?","it":"Posso importare una mappa o tracce che ho già?","de":"Kann ich vorhandene Karten oder Tracks importieren?","ro":"Pot importa o hartă sau trasee pe care le am deja?"},
+   "a":{"en":"GPX and KML files import directly, including exports from other travel apps. Voymark splits them into separate trips where the dates jump, or follows the folder names inside the file when there are any, so one export does not collapse into a single impossible journey.",
+        "fr":"Les fichiers GPX et KML s'importent directement, y compris les exports d'autres applications de voyage. Voymark les découpe en voyages distincts là où les dates sautent, ou suit les noms de dossiers du fichier quand il y en a, pour qu'un export ne s'effondre pas en un seul voyage impossible.",
+        "es":"Los archivos GPX y KML se importan directamente, incluidas las exportaciones de otras apps de viaje. Voymark los divide en viajes separados donde saltan las fechas, o sigue los nombres de carpeta del archivo cuando los hay, para que una exportación no acabe siendo un único viaje imposible.",
+        "it":"I file GPX e KML si importano direttamente, comprese le esportazioni di altre app di viaggio. Voymark li divide in viaggi separati dove le date saltano, oppure segue i nomi delle cartelle nel file quando ci sono, così un export non collassa in un unico viaggio impossibile.",
+        "de":"GPX- und KML-Dateien lassen sich direkt importieren, auch Exporte anderer Reise-Apps. Voymark teilt sie dort in eigene Reisen, wo die Daten springen, oder folgt den Ordnernamen in der Datei, falls vorhanden — damit ein Export nicht zu einer einzigen unmöglichen Reise zusammenfällt.",
+        "ro":"Fișierele GPX și KML se importă direct, inclusiv exporturile din alte aplicații de călătorie. Voymark le împarte în călătorii separate acolo unde sar datele sau urmează numele folderelor din fișier, când există, ca un export să nu se prăbușească într-o singură călătorie imposibilă."}},
+ ],
+},
+
+# The one page here that answers a question instead of describing a
+# product. "How many countries are there in the world" is asked constantly
+# and answered badly — usually with one number and no denominator — and it
+# is the exact question Voymark's counting rule exists to settle. It feeds
+# country-counter.html, which is about *your* number rather than the
+# world's; the two link to each other so they rank as a pair instead of
+# competing (SEO/GEO plan, 2026-07-31).
+"how-many-countries-in-the-world": {
+ "nav": {"en":"How many countries?","fr":"Combien de pays ?","es":"¿Cuántos países?","it":"Quanti paesi?","de":"Wie viele Länder?","ro":"Câte țări?"},
+ "title": {
+  "en":"How many countries are there in the world? 193, 197 or 249 | Voymark",
+  "fr":"Combien y a-t-il de pays dans le monde ? 193, 197 ou 249 | Voymark",
+  "es":"¿Cuántos países hay en el mundo? 193, 197 o 249 | Voymark",
+  "it":"Quanti paesi ci sono nel mondo? 193, 197 o 249 | Voymark",
+  "de":"Wie viele Länder gibt es auf der Welt? 193, 197 oder 249 | Voymark",
+  "ro":"Câte țări sunt în lume? 193, 197 sau 249 | Voymark"},
+ "meta": {
+  "en":"193 UN member states, 197 on the travellers' list, 249 ISO codes — all three are correct answers to different questions. Here is what each number contains and which one to count with.",
+  "fr":"193 États membres de l'ONU, 197 sur la liste des voyageurs, 249 codes ISO — les trois réponses sont justes, à des questions différentes. Voici ce que contient chaque nombre et lequel utiliser.",
+  "es":"193 estados miembros de la ONU, 197 en la lista de los viajeros, 249 códigos ISO: las tres respuestas son correctas, a preguntas distintas. Esto es lo que contiene cada número y cuál usar.",
+  "it":"193 stati membri ONU, 197 nella lista dei viaggiatori, 249 codici ISO: tutte e tre le risposte sono giuste, a domande diverse. Ecco cosa contiene ogni numero e quale usare.",
+  "de":"193 UN-Mitgliedstaaten, 197 auf der Reisendenliste, 249 ISO-Codes — alle drei Antworten stimmen, nur auf verschiedene Fragen. Was in jeder Zahl steckt und mit welcher du zählen solltest.",
+  "ro":"193 de state membre ONU, 197 pe lista călătorilor, 249 de coduri ISO — toate trei sunt răspunsuri corecte, la întrebări diferite. Iată ce conține fiecare număr și cu care să numeri."},
+ "h1": {
+  "en":"How many countries are there in the world?",
+  "fr":"Combien y a-t-il de pays dans le monde ?",
+  "es":"¿Cuántos países hay en el mundo?",
+  "it":"Quanti paesi ci sono nel mondo?",
+  "de":"Wie viele Länder gibt es auf der Welt?",
+  "ro":"Câte țări sunt în lume?"},
+ "lede": {
+  "en":"193, 197 or 249. All three are right — they answer different questions, and only one of them is a question about travel.",
+  "fr":"193, 197 ou 249. Les trois sont justes : elles répondent à des questions différentes, et une seule concerne le voyage.",
+  "es":"193, 197 o 249. Las tres son correctas: responden a preguntas distintas, y solo una es una pregunta sobre viajar.",
+  "it":"193, 197 o 249. Tutte e tre sono giuste: rispondono a domande diverse, e una sola riguarda il viaggio.",
+  "de":"193, 197 oder 249. Alle drei stimmen — sie beantworten verschiedene Fragen, und nur eine davon ist eine Frage übers Reisen.",
+  "ro":"193, 197 sau 249. Toate trei sunt corecte: răspund unor întrebări diferite, iar una singură este o întrebare despre călătorii."},
+ "sections": [
+  {"h":{"en":"The short answer","fr":"La réponse courte","es":"La respuesta corta","it":"La risposta breve","de":"Die kurze Antwort","ro":"Răspunsul scurt"},
+   "p":{"en":"There are 193 United Nations member states, 197 countries on the list most travellers use, and 249 entries in the ISO 3166 country-code standard. No number is a mistake; each one draws the line in a different place, and the disagreement is about sovereignty and about territories, not about geography.",
+        "fr":"Il y a 193 États membres des Nations unies, 197 pays sur la liste qu'utilisent la plupart des voyageurs, et 249 entrées dans la norme ISO 3166 des codes pays. Aucun chiffre n'est faux ; chacun trace la limite ailleurs, et le désaccord porte sur la souveraineté et les territoires, pas sur la géographie.",
+        "es":"Hay 193 estados miembros de las Naciones Unidas, 197 países en la lista que usa la mayoría de los viajeros y 249 entradas en la norma ISO 3166 de códigos de país. Ningún número es un error; cada uno traza la línea en otro sitio, y la discrepancia va de soberanía y de territorios, no de geografía.",
+        "it":"Ci sono 193 stati membri delle Nazioni Unite, 197 paesi nella lista che usa la maggior parte dei viaggiatori e 249 voci nello standard ISO 3166 dei codici paese. Nessun numero è sbagliato; ognuno traccia la linea altrove, e il disaccordo riguarda la sovranità e i territori, non la geografia.",
+        "de":"Es gibt 193 Mitgliedstaaten der Vereinten Nationen, 197 Länder auf der Liste, die die meisten Reisenden benutzen, und 249 Einträge im ISO-3166-Ländercode-Standard. Keine Zahl ist falsch; jede zieht die Grenze woanders, und der Streit dreht sich um Souveränität und Territorien, nicht um Geografie.",
+        "ro":"Există 193 de state membre ale Organizației Națiunilor Unite, 197 de țări pe lista folosită de majoritatea călătorilor și 249 de intrări în standardul ISO 3166 al codurilor de țară. Niciun număr nu este o greșeală; fiecare trage linia în altă parte, iar dezacordul e despre suveranitate și teritorii, nu despre geografie."},
+   "p2":{"en":"Which one you should use depends on what you are counting. For a geopolitics essay, 193. For a travel record, 197 is the convention. For collecting territories the way the long-haul clubs do, 249.",
+         "fr":"Le bon choix dépend de ce que vous comptez. Pour un devoir de géopolitique, 193. Pour un carnet de voyage, la convention est 197. Pour collectionner les territoires comme le font les clubs de grands voyageurs, 249.",
+         "es":"Cuál usar depende de qué estés contando. Para un ensayo de geopolítica, 193. Para un registro de viajes, la convención es 197. Para coleccionar territorios como hacen los clubes de grandes viajeros, 249.",
+         "it":"Quale usare dipende da cosa stai contando. Per un saggio di geopolitica, 193. Per un archivio di viaggi la convenzione è 197. Per collezionare territori come fanno i club dei grandi viaggiatori, 249.",
+         "de":"Welche du nehmen solltest, hängt davon ab, was du zählst. Für einen geopolitischen Aufsatz 193. Für eine Reisebilanz ist 197 die Konvention. Fürs Sammeln von Territorien, wie es die Vielreisenden-Clubs tun, 249.",
+         "ro":"Care dintre ele să o folosești depinde de ce numeri. Pentru un eseu de geopolitică, 193. Pentru o evidență de călătorii, convenția este 197. Pentru colecționat teritorii, așa cum fac cluburile marilor călători, 249."}},
+  {"h":{"en":"Why the UN says 193","fr":"Pourquoi l'ONU dit 193","es":"Por qué la ONU dice 193","it":"Perché l'ONU dice 193","de":"Warum die UN 193 sagt","ro":"De ce ONU spune 193"},
+   "p":{"en":"193 is a membership figure, not a census of the world. It counts the states that have been admitted to the United Nations — the strictest, cleanest and least arguable definition, which is exactly why institutions use it.",
+        "fr":"193 est un chiffre d'adhésion, pas un recensement du monde. Il compte les États admis aux Nations unies — la définition la plus stricte, la plus nette et la moins contestable, et c'est précisément pour cela que les institutions l'emploient.",
+        "es":"193 es una cifra de membresía, no un censo del mundo. Cuenta los estados admitidos en las Naciones Unidas: la definición más estricta, más limpia y menos discutible, que es justo por lo que la usan las instituciones.",
+        "it":"193 è un dato di adesione, non un censimento del mondo. Conta gli stati ammessi alle Nazioni Unite: la definizione più stretta, più pulita e meno discutibile, ed è esattamente per questo che le istituzioni la usano.",
+        "de":"193 ist eine Mitgliederzahl, keine Volkszählung der Welt. Sie zählt die Staaten, die in die Vereinten Nationen aufgenommen wurden — die strengste, sauberste und am wenigsten strittige Definition, und genau darum nutzen Institutionen sie.",
+        "ro":"193 este o cifră de membri, nu un recensământ al lumii. Numără statele admise în Organizația Națiunilor Unite — definiția cea mai strictă, cea mai curată și cea mai greu de contestat, exact motivul pentru care instituțiile o folosesc."},
+   "p2":{"en":"It leaves out places you can very much fly to, sleep in and get a stamp from. Vatican City and Palestine hold permanent observer status rather than membership; Taiwan is not a member; Kosovo is recognized by many states but not seated. None of that changes whether you have been there.",
+         "fr":"Il laisse de côté des lieux où l'on peut parfaitement atterrir, dormir et recevoir un tampon. Le Vatican et la Palestine ont un statut d'observateur permanent et non de membre ; Taïwan n'est pas membre ; le Kosovo est reconnu par de nombreux États mais n'y siège pas. Rien de tout cela ne change le fait que vous y êtes allé.",
+         "es":"Deja fuera lugares a los que perfectamente puedes volar, dormir y recibir un sello. El Vaticano y Palestina tienen estatus de observador permanente, no de miembro; Taiwán no es miembro; Kosovo está reconocido por muchos estados pero no tiene asiento. Nada de eso cambia si has estado allí.",
+         "it":"Lascia fuori posti in cui si può benissimo atterrare, dormire e farsi timbrare il passaporto. Vaticano e Palestina hanno lo status di osservatore permanente, non di membro; Taiwan non è membro; il Kosovo è riconosciuto da molti stati ma non siede. Niente di tutto ciò cambia il fatto che tu ci sia stato.",
+         "de":"Sie lässt Orte aus, zu denen man sehr wohl fliegen, in denen man schlafen und einen Stempel bekommen kann. Vatikanstadt und Palästina haben ständigen Beobachterstatus statt Mitgliedschaft; Taiwan ist kein Mitglied; das Kosovo wird von vielen Staaten anerkannt, sitzt aber nicht am Tisch. Nichts davon ändert, ob du dort warst.",
+         "ro":"Lasă pe dinafară locuri în care se poate foarte bine ateriza, dormi și lua o ștampilă. Vaticanul și Palestina au statut de observator permanent, nu de membru; Taiwanul nu este membru; Kosovo este recunoscut de multe state, dar nu are loc la masă. Nimic din toate acestea nu schimbă faptul că ai fost acolo."}},
+  {"h":{"en":"Why travellers say 197","fr":"Pourquoi les voyageurs disent 197","es":"Por qué los viajeros dicen 197","it":"Perché i viaggiatori dicono 197","de":"Warum Reisende 197 sagen","ro":"De ce călătorii spun 197"},
+   "p":{"en":"197 is the travel community's working answer: the UN's 193 plus the observer states and the de-facto states that function as countries when you actually go — their own border, their own stamp, their own capital.",
+        "fr":"197 est la réponse de travail du monde du voyage : les 193 de l'ONU, plus les États observateurs et les États de facto qui se comportent en pays quand on s'y rend vraiment — leur frontière, leur tampon, leur capitale.",
+        "es":"197 es la respuesta práctica de la comunidad viajera: los 193 de la ONU más los estados observadores y los estados de facto que funcionan como países cuando de verdad vas — su frontera, su sello, su capital.",
+        "it":"197 è la risposta operativa del mondo dei viaggi: i 193 dell'ONU più gli stati osservatori e gli stati de facto che si comportano da paesi quando ci vai davvero — un confine loro, un timbro loro, una capitale loro.",
+        "de":"197 ist die Arbeitsantwort der Reise-Community: die 193 der UN plus die Beobachterstaaten und die De-facto-Staaten, die sich wie Länder verhalten, wenn man tatsächlich hinfährt — eigene Grenze, eigener Stempel, eigene Hauptstadt.",
+        "ro":"197 este răspunsul practic al comunității de călători: cele 193 ale ONU plus statele observatoare și statele de facto care funcționează ca țări atunci când chiar ajungi acolo — graniță proprie, ștampilă proprie, capitală proprie."},
+   "p2":{"en":"It is a convention rather than a law, which is why you will occasionally see 195 or 196 instead, depending on whose list you read and which disputed cases it admits. What matters for a personal record is that the number is stated alongside what it contains.",
+         "fr":"C'est une convention et non une loi : d'où les 195 ou 196 qu'on croise parfois, selon la liste consultée et les cas contestés qu'elle accepte. Pour un carnet personnel, l'essentiel est que le nombre soit donné avec ce qu'il contient.",
+         "es":"Es una convención, no una ley: por eso a veces verás 195 o 196, según qué lista leas y qué casos disputados admita. Para un registro personal lo que importa es que el número venga con lo que contiene.",
+         "it":"È una convenzione, non una legge: per questo a volte trovi 195 o 196, a seconda della lista che leggi e dei casi contesi che ammette. Per un archivio personale conta che il numero sia dichiarato insieme a cosa contiene.",
+         "de":"Es ist eine Konvention, kein Gesetz — darum liest man gelegentlich 195 oder 196, je nach Liste und den darin zugelassenen Streitfällen. Für eine persönliche Bilanz zählt, dass die Zahl zusammen mit ihrem Inhalt genannt wird.",
+         "ro":"Este o convenție, nu o lege — de aceea vei vedea uneori 195 sau 196, în funcție de lista citită și de cazurile disputate pe care le acceptă. Pentru o evidență personală contează ca numărul să fie spus împreună cu ce conține."}},
+  {"h":{"en":"Why a computer says 249","fr":"Pourquoi un ordinateur dit 249","es":"Por qué un ordenador dice 249","it":"Perché un computer dice 249","de":"Warum ein Computer 249 sagt","ro":"De ce un calculator spune 249"},
+   "p":{"en":"249 is the count of two-letter codes in ISO 3166-1 — the standard behind country dropdowns, domain suffixes and shipping forms. It includes dependencies and overseas territories: Greenland, Guam, Réunion, the Falklands, Aruba and dozens more.",
+        "fr":"249 est le nombre de codes à deux lettres de la norme ISO 3166-1 — celle qui alimente les menus déroulants de pays, les suffixes de domaine et les formulaires d'expédition. Elle inclut les dépendances et territoires d'outre-mer : Groenland, Guam, La Réunion, Malouines, Aruba et des dizaines d'autres.",
+        "es":"249 es el número de códigos de dos letras de la ISO 3166-1, la norma que hay detrás de los desplegables de países, los sufijos de dominio y los formularios de envío. Incluye dependencias y territorios de ultramar: Groenlandia, Guam, Reunión, las Malvinas, Aruba y decenas más.",
+        "it":"249 è il numero di codici a due lettere della ISO 3166-1 — lo standard dietro i menù a tendina dei paesi, i suffissi di dominio e i moduli di spedizione. Include dipendenze e territori d'oltremare: Groenlandia, Guam, Riunione, Falkland, Aruba e decine di altri.",
+        "de":"249 ist die Zahl der Zwei-Buchstaben-Codes in ISO 3166-1 — dem Standard hinter Länder-Dropdowns, Domain-Endungen und Versandformularen. Sie enthält Außengebiete und Überseeterritorien: Grönland, Guam, Réunion, die Falklandinseln, Aruba und Dutzende mehr.",
+        "ro":"249 este numărul codurilor din două litere din ISO 3166-1 — standardul din spatele listelor derulante de țări, al sufixelor de domeniu și al formularelor de expediere. Include dependențe și teritorii de peste mări: Groenlanda, Guam, Réunion, Falkland, Aruba și încă zeci."},
+   "p2":{"en":"For a traveller this is not padding. Getting to Svalbard or French Guiana is a real journey, and counting them is a legitimate way to keep score — it is simply a different sport from counting sovereign states.",
+         "fr":"Pour un voyageur, ce n'est pas du remplissage. Aller au Svalbard ou en Guyane est un vrai voyage, et les compter est une manière légitime de tenir les comptes — c'est simplement un autre sport que compter des États souverains.",
+         "es":"Para un viajero esto no es relleno. Llegar a Svalbard o a la Guayana Francesa es un viaje de verdad, y contarlos es una forma legítima de llevar la cuenta — simplemente es otro deporte que contar estados soberanos.",
+         "it":"Per un viaggiatore non è riempitivo. Arrivare alle Svalbard o in Guyana francese è un viaggio vero, e contarli è un modo legittimo di tenere il punteggio — è solo uno sport diverso dal contare stati sovrani.",
+         "de":"Für Reisende ist das kein Füllmaterial. Nach Spitzbergen oder Französisch-Guayana zu kommen ist eine echte Reise, und sie mitzuzählen ist eine legitime Art zu zählen — nur eben eine andere Disziplin als das Zählen souveräner Staaten.",
+         "ro":"Pentru un călător, asta nu e umplutură. Să ajungi în Svalbard sau în Guyana Franceză este o călătorie adevărată, iar numărarea lor e un mod legitim de a ține scorul — pur și simplu e alt sport decât numărarea statelor suverane."}},
+  {"h":{"en":"So how many have you visited?","fr":"Alors, combien en avez-vous visités ?","es":"Entonces, ¿cuántos has visitado?","it":"E allora, quanti ne hai visitati?","de":"Und wie viele hast du besucht?","ro":"Deci câte ai vizitat?"},
+   "p":{"en":"Your own number needs the same treatment: state the denominator. \"Forty-one out of 197\" is a fact; \"forty-one countries\" is a claim waiting to be argued with. Voymark carries the denominator everywhere the numerator goes, and lets you switch between all three definitions whenever you like.",
+        "fr":"Votre propre chiffre mérite le même traitement : donnez le dénominateur. « Quarante et un sur 197 » est un fait ; « quarante et un pays » est une affirmation qui appelle la contradiction. Voymark porte le dénominateur partout où va le numérateur, et vous laisse passer d'une définition à l'autre quand vous voulez.",
+        "es":"Tu propio número merece lo mismo: di el denominador. \"Cuarenta y uno de 197\" es un hecho; \"cuarenta y un países\" es una afirmación esperando discusión. Voymark lleva el denominador allí donde va el numerador, y te deja cambiar entre las tres definiciones cuando quieras.",
+        "it":"Anche il tuo numero merita lo stesso trattamento: dichiara il denominatore. \"Quarantuno su 197\" è un fatto; \"quarantuno paesi\" è un'affermazione che invita a discutere. Voymark porta il denominatore ovunque vada il numeratore, e ti lascia passare fra le tre definizioni quando vuoi.",
+        "de":"Deine eigene Zahl verdient dasselbe: Nenne den Nenner. \"Einundvierzig von 197\" ist eine Tatsache; \"einundvierzig Länder\" ist eine Behauptung, die nach Widerspruch ruft. Voymark trägt den Nenner überall dorthin, wo der Zähler steht, und lässt dich jederzeit zwischen allen drei Definitionen wechseln.",
+        "ro":"Și numărul tău merită același tratament: spune numitorul. „Patruzeci și una din 197\" este un fapt; „patruzeci și una de țări\" este o afirmație care așteaptă o ceartă. Voymark duce numitorul oriunde merge numărătorul și te lasă să comuți între toate cele trei definiții oricând vrei."},
+   "p2":{"en":"There is a second question underneath, and it is the one that actually changes people's totals: does a layover count? That one is answered on the <a href=\"country-counter.html\">country counter page</a>, where the six visit kinds live.",
+         "fr":"Une deuxième question se cache dessous, et c'est elle qui change vraiment les totaux : une escale compte-t-elle ? La réponse est sur la <a href=\"country-counter.html\">page du compteur de pays</a>, là où vivent les six catégories de visite.",
+         "es":"Debajo hay una segunda pregunta, y es la que de verdad cambia los totales: ¿cuenta una escala? Eso se responde en la <a href=\"country-counter.html\">página del contador de países</a>, donde viven las seis categorías de visita.",
+         "it":"Sotto c'è una seconda domanda, ed è quella che cambia davvero i totali: uno scalo conta? A quella si risponde nella <a href=\"country-counter.html\">pagina del contatore di paesi</a>, dove vivono le sei categorie di visita.",
+         "de":"Darunter liegt eine zweite Frage, und sie ist die, die Summen wirklich verändert: Zählt ein Zwischenstopp? Das beantwortet die <a href=\"country-counter.html\">Länderzähler-Seite</a>, auf der die sechs Besuchsarten wohnen.",
+         "ro":"Dedesubt stă o a doua întrebare, și tocmai ea schimbă cu adevărat totalurile: contează o escală? La aceea se răspunde pe <a href=\"country-counter.html\">pagina numărătorului de țări</a>, unde stau cele șase feluri de vizită."}},
+ ],
+ "faq": [
+  {"q":{"en":"How many countries are in the United Nations?","fr":"Combien de pays comptent les Nations unies ?","es":"¿Cuántos países hay en las Naciones Unidas?","it":"Quanti paesi ci sono nelle Nazioni Unite?","de":"Wie viele Länder sind in den Vereinten Nationen?","ro":"Câte țări sunt în Organizația Națiunilor Unite?"},
+   "a":{"en":"193 member states, plus two permanent observer states — the Holy See and Palestine — which are not counted as members. That is where the gap between 193 and the travellers' 197 starts.",
+        "fr":"193 États membres, plus deux États observateurs permanents — le Saint-Siège et la Palestine — qui ne sont pas comptés comme membres. C'est là que commence l'écart entre 193 et les 197 des voyageurs.",
+        "es":"193 estados miembros, más dos estados observadores permanentes — la Santa Sede y Palestina — que no cuentan como miembros. Ahí empieza la diferencia entre 193 y los 197 de los viajeros.",
+        "it":"193 stati membri, più due stati osservatori permanenti — la Santa Sede e la Palestina — che non contano come membri. È lì che comincia lo scarto fra 193 e i 197 dei viaggiatori.",
+        "de":"193 Mitgliedstaaten, dazu zwei ständige Beobachterstaaten — der Heilige Stuhl und Palästina —, die nicht als Mitglieder zählen. Dort beginnt die Lücke zwischen 193 und den 197 der Reisenden.",
+        "ro":"193 de state membre, plus două state observatoare permanente — Sfântul Scaun și Palestina — care nu se numără ca membri. De acolo începe diferența dintre 193 și cei 197 ai călătorilor."}},
+  {"q":{"en":"Is Taiwan a country?","fr":"Taïwan est-il un pays ?","es":"¿Taiwán es un país?","it":"Taiwan è un paese?","de":"Ist Taiwan ein Land?","ro":"Este Taiwanul o țară?"},
+   "a":{"en":"It governs itself, issues its own passports and stamps yours on arrival, but it is not a UN member and its status is disputed. Travellers' lists generally include it; the UN's 193 does not. Voymark counts it under the 197 and the 249 rules and excludes it under 193 — the setting is yours.",
+        "fr":"Il se gouverne lui-même, délivre ses propres passeports et tamponne le vôtre à l'arrivée, mais il n'est pas membre de l'ONU et son statut est contesté. Les listes de voyageurs l'incluent généralement ; les 193 de l'ONU non. Voymark le compte sous les règles 197 et 249 et l'exclut sous 193 — le réglage vous appartient.",
+        "es":"Se gobierna a sí mismo, emite sus propios pasaportes y sella el tuyo al llegar, pero no es miembro de la ONU y su estatus está en disputa. Las listas de viajeros suelen incluirlo; los 193 de la ONU no. Voymark lo cuenta con las reglas 197 y 249 y lo excluye con 193 — el ajuste es tuyo.",
+        "it":"Si governa da sé, rilascia i propri passaporti e timbra il tuo all'arrivo, ma non è membro dell'ONU e il suo status è conteso. Le liste dei viaggiatori di solito lo includono; i 193 dell'ONU no. Voymark lo conta con le regole 197 e 249 e lo esclude con 193 — l'impostazione è tua.",
+        "de":"Es regiert sich selbst, gibt eigene Pässe aus und stempelt deinen bei der Ankunft, ist aber kein UN-Mitglied und sein Status ist umstritten. Reisendenlisten führen es meist mit; die 193 der UN nicht. Voymark zählt es unter den Regeln 197 und 249 und lässt es unter 193 weg — die Einstellung gehört dir.",
+        "ro":"Se guvernează singur, emite propriile pașapoarte și îl ștampilează pe al tău la sosire, dar nu este membru ONU, iar statutul îi este disputat. Listele călătorilor îl includ de obicei; cei 193 ai ONU, nu. Voymark îl numără sub regulile 197 și 249 și îl exclude sub 193 — setarea îți aparține."}},
+  {"q":{"en":"What is the difference between a country and a territory?","fr":"Quelle différence entre un pays et un territoire ?","es":"¿Qué diferencia hay entre un país y un territorio?","it":"Che differenza c'è fra un paese e un territorio?","de":"Was ist der Unterschied zwischen Land und Territorium?","ro":"Care e diferența dintre o țară și un teritoriu?"},
+   "a":{"en":"A territory has its own borders, often its own currency and stamps, but its foreign affairs belong to another state — Greenland to Denmark, Guam to the United States. That is why they carry ISO codes without being sovereign countries.",
+        "fr":"Un territoire a ses propres frontières, souvent sa monnaie et ses tampons, mais ses affaires étrangères relèvent d'un autre État — le Groenland du Danemark, Guam des États-Unis. D'où des codes ISO sans souveraineté.",
+        "es":"Un territorio tiene sus propias fronteras, a menudo su moneda y sus sellos, pero sus asuntos exteriores dependen de otro estado — Groenlandia de Dinamarca, Guam de Estados Unidos. Por eso llevan código ISO sin ser países soberanos.",
+        "it":"Un territorio ha confini propri, spesso valuta e timbri propri, ma i suoi affari esteri appartengono a un altro stato — la Groenlandia alla Danimarca, Guam agli Stati Uniti. Per questo hanno un codice ISO senza essere paesi sovrani.",
+        "de":"Ein Territorium hat eigene Grenzen, oft eigene Währung und eigene Stempel, aber seine Außenpolitik gehört einem anderen Staat — Grönland zu Dänemark, Guam zu den USA. Deshalb tragen sie ISO-Codes, ohne souveräne Länder zu sein.",
+        "ro":"Un teritoriu are granițe proprii, adesea monedă și ștampile proprii, dar afacerile externe îi aparțin altui stat — Groenlanda Danemarcei, Guam Statelor Unite. De aceea poartă coduri ISO fără să fie țări suverane."}},
+  {"q":{"en":"Which number should I use for my own travel count?","fr":"Quel nombre utiliser pour mon propre compteur de voyages ?","es":"¿Qué número debo usar para mi propio recuento?","it":"Quale numero devo usare per il mio conteggio?","de":"Welche Zahl nehme ich für meine eigene Zählung?","ro":"Ce număr să folosesc pentru propria numărătoare?"},
+   "a":{"en":"197 is the safe default: it is what other travellers assume when you say a number out loud. Switch to 193 if you want the strictest possible reading, or to 249 if territories are part of the game for you. Whatever you pick, say it alongside the count.",
+        "fr":"197 est le choix par défaut le plus sûr : c'est ce que les autres voyageurs supposent quand vous annoncez un chiffre. Passez à 193 pour la lecture la plus stricte, ou à 249 si les territoires font partie du jeu. Quel que soit votre choix, énoncez-le avec le compte.",
+        "es":"197 es el valor por defecto seguro: es lo que los demás viajeros dan por hecho cuando dices un número en voz alta. Cambia a 193 si quieres la lectura más estricta, o a 249 si los territorios forman parte del juego. Elijas lo que elijas, dilo junto a la cifra.",
+        "it":"197 è il default sicuro: è ciò che gli altri viaggiatori danno per scontato quando dici un numero ad alta voce. Passa a 193 per la lettura più severa, o a 249 se i territori fanno parte del gioco. Qualunque cosa scegli, dichiarala insieme al conteggio.",
+        "de":"197 ist die sichere Voreinstellung: Genau das nehmen andere Reisende an, wenn du eine Zahl nennst. Wechsle auf 193 für die strengste Lesart oder auf 249, wenn Territorien für dich dazugehören. Was auch immer du wählst — nenne es zusammen mit der Zahl.",
+        "ro":"197 este alegerea implicită sigură: exact asta presupun ceilalți călători când spui un număr cu voce tare. Treci la 193 dacă vrei citirea cea mai strictă sau la 249 dacă teritoriile fac parte din joc. Orice alegi, spune-o odată cu cifra."}},
+  {"q":{"en":"Has anyone visited every country?","fr":"Quelqu'un a-t-il visité tous les pays ?","es":"¿Alguien ha visitado todos los países?","it":"Qualcuno ha visitato tutti i paesi?","de":"Hat jemand jedes Land besucht?","ro":"A vizitat cineva toate țările?"},
+   "a":{"en":"Several people have reached every one of the 197, and a smaller group has gone after the full territory list as well. The reason those claims are always argued over is the one this page is about: without a stated definition, \"every country\" is not a checkable sentence.",
+        "fr":"Plusieurs personnes ont atteint chacun des 197, et un groupe plus restreint s'est attaqué aussi à la liste complète des territoires. Si ces revendications sont toujours discutées, c'est pour la raison même de cette page : sans définition annoncée, « tous les pays » n'est pas une phrase vérifiable.",
+        "es":"Varias personas han llegado a los 197, y un grupo más reducido ha ido también a por la lista completa de territorios. Esas afirmaciones siempre se discuten por lo mismo que trata esta página: sin una definición declarada, \"todos los países\" no es una frase comprobable.",
+        "it":"Diverse persone hanno raggiunto tutti e 197, e un gruppo più ristretto ha puntato anche alla lista completa dei territori. Quelle rivendicazioni fanno sempre discutere per il motivo di cui parla questa pagina: senza una definizione dichiarata, \"tutti i paesi\" non è una frase verificabile.",
+        "de":"Mehrere Menschen haben alle 197 erreicht, und eine kleinere Gruppe hat sich auch die vollständige Territorienliste vorgenommen. Dass über solche Behauptungen immer gestritten wird, liegt genau am Thema dieser Seite: Ohne genannte Definition ist \"jedes Land\" kein überprüfbarer Satz.",
+        "ro":"Mai multe persoane au ajuns în fiecare dintre cele 197, iar un grup mai mic a mers și după lista completă de teritorii. Motivul pentru care astfel de afirmații sunt mereu contestate este chiar subiectul acestei pagini: fără o definiție declarată, „toate țările\" nu este o propoziție verificabilă."}},
  ],
 },
 
 }
 
-EXPLORE_SLUGS = ["visited-countries-map", "travel-map", "travel-tracker-app", "country-counter", "travel-photos-to-trips"]
+EXPLORE_SLUGS = ["visited-countries-map", "travel-map", "travel-tracker-app", "country-counter", "travel-photos-to-trips",
+                 "how-many-countries-in-the-world"]
 LEGAL_SLUGS = ["privacy", "terms"]
 ALL_SLUGS = EXPLORE_SLUGS + LEGAL_SLUGS
 
@@ -1245,7 +1721,7 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
 {shots_band}    <section class="band">
 {sections_html}
     </section>
-    <section class="band band-alt">
+{faq_html}    <section class="band band-alt">
       <div class="cta">
         <a class="badge badge-disabled" href="#" aria-disabled="true">
           <span class="badge-small">{badge_small}</span>
@@ -1334,6 +1810,32 @@ def shots_band_block(lang, root, slug):
         "    </section>\n"
     )
 
+def faq_band_block(lang, slug):
+    """The visible FAQ, mirroring this page's FAQPage JSON-LD exactly.
+
+    Both halves come from the one `faq` list in PAGES, so the marked-up
+    answer and the rendered answer can never drift — Google treats
+    structured data that isn't on the page as a violation, and it would
+    also just be a lie to the reader.
+    """
+    faq = PAGES[slug].get("faq")
+    if not faq:
+        return ""
+    items = "\n".join(
+        f'        <div class="faq-item"><h3>{q["q"][lang]}</h3>'
+        f'<p>{q["a"][lang]}</p></div>'
+        for q in faq
+    )
+    return (
+        '    <section class="band">\n'
+        f'      <h2>{T["faq_title"][lang]}</h2>\n'
+        '      <div class="faq">\n'
+        f"{items}\n"
+        "      </div>\n"
+        "    </section>\n"
+    )
+
+
 def footnav_block(lang):
     links = [f'      <a href="{page_url(s, lang)}">{PAGES[s]["nav"][lang]}</a>' for s in EXPLORE_SLUGS]
     links.append(f'      <a href="{page_url("privacy", lang)}">{T["nav_privacy"][lang]}</a>')
@@ -1367,10 +1869,17 @@ def build_index(lang):
 def build_page(slug, lang):
     page = PAGES[slug]
     root = "" if lang == "en" else "../"
-    sections = "\n".join(
-        f'      <article class="prose"><h2>{s["h"][lang]}</h2><p>{s["p"][lang]}</p></article>'
-        for s in page["sections"]
-    )
+    # A section may carry a second paragraph ("p2"): the landing pages were
+    # 245-286 words each, thin enough that search had little to rank and an
+    # answer engine had little to quote (SEO audit, 2026-07-31). Two
+    # paragraphs let a section actually answer its own heading.
+    def section_html(s):
+        body = f'<p>{s["p"][lang]}</p>'
+        if "p2" in s:
+            body += f'<p>{s["p2"][lang]}</p>'
+        return f'      <article class="prose"><h2>{s["h"][lang]}</h2>{body}</article>'
+
+    sections = "\n".join(section_html(s) for s in page["sections"])
     html = SUBPAGE_TEMPLATE.format(
         social=social_block(lang, page_url(slug, lang),
                             page["title"][lang], page["meta"][lang]),
@@ -1380,6 +1889,7 @@ def build_page(slug, lang):
         title=page["title"][lang], meta=page["meta"][lang],
         h1=page["h1"][lang], lede=page["lede"][lang],
         sections_html=sections,
+        faq_html=faq_band_block(lang, slug),
         shots_band=shots_band_block(lang, root, slug),
         hreflangs=hreflang_block(lambda l: page_url(slug, l)),
         langlinks=langlinks_block(lang, lambda l: page_url(slug, l)),

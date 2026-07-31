@@ -143,6 +143,52 @@
             "item": "https://voymark.app/travel-photos-to-trips.html"
           }
         ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://voymark.app/travel-photos-to-trips.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do my photos get uploaded anywhere?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The scan runs entirely on the phone and works with the network switched off — try it in airplane mode. Images are never copied out of your library, and the app has no server to send them to even if it wanted one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if my photos have no location data?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Then they are simply skipped — nothing is guessed. You can still build those trips by hand and attach the photos afterwards, which takes seconds and keeps the dates and places exactly as you remember them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will it turn my everyday photos into trips?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Set your home area once and everything within 25 km of it is excluded from detection. Voymark never guesses where you live — if you skip that step, nothing is treated as home rather than something being assumed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I undo an import?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nothing is written until you accept it, and anything accepted can be edited or deleted afterwards. A candidate you skip is remembered as skipped, so the next scan does not offer it again."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How far back can it go?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "As far as your library does. Scan everything at once, the past year, everything since the last scan, or a period you choose. Photos on a memory card, an external drive or a restored backup can be scanned as a folder, so the years before this phone are not lost."
+            }
+          }
+        ]
       }
     ]
   }
@@ -178,6 +224,18 @@
       <article class="prose"><h2>Scan a year, or everything</h2><p>Scan your whole library, the past year, everything since last time, or any custom period — one era at a time. Your confirmed home area is excluded, so everyday photos never become "trips".</p></article>
       <article class="prose"><h2>On-device, provably</h2><p>The scan works in airplane mode — that's the whole point. Locations and dates are read on your phone, images are never copied or uploaded, and revoking photo access takes one switch in system settings.</p></article>
       <article class="prose"><h2>Photos that aren't in your library</h2><p>Old trips are often on a memory card, an external drive or in a restored backup folder rather than in the phone's photo library. Voymark can scan a folder too, reading the same locations and dates and proposing the same reviewable trips — so the decade before this phone isn't lost to it.</p></article>
+      <article class="prose"><h2>How a pile of photos becomes a trip</h2><p>Photos taken near each other on the same day become a stop. Stops on consecutive days become a trip, and a gap of more than two days ends it — so a summer with three holidays comes back as three trips, not one long blur.</p><p>Each stop is then named by your phone's own geocoder, preferring the city over the district — so a day in Rome reads "Rome", not "Municipio I". A trip needs at least three geotagged photos to exist at all, which is what stops a stray airport snapshot from becoming a journey.</p></article>
+      <article class="prose"><h2>What the app never does with your photos</h2><p>It does not copy them, does not upload them and does not send them anywhere for analysis. There is no image recognition, no face detection and no cloud step: the only thing read is the coordinate and the timestamp already written into the file by your camera.</p><p>Photos you attach to a trip are stored as references, not duplicates, so nothing doubles your storage. Delete a photo from your library and Voymark notices the reference has gone stale and offers to clean it up.</p></article>
+    </section>
+    <section class="band">
+      <h2>Common questions</h2>
+      <div class="faq">
+        <div class="faq-item"><h3>Do my photos get uploaded anywhere?</h3><p>No. The scan runs entirely on the phone and works with the network switched off — try it in airplane mode. Images are never copied out of your library, and the app has no server to send them to even if it wanted one.</p></div>
+        <div class="faq-item"><h3>What if my photos have no location data?</h3><p>Then they are simply skipped — nothing is guessed. You can still build those trips by hand and attach the photos afterwards, which takes seconds and keeps the dates and places exactly as you remember them.</p></div>
+        <div class="faq-item"><h3>Will it turn my everyday photos into trips?</h3><p>Set your home area once and everything within 25 km of it is excluded from detection. Voymark never guesses where you live — if you skip that step, nothing is treated as home rather than something being assumed.</p></div>
+        <div class="faq-item"><h3>Can I undo an import?</h3><p>Nothing is written until you accept it, and anything accepted can be edited or deleted afterwards. A candidate you skip is remembered as skipped, so the next scan does not offer it again.</p></div>
+        <div class="faq-item"><h3>How far back can it go?</h3><p>As far as your library does. Scan everything at once, the past year, everything since the last scan, or a period you choose. Photos on a memory card, an external drive or a restored backup can be scanned as a folder, so the years before this phone are not lost.</p></div>
+      </div>
     </section>
     <section class="band band-alt">
       <div class="cta">
@@ -202,6 +260,7 @@
       <a href="https://voymark.app/travel-tracker-app.html">Travel tracker</a>
       <a href="https://voymark.app/country-counter.html">Country counter</a>
       <a href="https://voymark.app/travel-photos-to-trips.html">Photos → trips</a>
+      <a href="https://voymark.app/how-many-countries-in-the-world.html">How many countries?</a>
       <a href="https://voymark.app/privacy.html">Privacy</a>
       <a href="https://voymark.app/terms.html">Terms</a>
     </nav>
