@@ -159,6 +159,31 @@ body {
   margin-bottom: 48px;
 }
 
+/* ---------- Above-the-fold trust row ----------
+   Free, offline and private are the three reasons someone picks this over
+   the paid alternatives, and until now all three were buried past two
+   scrolls of feature cards (SEO/positioning audit, 2026-07-31). They belong
+   in the first screen, stated flatly, before anything is described. */
+
+.trustrow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px auto 20px;
+}
+.trustrow span {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+
 .badge {
   display: inline-flex;
   flex-direction: column;
