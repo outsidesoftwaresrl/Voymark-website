@@ -360,12 +360,26 @@ body {
 
 /* ---------- App screenshots ---------- */
 
+/* Full rows here too, the same rule the card grids follow: a flex-wrap
+   row put the index page's three phones at 2 + 1, and a lone orphan
+   phone under a full row reads as a mistake. Column counts are fixed per
+   count (the generator emits .shots-2 or .shots-3), and each drops
+   straight to one column when its row no longer fits, never to a
+   half-empty one. */
 .shots {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   justify-content: center;
-  gap: 28px;
+  gap: 22px;
 }
+
+.shots-2 { grid-template-columns: repeat(2, auto); }
+.shots-3 { grid-template-columns: repeat(3, auto); }
+
+@media (max-width: 1040px) { .shots-3 { grid-template-columns: auto; } }
+@media (max-width: 720px)  { .shots-2 { grid-template-columns: auto; } }
+
+/* Three phones side by side need more room than the reading measure. */
+.band-shots { max-width: 1060px; }
 
 .shot { margin: 0; }
 

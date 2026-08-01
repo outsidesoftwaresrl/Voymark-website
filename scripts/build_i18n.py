@@ -77,28 +77,68 @@ T = {
  "it": "Direttamente dall'app", "de": "Direkt aus der App", "ro": "Direct din aplicație",
 },
 "shots_alt_map": {
- "en": "The Voymark map with visited countries stamped in burgundy",
- "fr": "La carte Voymark avec les pays visités tamponnés en bordeaux",
- "es": "El mapa de Voymark con los países visitados sellados en burdeos",
- "it": "La mappa Voymark con i paesi visitati timbrati in bordeaux",
- "de": "Die Voymark-Karte mit burgunderrot gestempelten besuchten Ländern",
- "ro": "Harta Voymark cu țările vizitate ștampilate în burgundy",
+ "en": "The Voymark Atlas map: 16 visited countries filled in burgundy across every continent, gold dots where photos were taken",
+ "fr": "La carte Atlas de Voymark : 16 pays visités remplis en bordeaux sur tous les continents, points dorés là où des photos ont été prises",
+ "es": "El mapa Atlas de Voymark: 16 países visitados en burdeos en todos los continentes, puntos dorados donde se hicieron fotos",
+ "it": "La mappa Atlas di Voymark: 16 paesi visitati in bordeaux su tutti i continenti, punti dorati dove sono state scattate le foto",
+ "de": "Die Voymark-Atlaskarte: 16 besuchte Länder burgunderrot auf allen Kontinenten, goldene Punkte, wo Fotos entstanden",
+ "ro": "Harta Atlas Voymark: 16 țări vizitate colorate în bordo pe toate continentele, puncte aurii acolo unde s-au făcut poze",
+},
+"shots_alt_paper": {
+ "en": "The same world on the aged Paper map style, visited countries in burgundy on parchment",
+ "fr": "Le même monde en style carte Papier vieilli, pays visités en bordeaux sur parchemin",
+ "es": "El mismo mundo en el estilo de mapa Papel envejecido, países visitados en burdeos sobre pergamino",
+ "it": "Lo stesso mondo nello stile mappa Carta invecchiata, paesi visitati in bordeaux su pergamena",
+ "de": "Dieselbe Welt im gealterten Papier-Kartenstil, besuchte Länder burgunderrot auf Pergament",
+ "ro": "Aceeași lume în stilul de hartă Hârtie învechită, țări vizitate în bordo pe pergament",
+},
+"shots_alt_timemachine": {
+ "en": "The time machine slider set to 2017: the map shows only the 6 countries visited by then",
+ "fr": "Le curseur de la machine à remonter le temps sur 2017 : la carte ne montre que les 6 pays visités à cette date",
+ "es": "El control de la máquina del tiempo en 2017: el mapa solo muestra los 6 países visitados hasta entonces",
+ "it": "Il cursore della macchina del tempo sul 2017: la mappa mostra solo i 6 paesi visitati fino ad allora",
+ "de": "Der Zeitmaschinen-Regler auf 2017: die Karte zeigt nur die bis dahin besuchten 6 Länder",
+ "ro": "Cursorul mașinii timpului pe 2017: harta arată doar cele 6 țări vizitate până atunci",
+},
+"shots_alt_trip": {
+ "en": "A trip page: Paris &amp; Amsterdam, 6 days, 2 places, 2 countries, 8 photos, with the route drawn between the two cities",
+ "fr": "La page d'un voyage : Paris et Amsterdam, 6 jours, 2 lieux, 2 pays, 8 photos, avec l'itinéraire tracé entre les deux villes",
+ "es": "La página de un viaje: París y Ámsterdam, 6 días, 2 lugares, 2 países, 8 fotos, con la ruta trazada entre las dos ciudades",
+ "it": "La pagina di un viaggio: Parigi e Amsterdam, 6 giorni, 2 luoghi, 2 paesi, 8 foto, con il percorso tracciato fra le due città",
+ "de": "Die Seite einer Reise: Paris und Amsterdam, 6 Tage, 2 Orte, 2 Länder, 8 Fotos, mit der Route zwischen beiden Städten",
+ "ro": "Pagina unei călătorii: Paris și Amsterdam, 6 zile, 2 locuri, 2 țări, 8 poze, cu traseul desenat între cele două orașe",
+},
+"shots_alt_photoimport": {
+ "en": "Photo import review: detected trips to Iceland, Italy, Japan and Morocco with their dates and photo counts, each waiting to be approved",
+ "fr": "Vérification de l'import photo : voyages détectés en Islande, Italie, Japon et Maroc avec leurs dates et leur nombre de photos, chacun en attente de validation",
+ "es": "Revisión de la importación de fotos: viajes detectados a Islandia, Italia, Japón y Marruecos con sus fechas y número de fotos, cada uno a la espera de aprobación",
+ "it": "Revisione dell'importazione foto: viaggi rilevati in Islanda, Italia, Giappone e Marocco con date e numero di foto, ognuno in attesa di approvazione",
+ "de": "Prüfung des Fotoimports: erkannte Reisen nach Island, Italien, Japan und Marokko mit Daten und Fotoanzahl, jede wartet auf Bestätigung",
+ "ro": "Verificarea importului de poze: călătorii detectate în Islanda, Italia, Japonia și Maroc, cu datele și numărul de poze, fiecare așteptând aprobarea",
+},
+"shots_alt_stats": {
+ "en": "Travel statistics: 16 countries, 49 places, 111 travel days, 18 177 km, a 6-year streak, and Sydney as the furthest point from home",
+ "fr": "Statistiques de voyage : 16 pays, 49 lieux, 111 jours de voyage, 18 177 km, une série de 6 ans, et Sydney comme point le plus éloigné du domicile",
+ "es": "Estadísticas de viaje: 16 países, 49 lugares, 111 días de viaje, 18 177 km, una racha de 6 años y Sídney como punto más lejano de casa",
+ "it": "Statistiche di viaggio: 16 paesi, 49 luoghi, 111 giorni di viaggio, 18 177 km, una serie di 6 anni e Sydney come punto più lontano da casa",
+ "de": "Reisestatistik: 16 Länder, 49 Orte, 111 Reisetage, 18 177 km, eine Serie von 6 Jahren und Sydney als entferntester Punkt von zu Hause",
+ "ro": "Statistici de călătorie: 16 țări, 49 de locuri, 111 zile de călătorie, 18 177 km, o serie de 6 ani și Sydney drept cel mai îndepărtat punct de acasă",
 },
 "shots_alt_passport": {
- "en": "The Voymark passport screen with country stamps",
- "fr": "L'écran passeport de Voymark avec des tampons de pays",
- "es": "La pantalla de pasaporte de Voymark con sellos de países",
- "it": "La schermata passaporto di Voymark con timbri dei paesi",
- "de": "Der Voymark-Pass-Bildschirm mit Länderstempeln",
- "ro": "Ecranul de pașaport Voymark cu ștampile de țări",
+ "en": "The Voymark passport: 16 of 197 countries, 6 of 6 continents, 8.1% of the world, recent stamps and a bar per continent",
+ "fr": "Le passeport Voymark : 16 pays sur 197, 6 continents sur 6, 8,1 % du monde, les derniers tampons et une barre par continent",
+ "es": "El pasaporte de Voymark: 16 de 197 países, 6 de 6 continentes, 8,1 % del mundo, sellos recientes y una barra por continente",
+ "it": "Il passaporto Voymark: 16 paesi su 197, 6 continenti su 6, 8,1% del mondo, i timbri recenti e una barra per continente",
+ "de": "Der Voymark-Pass: 16 von 197 Ländern, 6 von 6 Kontinenten, 8,1 % der Welt, letzte Stempel und ein Balken je Kontinent",
+ "ro": "Pașaportul Voymark: 16 din 197 de țări, 6 din 6 continente, 8,1% din lume, ștampile recente și o bară per continent",
 },
 "shots_alt_timeline": {
- "en": "The Voymark timeline of trips by year",
- "fr": "La chronologie Voymark des voyages par année",
- "es": "La línea de tiempo de Voymark con viajes por año",
- "it": "La cronologia Voymark dei viaggi per anno",
- "de": "Die Voymark-Zeitleiste der Reisen nach Jahr",
- "ro": "Cronologia Voymark a călătoriilor pe ani",
+ "en": "The Voymark timeline: trips stacked by year with their dates, places and photo counts, and a first-visit stamp beside each new country",
+ "fr": "La chronologie Voymark : les voyages empilés par année avec leurs dates, lieux et nombre de photos, et un tampon de première visite près de chaque nouveau pays",
+ "es": "La línea de tiempo de Voymark: viajes apilados por año con sus fechas, lugares y número de fotos, y un sello de primera visita junto a cada país nuevo",
+ "it": "La cronologia Voymark: viaggi impilati per anno con date, luoghi e numero di foto, e un timbro di prima visita accanto a ogni nuovo paese",
+ "de": "Die Voymark-Zeitleiste: Reisen nach Jahr gestapelt, mit Daten, Orten und Fotoanzahl, und ein Erstbesuch-Stempel neben jedem neuen Land",
+ "ro": "Cronologia Voymark: călătorii așezate pe ani, cu datele, locurile și numărul de poze, și o ștampilă de primă vizită lângă fiecare țară nouă",
 },
 "nav_privacy": {
  "en": "Privacy", "fr": "Confidentialité", "es": "Privacidad",
@@ -477,7 +517,7 @@ TEMPLATE = """<!DOCTYPE html>
 
     <section class="band band-shots">
       <h2>{shots_title}</h2>
-      <div class="shots">
+      <div class="shots shots-3">
 {shots_html}
       </div>
     </section>
@@ -2134,29 +2174,52 @@ def langlinks_block(lang, lang_url):
     return "\n".join(link(l) for l in LANGS)
 
 
-# App screenshots (assets/img/screen-*.png, captured from the real app on
-# Appetize). Key → alt-text T key. Order matters.
+# App screenshots.
+#
+# The real thing at last: shot 2026-08-01 on an iPhone 17 Pro Max and
+# committed to the app repo as docs/screenshots/iphone-6.9/, replacing the
+# three dummy placeholders the site had been showing. Downscaled from
+# 1320x2868 to 720x1564 — twice the 360px slot they render in — and stored
+# as WebP, which takes the eight of them to 353 KB where PNG would have
+# been about 2 MB. WebP has shipped in every browser since Safari 14
+# (2020), the same vintage as the prefers-color-scheme and WOFF2 this site
+# already relies on.
+#
+# Key → (filename, alt-text T key). Order within a page matters.
 SHOT_FILES = {
-    "map": ("screen-map.png", "shots_alt_map"),
-    "passport": ("screen-passport.png", "shots_alt_passport"),
-    "timeline": ("screen-timeline.png", "shots_alt_timeline"),
+    "passport": ("shot-passport.webp", "shots_alt_passport"),
+    "map": ("shot-map.webp", "shots_alt_map"),
+    "paper": ("shot-paper.webp", "shots_alt_paper"),
+    "timeMachine": ("shot-time-machine.webp", "shots_alt_timemachine"),
+    "timeline": ("shot-timeline.webp", "shots_alt_timeline"),
+    "trip": ("shot-trip.webp", "shots_alt_trip"),
+    "photoImport": ("shot-photo-import.webp", "shots_alt_photoimport"),
+    "stats": ("shot-stats.webp", "shots_alt_stats"),
 }
-INDEX_SHOTS = ["map", "passport", "timeline"]
+INDEX_SHOTS = ["passport", "map", "timeline"]
+
+# Each page gets the two screens its own copy is about, rather than the
+# same three everywhere.
 PAGE_SHOTS = {
     "visited-countries-map": ["map", "passport"],
-    "travel-map": ["map", "timeline"],
-    "travel-tracker-app": ["timeline", "passport"],
-    "country-counter": ["passport", "map"],
-    "travel-photos-to-trips": ["timeline", "map"],
+    "travel-map": ["paper", "trip"],
+    "travel-tracker-app": ["timeline", "stats"],
+    "country-counter": ["passport", "stats"],
+    "travel-photos-to-trips": ["photoImport", "timeline"],
+    "how-many-countries-in-the-world": ["passport", "map"],
+    "free-travel-app-no-subscription": ["map", "timeline"],
+    "travel-app-alternatives": ["timeMachine", "trip"],
 }
 
 def shots_html_block(lang, root, keys):
     lines = []
     for key in keys:
         fname, alt_key = SHOT_FILES[key]
+        # 360x782 is the true 1320:2868 ratio; the old 360x800 was the
+        # dummies' shape and would letterbox these.
         lines.append(
             f'        <figure class="shot"><img src="{root}assets/img/{fname}" '
-            f'alt="{T[alt_key][lang]}" loading="lazy" width="360" height="800"></figure>'
+            f'alt="{T[alt_key][lang]}" loading="lazy" width="360" height="782"></figure>'
         )
     return "\n".join(lines)
 
@@ -2167,7 +2230,7 @@ def shots_band_block(lang, root, slug):
     return (
         '    <section class="band band-shots">\n'
         f'      <h2>{T["shots_title"][lang]}</h2>\n'
-        '      <div class="shots">\n'
+        f'      <div class="shots shots-{len(keys)}">\n'
         f"{shots_html_block(lang, root, keys)}\n"
         "      </div>\n"
         "    </section>\n"
