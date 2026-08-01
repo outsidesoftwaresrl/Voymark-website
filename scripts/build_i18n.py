@@ -2072,6 +2072,33 @@ def page_url(slug, lang):
     return f"{url_for(lang)}{slug}.html"
 
 
+# ---------------------------------------------------------------------------
+# Absolute vs relative
+#
+# Two URLs exist for every page: voymark.app and the GitHub Pages project
+# URL the deploy also serves. Anything a *person* clicks has to stay on the
+# domain that served the page, or testing the Pages copy bounces you onto
+# the apex domain mid-visit (Florentin, 2026-08-01). Anything a *crawler*
+# reads must be absolute and must name voymark.app, so the Pages copy
+# declares the apex domain canonical instead of competing with it as a
+# duplicate.
+#
+#   relative — language switcher, footer nav, the home link on subpages
+#   absolute — canonical, og:url, hreflang, JSON-LD @id/url, sitemap.xml
+#
+# Relative also survives the Pages path prefix (/Voymark-website/), which a
+# root-relative "/fr/..." would not.
+# ---------------------------------------------------------------------------
+
+def rel_url(from_lang, to_lang, filename):
+    """Link from a page in from_lang to `filename` in to_lang."""
+    if from_lang == to_lang:
+        return filename          # same directory - no need to go up and back
+    up = "" if from_lang == "en" else "../"
+    down = "" if to_lang == "en" else f"{to_lang}/"
+    return f"{up}{down}{filename}"
+
+
 def hreflang_block(lang_url):
     lines = [f'  <link rel="alternate" hreflang="{l}" href="{lang_url(l)}">' for l in LANGS]
     lines.append(f'  <link rel="alternate" hreflang="x-default" href="{lang_url("en")}">')
@@ -2151,9 +2178,12 @@ def faq_band_block(lang, slug):
 
 
 def footnav_block(lang):
-    links = [f'      <a href="{page_url(s, lang)}">{PAGES[s]["nav"][lang]}</a>' for s in EXPLORE_SLUGS]
-    links.append(f'      <a href="{page_url("privacy", lang)}">{T["nav_privacy"][lang]}</a>')
-    links.append(f'      <a href="{page_url("terms", lang)}">{T["nav_terms"][lang]}</a>')
+    """Same language, same domain — every href stays inside this locale."""
+    def href(slug):
+        return rel_url(lang, lang, f"{slug}.html")
+    links = [f'      <a href="{href(s)}">{PAGES[s]["nav"][lang]}</a>' for s in EXPLORE_SLUGS]
+    links.append(f'      <a href="{href("privacy")}">{T["nav_privacy"][lang]}</a>')
+    links.append(f'      <a href="{href("terms")}">{T["nav_terms"][lang]}</a>')
     return "\n".join(links)
 
 
@@ -2167,7 +2197,7 @@ def build_index(lang):
         canonical=url_for(lang),
         jsonld=jsonld_home(lang),
         hreflangs=hreflang_block(url_for),
-        langlinks=langlinks_block(lang, url_for),
+        langlinks=langlinks_block(lang, lambda l: rel_url(lang, l, "index.html")),
         footnav=footnav_block(lang),
         shots_html=shots_html_block(lang, root, INDEX_SHOTS),
         **values,
@@ -2211,9 +2241,9 @@ def build_page(slug, lang):
         faq_html=faq_band_block(lang, slug),
         shots_band=shots_band_block(lang, root, slug),
         hreflangs=hreflang_block(lambda l: page_url(slug, l)),
-        langlinks=langlinks_block(lang, lambda l: page_url(slug, l)),
+        langlinks=langlinks_block(lang, lambda l: rel_url(lang, l, f"{slug}.html")),
         footnav=footnav_block(lang),
-        home_url=url_for(lang),
+        home_url=rel_url(lang, lang, "index.html"),
         badge_small=T["badge_small"][lang],
         badge_small_android=T["badge_small_android"][lang],
         tagline=T["tagline"][lang],
