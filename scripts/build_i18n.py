@@ -2034,6 +2034,7 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
     <a class="homelink" href="{home_url}"><span class="stamp" aria-hidden="true"><span>VOYMARK</span><span>WORLD</span><span>PASSPORT</span></span></a>
     <h1>{h1}</h1>
     <p class="lede">{lede}</p>
+    <p class="trustrow"><span>{trust1}</span><span>{trust2}</span><span>{trust3}</span></p>
     <!-- Store buttons here as well as in the band at the foot of the page
          (Florentin, 2026-08-01). Top and bottom, not top instead of
          bottom: a reader who is already convinced by the lede should not
@@ -2267,6 +2268,9 @@ def build_page(slug, lang):
         home_url=rel_url(lang, lang, "index.html"),
         badge_small=T["badge_small"][lang],
         badge_small_android=T["badge_small_android"][lang],
+        trust1=T["trust1"][lang],
+        trust2=T["trust2"][lang],
+        trust3=T["trust3"][lang],
         tagline=T["tagline"][lang],
         credits=T["credits"][lang],
     )
