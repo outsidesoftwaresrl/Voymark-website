@@ -2034,6 +2034,22 @@ SUBPAGE_TEMPLATE = """<!DOCTYPE html>
     <a class="homelink" href="{home_url}"><span class="stamp" aria-hidden="true"><span>VOYMARK</span><span>WORLD</span><span>PASSPORT</span></span></a>
     <h1>{h1}</h1>
     <p class="lede">{lede}</p>
+    <!-- Store buttons here as well as in the band at the foot of the page
+         (Florentin, 2026-08-01). Top and bottom, not top instead of
+         bottom: a reader who is already convinced by the lede should not
+         have to scroll a 700-word page to find them, and a reader who
+         needed the whole page still finds them where they finished. -->
+    <div class="cta">
+      <a class="badge badge-disabled" href="#" aria-disabled="true">
+        <span class="badge-small">{badge_small}</span>
+        <span class="badge-large">App&nbsp;Store</span>
+      </a>
+      <!-- Placeholder: swap href for the Play Store listing at launch. -->
+      <a class="badge badge-disabled" href="#" aria-disabled="true">
+        <span class="badge-small">{badge_small_android}</span>
+        <span class="badge-large">Google&nbsp;Play</span>
+      </a>
+    </div>
   </header>
 
   <main>
