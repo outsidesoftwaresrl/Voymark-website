@@ -306,8 +306,13 @@ body {
 
 /* ---------- Subpages (legal + explore) ---------- */
 
+/* Subpages carry the identical .stamp the homepage does — same size, same
+   three lines. The .stamp-small variant that used to live here made the
+   mark on a landing page a different mark from the one on the home page
+   (Florentin, 2026-08-01); it is gone rather than overridden, so nothing
+   can quietly reintroduce a second logo size. */
 .hero-sub {
-  padding: 72px 24px 24px;
+  padding: 88px 24px 24px;
 }
 
 .hero-sub h1 {
@@ -315,14 +320,6 @@ body {
 }
 
 .homelink { text-decoration: none; display: inline-block; }
-
-.stamp-small {
-  width: 92px;
-  height: 80px;
-  font-size: 10px;
-  border-width: 2px;
-  margin-bottom: 24px;
-}
 
 .prose {
   background: var(--card);
