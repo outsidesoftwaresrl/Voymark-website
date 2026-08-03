@@ -340,6 +340,8 @@ body {
 .prose strong { color: var(--ink); }
 .prose ul { margin: 12px 0 0 20px; color: var(--ink2); }
 .prose li + li { margin-top: 6px; }
+/* A paragraph after a list is a new thought, not the last bullet running on. */
+.prose ul + p { margin-top: 12px; }
 
 /* ---------- FAQ ----------
    Answers stay in the page, not behind a <details> toggle. The point of
