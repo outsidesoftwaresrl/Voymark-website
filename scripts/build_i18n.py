@@ -2319,14 +2319,19 @@ def langlinks_block(lang, lang_url):
 
 # App screenshots.
 #
-# The real thing at last: shot 2026-08-01 on an iPhone 17 Pro Max and
-# committed to the app repo as docs/screenshots/iphone-6.9/, replacing the
-# three dummy placeholders the site had been showing. Downscaled from
-# 1320x2868 to 720x1564 — twice the 360px slot they render in — and stored
-# as WebP, which takes the eight of them to 353 KB where PNG would have
-# been about 2 MB. WebP has shipped in every browser since Safari 14
-# (2020), the same vintage as the prefers-color-scheme and WOFF2 this site
-# already relies on.
+# Real captures, committed to the app repo as docs/screenshots/iphone-6.9/.
+# First shot 2026-08-01 on an iPhone 17 Pro Max, replacing three dummy
+# placeholders; all eighteen re-captured 2026-08-04 on iOS 1.0.240 after
+# 1.0.226 moved every screen title inline and removed a ~110pt band from the
+# top of most of them. Downscaled from 1320x2868 to 720x1564 — twice the
+# 360px slot they render in — and stored as WebP, which takes the eight to
+# ~368 KB where PNG would be about 2 MB. WebP has shipped in every browser
+# since Safari 14 (2020), the same vintage as the prefers-color-scheme and
+# WOFF2 this site already relies on.
+#
+# Do not convert them by hand. `scripts/make_site_shots.py <src-dir>` does
+# it, and exists because the hand conversion is why the site was still
+# serving the 2026-08-01 set four days after the app repo replaced it.
 #
 # Key → (filename, alt-text T key). Order within a page matters.
 SHOT_FILES = {
